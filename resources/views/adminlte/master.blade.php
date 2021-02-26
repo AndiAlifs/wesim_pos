@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Point of Sales | Techno's Studio</title>
+  <title>{{env("APP_NAME").'| '.env("ORGANIZATION_NAME")}}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,7 +30,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <div class="px-5 py-3">
+    <div class="px-5 py-3"> 
       <!-- Content Header (Page header) -->
       @yield('content')
       <!-- /.content -->
