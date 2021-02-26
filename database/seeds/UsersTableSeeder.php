@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
                 'name' => $faker->name,
                 'email' => $faker->unique()->safeEmail,
                 'username' => $faker->unique()->userName,
+                'role_id' => rand(1,3),
                 'password' => bcrypt('12345'),
                 'remember_token' => Str::random(10),
             ];
