@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePurchaseTransactionTable extends Migration
+class CreatePurchaseTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,10 +20,10 @@ class CreatePurchaseTransactionTable extends Migration
             $table->integer('selling_amount');
 
             $table->unsignedBigInteger('member_id');
-            $table->foreign("member_id")->references('id')->on("member");
+            $table->foreign("member_id")->references('id')->on("members");
 
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('product');
+            $table->foreign('product_id')->references('id')->on('products');
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
