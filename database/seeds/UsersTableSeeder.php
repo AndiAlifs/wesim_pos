@@ -14,15 +14,31 @@ class UsersTableSeeder extends Seeder
         $data = [];
         $faker = Faker\Factory::create();
 
-        for($i=0;$i<5;$i++){
-            $data[$i] = [
-                    'name' => $faker->name,
-                    'email' => $faker->unique()->safeEmail,
-                    'username' => $faker->unique()->userName,
-                    'role_id' => rand(1,3),
-                    'password' => bcrypt('12345'),
-                ];
-        }
+        
+        $data[0] = [
+                'name' => $faker->name,
+                'email' => $faker->unique()->safeEmail,
+                'username' => 'admin',
+                'role_id' => 1,
+                'password' => bcrypt('password'),
+        ];
+
+        $data[1] = [
+            'name' => $faker->name,
+            'email' => $faker->unique()->safeEmail,
+            'username' => 'owner',
+            'role_id' => 2,
+            'password' => bcrypt('password'),
+        ];
+
+        $data[2] = [
+        'name' => $faker->name,
+        'email' => $faker->unique()->safeEmail,
+        'username' => 'cashier',
+        'role_id' => 3,
+        'password' => bcrypt('password'),
+        ];
+
         DB::table('users')->insert($data);
     }
 }
