@@ -13,7 +13,7 @@ class CreateMemberTable extends Migration
      */
     public function up()
     {
-        Schema::create('member', function (Blueprint $table) {
+        Schema::create('members', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('point');
 
