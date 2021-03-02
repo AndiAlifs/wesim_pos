@@ -17,8 +17,8 @@ class CreateMemberTable extends Migration
             $table->bigIncrements('id');
             $table->integer('point');
 
-            $table->integer('user_id');
-            $table->foreign('user_id')->reference("id")->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references("id")->on('users');
         });
     }
 
