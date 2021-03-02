@@ -13,7 +13,7 @@ class CreatePurchaseTransactionTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchase_transaction', function (Blueprint $table) {
+        Schema::create('purchase_transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamp('transaction_time');
             $table->enum('status', ["Succesfully", "Holded", "PO"])->nullable();
