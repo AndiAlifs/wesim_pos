@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePurchaseTransactionsTable extends Migration
+class CreateSellingTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,19 @@ class CreatePurchaseTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchase_transactions', function (Blueprint $table) {
+        Schema::create('selling_transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('transaction_number');
+            
             $table->enum('status', ["Succesfully", "Holded", "PO"])->nullable();
-            $table->integer('transaction_number');
-
-            $table->unsignedBigInteger('member_id');
-            $table->foreign("member_id")->references('id')->on("members");
-
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->timestamps();
+            $table->unsignedBigInteger('member_id');
+            $table->foreign("member_id")->references('id')->on("members");
 
+            $table->timestamps();
         });
     }
 
@@ -39,6 +36,6 @@ class CreatePurchaseTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchase_transactions');
+        Schema::dropIfExists('selling_transactions');
     }
 }
