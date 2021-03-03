@@ -18,14 +18,14 @@ class CreatePurchaseTransactionsTable extends Migration
             $table->enum('status', ["Succesfully", "Holded", "PO"])->nullable();
             $table->integer('transaction_number');
 
-            $table->unsignedBigInteger('member_id');
-            $table->foreign("member_id")->references('id')->on("members");
+            $table->unsignedBigInteger('user_id');
+            $table->foreign("user_id")->references('id')->on("users");
 
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('supplier_id');
+            $table->foreign('supplier_id')->references('id')->on('suppliers');
 
             $table->timestamps();
 
