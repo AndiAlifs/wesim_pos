@@ -13,12 +13,60 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-header">MAIN MENU</li>
+        <li class="nav-header">Dashboard</li>
         <li class="nav-item">
-          <a href="/questions" class="nav-link">
-            <i class="nav-icon fas fa-table"></i>
+          <a href="/home" class="nav-link">
+            <i class="nav-icon fas fa-home"></i>
             <p>
-              Stackoverflow
+              Beranda
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/#" class="nav-link">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              User
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/#" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              Member
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/#" class="nav-link">
+            <i class="nav-icon fas fa-cart-arrow-down"></i>
+            <p>
+              Pemasok
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/#" class="nav-link">
+            <i class="nav-icon fas fa-archive"></i>
+            <p>
+              Produk
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/#" class="nav-link">
+            <i class="nav-icon fas fa-warehouse"></i>
+            <p>
+              Gudang
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/#" class="nav-link">
+            <i class="nav-icon fa fa-file"></i>
+            <p>
+              Laporan
             </p>
           </a>
         </li>
