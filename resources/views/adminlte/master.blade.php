@@ -62,6 +62,25 @@
 <script src="{{asset('/adminlte/plugins/datatables/jquery.dataTables.js')}}"></script>
 <script src="{{asset('/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
 
+<!-- page script -->
+<script>
+  $(function () {
+    $("#datatable_pagination").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+
 @stack('scripts-footer')
 
 </body>
