@@ -32,6 +32,11 @@
                       @csrf
                   </form>
               </div>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  <a></a>
+                      User Profile
+                  </a>
+              </div>
           </li>
       @endguest
       <!-- <li class="nav-item">
