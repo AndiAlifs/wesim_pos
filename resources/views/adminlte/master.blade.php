@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="{{asset('/adminlte/dist/css/adminlte.min.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- CSS Datatable -->
+  <link rel="stylesheet" href="{{asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
 
   @stack('scripts-header')
 </head>
@@ -56,6 +58,9 @@
 <script src="{{asset('/adminlte/dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('/adminlte/dist/js/demo.js')}}"></script>
+<!-- AdminLTE for dataTables -->
+<script src="{{asset('/adminlte/plugins/datatables/jquery.dataTables.js')}}"></script>
+<script src="{{asset('/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
 
 @stack('scripts-footer')
 
