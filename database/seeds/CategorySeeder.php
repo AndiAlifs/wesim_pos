@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\category;
 
 class CategorySeeder extends Seeder
 {
@@ -11,6 +12,17 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        //
+        category::create([
+            "name" => "primary",
+            "description" => "kategori produk primary"
+        ]);
+        category::create([
+            "name" => "special",
+            "description" => "kategori produk special"
+        ]);
+        category::create([
+            "name" => "rare",
+            "description" => "kategori produk rare"
+        ]);
     }
 }
