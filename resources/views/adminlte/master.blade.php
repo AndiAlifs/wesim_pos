@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{env("APP_NAME").'| '.env("ORGANIZATION_NAME")}}</title>
+  <title>{{env("APP_NAME").' | '.env("ORGANIZATION_NAME")}}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,7 +18,7 @@
 
   @stack('scripts-header')
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini sidebar-closed">
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
