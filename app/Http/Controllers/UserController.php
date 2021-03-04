@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\user;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -15,8 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-    	$user = DB::table('users')->get();
-    	return view('adminlte/user/user',['user' => $user]);
+    	$users = User::with("role")->get();
+    	return view('adminlte/user/user',['user' => $users]);
     }
 
     /**
