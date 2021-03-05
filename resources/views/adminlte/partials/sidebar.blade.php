@@ -15,7 +15,7 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-header">Dashboard</li>
         <li class="nav-item">
-          <a href="/home" class="nav-link">
+          <a href="{{route('home')}}" class="nav-link">
             <i class="nav-icon fas fa-home"></i>
             <p>
               Beranda
@@ -23,7 +23,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="/user" class="nav-link">
+          <a href="{{route('user')}}" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
             <p>
               User
@@ -31,7 +31,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="/#" class="nav-link">
+          <a href="{{route('member')}}" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
             <p>
               Member
@@ -46,8 +46,8 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="/#" class="nav-link">
+        <li class="nav-item  ">
+          <a href="{{route('product')}}" class="nav-link">
             <i class="nav-icon fas fa-archive"></i>
             <p>
               Produk
