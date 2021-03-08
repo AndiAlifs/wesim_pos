@@ -14,7 +14,8 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
+        $supplier = Supplier::all();
+        return view('adminlte/supplier/supplier',['supplier' => $supplier]);
     }
 
     /**

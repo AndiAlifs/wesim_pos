@@ -39,7 +39,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="/#" class="nav-link {{Route::is('supplier') ? 'active' : ''}}">
+          <a href="/supplier" class="nav-link {{Route::is('supplier') ? 'active' : ''}}">
             <i class="nav-icon fas fa-cart-arrow-down"></i>
             <p>
               Pemasok

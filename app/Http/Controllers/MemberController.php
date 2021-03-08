@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\user;
 use Illuminate\Http\Request;
+use App\member;
 
 class MemberController extends Controller
 {
-    public function index()
-    {
-        $user = User::with('role')->get();
-    	return view('adminlte/member/member', compact('user'));
+    public function index(){
+        $member = Member::all();
+        return view('adminlte/member/member',['member' => $member]);
     }
 }

@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Daftar Member</h3>
+                    <h3 class="card-title">Daftar Pemasok</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -22,21 +22,21 @@
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Nomor Member</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Nama</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Email</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Point</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Nama</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Telepon</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Alamat</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Deskripsi</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($member as $row)
+                                        @foreach($supplier as $row)
                                         <tr role="row" class="odd">
                                             <td tabindex="0" class="sorting_1">{{ $loop->iteration }}</td>
-                                            <td>{{ $row->member_code }}</td>
                                             <td>{{ $row->name }}</td>
-                                            <td>{{ $row->email }}</td>
-                                            <td>{{ $row->point }}</td>
+                                            <td>{{ $row->phone }}</td>
+                                            <td>{{ $row->address }}</td>
+                                            <td>{{ $row->description }}</td>
                                             <td></td>
                                         </tr>
                                         @endforeach
@@ -44,10 +44,10 @@
                                     <tfoot>
                                         <tr>
                                             <th rowspan="1" colspan="1">No</th>
-                                            <th rowspan="1" colspan="1">Nomor Member</th>
                                             <th rowspan="1" colspan="1">Nama</th>
-                                            <th rowspan="1" colspan="1">Email</th>
-                                            <th rowspan="1" colspan="1">Point</th>
+                                            <th rowspan="1" colspan="1">Telepon</th>
+                                            <th rowspan="1" colspan="1">Alamat</th>
+                                            <th rowspan="1" colspan="1">Deskripsi</th>
                                             <th rowspan="1" colspan="1">Aksi</th>
                                         </tr>
                                     </tfoot>
