@@ -83,6 +83,9 @@
                 <div class="title m-b-md">
                     WESIM
                 </div>
+                <div class="display-5 m-b-md">
+                    Point Of Sales
+                </div>
 
                 <!-- <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
