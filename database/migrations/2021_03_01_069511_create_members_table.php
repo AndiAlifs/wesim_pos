@@ -17,7 +17,7 @@ class CreateMembersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('phone');
-            $table->string('member_code');
+            $table->string('member_id');
             $table->string('email');
             $table->string('address');
             $table->integer('point');

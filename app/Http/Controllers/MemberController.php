@@ -11,7 +11,7 @@ class MemberController extends Controller
     public function index()
     {
         $members = Member::all();
-        return view('adminlte/member/member',['member' => $members]);
+        return view('adminlte/member/member',['members' => $members]);
     }
 
     public function store(Request $request)
@@ -19,13 +19,17 @@ class MemberController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'phone' => 'required',
+            'email' => 'required',
             'address' => 'required',
         ]);
 
+        $faker = Faker::create('id_ID');
+
         Member::create([
             'name' => $request->name,
+            'member_id' => $faker->numberBetween(1000000,9999999),
             'phone' => $request->phone,
-            'member_code' => "34123",
+            'email' => $request->email,
             'address' => $request->address,
             'point' => 0,
         ]);
