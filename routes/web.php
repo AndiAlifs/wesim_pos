@@ -30,8 +30,9 @@ Route::middleware('role:admin')->group(function () {
     
     // Member Route
     Route::get('/member', 'MemberController@index')->name('member');
-    Route::put('/member/update/{id}', 'MemberController@update');
-    Route::get('/member/destroy/{id}', 'MemberController@destroy');
+    Route::put('/member/update/{id}', 'MemberController@update')->name('update_member');
+    Route::get('/member/destroy/{id}', 'MemberController@destroy')->name('delete_member');
+    Route::put('/member/store', 'MemberController@store')->name('create_member');
 
     // Supplier Route
     Route::get('/supplier', 'SupplierController@index')->name('supplier');

@@ -44,7 +44,7 @@
                                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
                                                     <abbr title="edit"><i class="nav-icon fas fa-edit"></i>
                                                 </button>
-                                                <a onclick="return confirm('Are you sure?')" href="/member/destroy/{{ $row->id }}" class="btn btn-danger"><abbr title="Hapus"><i class="nav-icon fas fa-trash"></i></a>
+                                                <a onclick="return confirm('Are you sure?')" href="{{route('delete_member', $row->id)}}" class="btn btn-danger"><abbr title="Hapus"><i class="nav-icon fas fa-trash"></i></a>
                                             </td>
                                         </tr>
                                         <!-- modal update -->
@@ -57,7 +57,7 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form method="post" action="/member/update/{{ $row->id }}">
+                                                    <form method="post" action="{{ route('update_member', $row->id) }}">
                                                         <div class="modal-body">
                                                             {{ csrf_field() }}
                                                             {{ method_field('PUT') }}
@@ -126,8 +126,64 @@
                                         </tr>
                                     </tfoot>
                                 </table>
+                                <!-- modal update -->
+                                <div class="modal fade" id="modal-create-member">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Tambah Member</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form method="post" action="{{ route('create_member') }}">
+                                                <div class="modal-body">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PUT') }}
+                                                    <div class="form-group">
+                                                        <label>Nama</label>
+                                                        <input type="text" name="name" class="form-control" placeholder="" value="">
+                                                        @if($errors->has('name'))
+                                                        <div class="text-danger">
+                                                            {{ $errors->first('name')}}
+                                                        </div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Nomor Handphone</label>
+                                                        <textarea name="phone" class="form-control" placeholder=""></textarea>
+                                                        @if($errors->has('phone'))
+                                                        <div class="text-danger">
+                                                            {{ $errors->first('phone')}}
+                                                        </div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Alamat</label>
+                                                        <textarea name="address" class="form-control" placeholder=""></textarea>
+                                                        @if($errors->has('address'))
+                                                        <div class="text-danger">
+                                                            {{ $errors->first('address')}}
+                                                        </div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="small text-muted text-right">
+                                                        terdaftar <b>{{ $row->created_at }}</b> | perbaruan terakhir <b>{{ $row->updated_at }}</b>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <input type="submit" class="btn btn-success" value="Simpan">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.modal -->
                                 <div class="float-right pt-3">
-                                    <a class="btn btn-primary" href="" data-toggle="modal" data-target="#modal-store"><i class='fa fa-plus-circle'></i> Tambah</a>
+                                    <a class="btn btn-primary" href="" data-toggle="modal" data-target="#modal-create-member"><i class='fa fa-plus-circle'></i> Tambah</a>
                                 </div>
                             </div>
                         </div>
