@@ -18,26 +18,32 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Home Route
-Route::get('/home', 'HomeController@index')->name('home');
+// Apply role middleware
+Route::middleware('role:admin')->group(function () {
 
-// User Route
-Route::get('/user', 'UserController@index')->name('user');
+    
+    // Home Route
+    Route::get('/home', 'HomeController@index')->name('home');
 
-// Member Route
-Route::get('/member', 'MemberController@index')->name('member');
-
-// Supplier Route
-Route::get('/supplier', 'SupplierController@index')->name('supplier');
-Route::put('/supplier/update/{id}', 'SupplierController@update');
-Route::get('/supplier/destroy/{id}', 'SupplierController@destroy');
-Route::put('/supplier/store', 'SupplierController@store')->name('supplier_store');
-
-// Product Route
-Route::get('/product', 'ProductController@index')->name('product');
-
-// Category Route
-Route::get('/category', 'CategoryController@index')->name('category');
-Route::put('/category/update/{id}', 'CategoryController@update');
-Route::get('/category/destroy/{id}', 'CategoryController@destroy');
-Route::put('/category/store', 'CategoryController@store')->name('category_store');
+    // User Route
+    Route::get('/user', 'UserController@index')->name('user');
+    
+    // Member Route
+    Route::get('/member', 'MemberController@index')->name('member');
+    
+    // Supplier Route
+    Route::get('/supplier', 'SupplierController@index')->name('supplier');
+    Route::put('/supplier/update/{id}', 'SupplierController@update');
+    Route::get('/supplier/destroy/{id}', 'SupplierController@destroy');
+    Route::put('/supplier/store', 'SupplierController@store')->name('supplier_store');
+    
+    // Product Route
+    Route::get('/product', 'ProductController@index')->name('product');
+    
+    // Category Route
+    Route::get('/category', 'CategoryController@index')->name('category');
+    Route::put('/category/update/{id}', 'CategoryController@update');
+    Route::get('/category/destroy/{id}', 'CategoryController@destroy');
+    Route::put('/category/store', 'CategoryController@store')->name('category_store');
+    
+});
