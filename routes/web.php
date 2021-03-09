@@ -35,3 +35,9 @@ Route::put('/supplier/store', 'SupplierController@store')->name('supplier_store'
 
 // Product Route
 Route::get('/product', 'ProductController@index')->name('product');
+
+// Category Route
+Route::get('/category', 'CategoryController@index')->name('category');
+Route::put('/category/update/{id}', 'CategoryController@update');
+Route::get('/category/destroy/{id}', 'CategoryController@destroy');
+Route::put('/category/store', 'CategoryController@store')->name('category_store');
