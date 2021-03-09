@@ -28,6 +28,8 @@ Route::middleware('role:admin')->group(function () {
     // User Route
     Route::get('/user', 'UserController@index')->name('user');
     Route::post('/user/store', 'UserController@store')->name('user_store');
+    Route::put('/user/update/{id}', 'UserController@update');
+    Route::get('/user/destroy/{id}', 'userController@destroy');
     
     
     // Member Route

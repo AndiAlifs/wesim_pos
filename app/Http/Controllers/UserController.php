@@ -83,7 +83,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        dd($request);
+        // dd($request);
         $this->validate($request, [
             'name' => 'required',
             'username' => 'required',
@@ -95,12 +95,13 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->username = $request->username;
         $user->email = $request->email;
-        $user->role = $request->role;
+        $user->role_id = $request->role;
         if ($request -> password){
             $user->password = bcrypt($request->password);
         }
         $user->save();
-        return redirect(route('user'));
+
+        return redirect()->route('user');
     }
 
     /**
