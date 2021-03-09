@@ -11,7 +11,7 @@ class MemberController extends Controller
     public function index()
     {
         $members = Member::all();
-        return view('adminlte/member/member',['members' => $members]);
+        return view('adminlte/member/member',['member' => $members]);
     }
 
     public function store(Request $request)
