@@ -29,11 +29,12 @@ Route::middleware('role:admin')->group(function () {
     Route::get('/user', 'UserController@index')->name('user');
     Route::post('/user/store', 'UserController@store')->name('user_store');
     
+    
     // Member Route
     Route::get('/member', 'MemberController@index')->name('member');
-    Route::put('/member/update/{id}', 'MemberController@update');
-    Route::get('/member/destroy/{id}', 'MemberController@destroy');
-    Route::post('/member/store', 'MemberController@store')->name('member_store');
+    Route::put('/member/update/{id}', 'MemberController@update')->name('update_member');
+    Route::get('/member/destroy/{id}', 'MemberController@destroy')->name('delete_member');
+    Route::put('/member/store', 'MemberController@store')->name('create_member');
 
     // Supplier Route
     Route::get('/supplier', 'SupplierController@index')->name('supplier');
