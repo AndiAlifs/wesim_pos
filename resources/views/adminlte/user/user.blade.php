@@ -52,6 +52,9 @@
                                         </tr>
                                     </tfoot>
                                 </table>
+                                <div class="float-right pt-3">
+                                    <a class="btn btn-primary" href="" data-toggle="modal" data-target="#modal-store"><i class='fa fa-plus-circle'></i> Tambah</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -61,5 +64,83 @@
         </div>
     </div>
 </div>
+
+<!-- modal store -->
+<div class="modal fade" id="modal-store">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Tambah User</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="{{route('user_store')}}">
+                <div class="modal-body">
+                    @csrf
+
+                    <div class="form-group">
+                        <label>Nama</label>
+                        <input type="text" name="name" class="form-control" placeholder="Masukan Nama" value="">
+                        @if($errors->has('name'))
+                        <div class="text-danger">
+                            {{ $errors->first('name')}}
+                        </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="username" class="form-control" placeholder="Masukan Username" value="">
+                        @if($errors->has('username'))
+                        <div class="text-danger">
+                            {{ $errors->first('username')}}
+                        </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" name="email" class="form-control" placeholder="Masukan Email" value="">
+                        @if($errors->has('email'))
+                        <div class="text-danger">
+                            {{ $errors->first('email')}}
+                        </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Masukan Password" value="">
+                        @if($errors->has('password'))
+                        <div class="text-danger">
+                            {{ $errors->first('password')}}
+                        </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <br>
+                        <select name="role" id="role">
+                            @foreach($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->role_name }}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('role'))
+                        <div class="text-danger">
+                            {{ $errors->first('role')}}
+                        </div>
+                        @endif
+                    </div>
+                    
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-success" value="Simpan">
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 @endsection

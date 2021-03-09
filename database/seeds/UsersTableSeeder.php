@@ -47,6 +47,6 @@ class UsersTableSeeder extends Seeder
         'password' => bcrypt('fatwa'),
         ];
 
-         DB::table('users')->insert($data);
+        DB::table('users')->insert($data);
     }
 }

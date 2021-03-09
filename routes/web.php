@@ -27,6 +27,7 @@ Route::middleware('role:admin')->group(function () {
 
     // User Route
     Route::get('/user', 'UserController@index')->name('user');
+    Route::post('/user/store', 'UserController@store')->name('user_store');
     
     // Member Route
     Route::get('/member', 'MemberController@index')->name('member');

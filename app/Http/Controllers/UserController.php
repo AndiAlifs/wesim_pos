@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\user;
+use App\Role;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -15,7 +16,8 @@ class UserController extends Controller
     public function index()
     {
     	$users = User::with("role")->get();
-    	return view('adminlte/user/user',['user' => $users]);
+        $roles = Role::get();
+    	return view('adminlte/user/user',['user' => $users, 'roles' => $roles]);
     }
 
     /**
@@ -36,7 +38,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->role);
+        $new_data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'username' => $request->username,
+            'role_id' => $request->role,
+            'password' => bcrypt($request->password),
+        ];
+
+        User::create($new_data);
+
+        return redirect()->route('user');
     }
 
     /**
