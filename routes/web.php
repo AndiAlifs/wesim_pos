@@ -47,8 +47,6 @@ Route::middleware('role:admin')->group(function () {
     Route::get('/product', 'ProductController@index')->name('product');
     Route::post('/product/store', 'ProductController@store')->name('product_store');
     Route::get('/product/destroy/{id}', 'ProductController@destroy');
-
-
     
     // Category Route
     Route::get('/category', 'CategoryController@index')->name('category');

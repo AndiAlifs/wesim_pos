@@ -45,7 +45,7 @@ class RoleMiddleware
          * Get the login user role ID
          */
         $user_role = Auth()->user()->role_id;
-
+        dd($user_role);
         if (in_array($user_role, $roleToId[$canAccess])) {
             return $next($request);
         }
