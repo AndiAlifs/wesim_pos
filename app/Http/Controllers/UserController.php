@@ -81,9 +81,26 @@ class UserController extends Controller
      * @param  \App\user  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, user $user)
-    {
-        //
+    public function update(Request $request, $id)
+    {   
+        dd($request);
+        $this->validate($request, [
+            'name' => 'required',
+            'username' => 'required',
+            'email' => 'required',
+            'role' => 'required',
+        ]);
+
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->role = $request->role;
+        if ($request -> password){
+            $user->password = bcrypt($request->password);
+        }
+        $user->save();
+        return redirect(route('user'));
     }
 
     /**
@@ -92,8 +109,10 @@ class UserController extends Controller
      * @param  \App\user  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(user $user)
+    public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('user');
     }
 }
