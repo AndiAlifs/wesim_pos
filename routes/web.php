@@ -30,7 +30,9 @@ Route::middleware('role:admin')->group(function () {
     
     // Member Route
     Route::get('/member', 'MemberController@index')->name('member');
-    
+    Route::put('/member/update/{id}', 'MemberController@update');
+    Route::get('/member/destroy/{id}', 'MemberController@destroy');
+
     // Supplier Route
     Route::get('/supplier', 'SupplierController@index')->name('supplier');
     Route::put('/supplier/update/{id}', 'SupplierController@update');

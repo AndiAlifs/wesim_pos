@@ -21,6 +21,7 @@ class MemberSeeder extends Seeder
             DB::table('members')->insert([
                 'member_code' => $faker->numberBetween(1000000,9999999),
                 'name' => $faker->name,
+                'phone' => $faker->phoneNumber,
                 'email' => $faker->unique()->safeEmail,
                 'address' => $faker->address,
                 'point' => $faker->numberBetween(25,40),
