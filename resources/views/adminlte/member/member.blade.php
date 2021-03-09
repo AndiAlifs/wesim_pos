@@ -15,6 +15,7 @@
                         {{ session('status') }}
                     </div>
                     @endif
+                    <a class="btn btn-primary col text-white font-semibold py-3 mb-3 my-2" >Tambah member</a>
                     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12">
