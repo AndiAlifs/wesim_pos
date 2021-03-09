@@ -22,11 +22,11 @@ class MemberController extends Controller
             'address' => 'required',
         ]);
 
-        Supplier::create([
+        Member::create([
             'name' => $request->name,
             'phone' => $request->phone,
+            'member_code' => "34123",
             'address' => $request->address,
-            'member_id' => Faker::create('id_ID')->numberBetween(1000000,9999999),
             'point' => 0,
         ]);
         return redirect('/member');

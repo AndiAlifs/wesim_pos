@@ -15,7 +15,6 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <a class="btn btn-primary col text-white font-semibold py-3 mb-3 my-2" >Tambah member</a>
                     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12">
@@ -31,7 +30,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($member as $row)
+                                        @foreach($members as $row)
                                         <tr role="row" class="odd">
                                             <td tabindex="0" class="sorting_1">{{ $loop->iteration }}</td>
                                             <td>{{ $row->member_code }}</td>

@@ -19,9 +19,10 @@ class MemberSeeder extends Seeder
     
             // insert data ke table pegawai menggunakan Faker
             DB::table('members')->insert([
-                'member_code' => $faker->numberBetween(1000000,9999999),
                 'name' => $faker->name,
+                'phone' => $faker->phoneNumber,
                 'email' => $faker->unique()->safeEmail,
+                'member_code' => $faker->numberBetween(1000000,9999999),
                 'address' => $faker->address,
                 'point' => $faker->numberBetween(25,40),
             ]);
