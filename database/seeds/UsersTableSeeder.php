@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
             'name' => $faker->name,
             'email' => $faker->unique()->safeEmail,
             'username' => 'owner',
-            'role_id' => 2,
+            'role_id' => 3,
             'password' => bcrypt('password'),
         ];
 
@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'username' => 'cashier',
-        'role_id' => 3,
+        'role_id' => 2,
         'password' => bcrypt('password'),
         ];
 
