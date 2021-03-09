@@ -31,7 +31,6 @@ Route::middleware('role:admin')->group(function () {
     Route::put('/user/update/{id}', 'UserController@update');
     Route::get('/user/destroy/{id}', 'userController@destroy');
     
-    
     // Member Route
     Route::get('/member', 'MemberController@index')->name('member');
     Route::put('/member/update/{id}', 'MemberController@update')->name('update_member');
@@ -46,6 +45,10 @@ Route::middleware('role:admin')->group(function () {
     
     // Product Route
     Route::get('/product', 'ProductController@index')->name('product');
+    Route::post('/product/store', 'ProductController@store')->name('product_store');
+    Route::get('/product/destroy/{id}', 'ProductController@destroy');
+
+
     
     // Category Route
     Route::get('/category', 'CategoryController@index')->name('category');
