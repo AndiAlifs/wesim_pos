@@ -51,7 +51,7 @@
                                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
                                                     <abbr title="edit"><i class="nav-icon fas fa-edit"></i>
                                                 </button>
-                                                <a onclick="return confirm('Are you sure?')" href="/supplier/destroy/{{ $row->id }}" class="btn btn-danger"><abbr title="Hapus"><i class="nav-icon fas fa-trash"></i></a>
+                                                <a onclick="return confirm('Are you sure?')" href="{{ route('delete_supplier', $row->id) }}" class="btn btn-danger"><abbr title="Hapus"><i class="nav-icon fas fa-trash"></i></a>
                                             </td>
                                         </tr>
 
@@ -65,7 +65,7 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form method="post" action="/supplier/update/{{ $row->id }}">
+                                                    <form method="post" action="{{ route('update_supplier', $row->id) }}">
                                                         <div class="modal-body">
                                                             {{ csrf_field() }}
                                                             {{ method_field('PUT') }}

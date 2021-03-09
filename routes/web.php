@@ -36,8 +36,8 @@ Route::middleware('role:admin')->group(function () {
 
     // Supplier Route
     Route::get('/supplier', 'SupplierController@index')->name('supplier');
-    Route::put('/supplier/update/{id}', 'SupplierController@update');
-    Route::get('/supplier/destroy/{id}', 'SupplierController@destroy');
+    Route::put('/supplier/update/{id}', 'SupplierController@update')->name('update_supplier');
+    Route::get('/supplier/destroy/{id}', 'SupplierController@destroy')->name('delete_supplier');
     Route::put('/supplier/store', 'SupplierController@store')->name('supplier_store');
     
     // Product Route
