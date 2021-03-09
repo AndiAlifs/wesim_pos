@@ -49,8 +49,8 @@ class LoginController extends Controller
         /**
          * Cashier tidak boleh ke halaman admin
          */
-        if ($user->role_id === 3) {
-            return redirect()->route('landing-page');
+        if ($user->role_id === 2) {
+            return redirect()->route('cashier');
         }
 
         /**
