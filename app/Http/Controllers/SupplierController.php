@@ -15,7 +15,7 @@ class SupplierController extends Controller
     public function index()
     {
         $supplier = Supplier::all();
-        return view('adminlte/supplier/supplier',['supplier' => $supplier]);
+        return view('adminlte/supplier/supplier', ['supplier' => $supplier]);
     }
 
     /**
@@ -36,7 +36,21 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'description' => 'required',
+        ]);
+
+        Supplier::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'description' => $request->description,
+        ]);
+
+        return redirect('/supplier');
     }
 
     /**
@@ -68,9 +82,22 @@ class SupplierController extends Controller
      * @param  \App\supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, supplier $supplier)
+    public function update($id, Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'description' => 'required',
+        ]);
+
+        $supplier = Supplier::find($id);
+        $supplier->name = $request->name;
+        $supplier->phone = $request->phone;
+        $supplier->address = $request->address;
+        $supplier->description = $request->description;
+        $supplier->save();
+        return redirect('/supplier');
     }
 
     /**
@@ -79,8 +106,11 @@ class SupplierController extends Controller
      * @param  \App\supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function destroy(supplier $supplier)
+    public function destroy($id)
     {
-        //
+
+        $supplier = Supplier::find($id);
+        $supplier->delete();
+        return redirect('/supplier');
     }
 }

@@ -55,6 +55,14 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{route('category')}}" class="nav-link {{Route::is('category') ? 'active' : ''}}">
+            <i class="nav-icon fas fa-archive"></i>
+            <p>
+              Kategori Produk
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="/#" class="nav-link {{Route::is('warehouse') ? 'active' : ''}}">
             <i class="nav-icon fas fa-warehouse"></i>
             <p>
