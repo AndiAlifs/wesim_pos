@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -41,5 +42,19 @@ class LoginController extends Controller
     public function username()
     {
         return 'username';
+    }
+
+    public function authenticated(Request $request, $user)
+    {
+        /**
+         * Cashier tidak boleh ke halaman admin
+         */
+        if ($user->role_id === 3) {
+            return redirect()->route('landing-page');
+        }
+
+        /**
+         * Berarti yang login admin atau owner
+         */
     }
 }
