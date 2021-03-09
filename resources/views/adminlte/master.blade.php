@@ -61,7 +61,9 @@
 <!-- AdminLTE for dataTables -->
 <script src="{{asset('/adminlte/plugins/datatables/jquery.dataTables.js')}}"></script>
 <script src="{{asset('/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
-
+<!-- AdminLTE for demo purposes -->
+<script src="{{asset('/adminlte/dist/js/demo.js')}}"></script>
+  
 <!-- page script -->
 <script>
   $(function () {
