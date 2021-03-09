@@ -49,3 +49,5 @@ Route::middleware('role:admin')->group(function () {
     Route::put('/category/store', 'CategoryController@store')->name('category_store');
     
 });
+
+Route::get('/cashier', 'HomeController@cashier')->name('cashier');
