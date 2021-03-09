@@ -18,6 +18,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// ------------------------------------------- Admin Page -----------------------------------------
 // Home Route
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -41,3 +42,8 @@ Route::get('/category', 'CategoryController@index')->name('category');
 Route::put('/category/update/{id}', 'CategoryController@update');
 Route::get('/category/destroy/{id}', 'CategoryController@destroy');
 Route::put('/category/store', 'CategoryController@store')->name('category_store');
+
+
+// --------------------------------------- Kasir Page -----------------------------------------
+// Home Route
+Route::get('/cashier', 'HomeController@cashier')->name('cashier');

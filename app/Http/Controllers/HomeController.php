@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function cashier()
+    {
+        return view('cashier/home');
+    }
 }
