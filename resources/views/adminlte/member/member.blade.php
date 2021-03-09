@@ -53,6 +53,9 @@
                                         </tr>
                                     </tfoot>
                                 </table>
+                                <div class="float-right pt-3">
+                                    <a class="btn btn-primary" href="" data-toggle="modal" data-target="#modal-store"><i class='fa fa-plus-circle'></i> Tambah</a>
+                                </div>
                             </div>
                         </div>
                     </div>
