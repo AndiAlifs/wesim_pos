@@ -25,7 +25,7 @@
                                         <tr role="row">
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Transaction Id</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Nama</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Amount</th>
+                                            {{-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Amount</th> --}}
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="descending" aria-label="Platform(s): activate to sort column ascending">Date</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Debit</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Kredit</th>
@@ -37,7 +37,7 @@
                                         <tr role="row">
                                             <td>TRX-0321-{{ $row->id }}</td>
                                             <td>{{ $row->transaction_name }}</td>
-                                            <td>{{ $row->amount }}</td>
+                                            {{-- <td>{{ $row->amount }}</td> --}}
                                             <td class="sorting_1" >{{ $row->transaction_date }}</td>
                                             @if ($row->jenis == "debit")
                                                 <td>Rp. {{ $row->amount }}</td>
@@ -137,7 +137,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th class="bg-info" rowspan="1" colspan="4">Total</th>
+                                            <th class="bg-info" rowspan="1" colspan="3">Total</th>
                                             <th class="bg-danger" rowspan="1" colspan="1">Rp. {{ $kas["debit"]}}</th>
                                             <th class="bg-success" rowspan="1" colspan="1">Rp. {{ $kas["kredit"]}}</th>
                                             <th class="bg-secondary" rowspan="1" colspan="1">Aksi</th>
