@@ -54,6 +54,9 @@ Route::middleware('role:admin')->group(function () {
     Route::get('/category/destroy/{id}', 'CategoryController@destroy');
     Route::put('/category/store', 'CategoryController@store')->name('category_store');
     
+    // finance route
+    Route::get('/finance', 'FinanceController@index')->name('finance');
+
 });
 
 Route::get('/cashier', 'cashier\CashierController@index')->name('cashier');

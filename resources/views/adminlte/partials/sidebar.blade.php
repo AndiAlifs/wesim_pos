@@ -30,6 +30,16 @@
             </p>
           </a>
         </li>
+
+        <li class="nav-item">
+          <a href="{{__('finance')}}" class="nav-link {{Route::is('report') ? 'active' : ''}}">
+            <i class="nav-icon fa fa-file"></i>
+            <p>
+              Informasi Keuangan
+            </p>
+          </a>
+        </li>
+
         <li class="nav-item">
           <a href="{{route('member')}}" class="nav-link {{Route::is('member') ? 'active' : ''}}">
             <i class="nav-icon fas fa-users"></i>
@@ -78,6 +88,7 @@
             </p>
           </a>
         </li>
+        
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
