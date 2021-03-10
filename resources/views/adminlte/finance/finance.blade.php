@@ -23,7 +23,7 @@
                                 <table id="datatable_pagination" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Id</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Transaction Id</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Nama</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Amount</th>
                                             <th class="sorting_desc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="descending" aria-label="Platform(s): activate to sort column ascending">Date</th>
@@ -35,7 +35,7 @@
                                     <tbody>
                                         @foreach($finances as $row)
                                         <tr role="row">
-                                            <td>0321-TRX-{{ $row->id }}</td>
+                                            <td>TRX-0321-{{ $row->id }}</td>
                                             <td>{{ $row->transaction_name }}</td>
                                             <td>{{ $row->amount }}</td>
                                             <td class="sorting_1" >{{ $row->transaction_date }}</td>
