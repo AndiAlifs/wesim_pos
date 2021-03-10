@@ -15,7 +15,6 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <a class="btn btn-primary col text-white font-semibold py-3 mb-3 my-2" >Tambah member</a>
                     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12">
@@ -31,10 +30,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($member as $row)
+                                        @foreach($members as $row)
                                         <tr role="row" class="odd">
                                             <td tabindex="0" class="sorting_1">{{ $loop->iteration }}</td>
-                                            <td>{{ $row->member_code }}</td>
+                                            <td>{{ $row->member_id }}</td>
                                             <td>{{ $row->name }}</td>
                                             <td>{{ $row->email }}</td>
                                             <td>{{ $row->point }}</td>
@@ -70,7 +69,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Nomor Handphone</label>
-                                                                <textarea name="phone" class="form-control" placeholder="">{{ $row->phone }}</textarea>
+                                                                <input name="phone" class="form-control" placeholder="">{{ $row->phone }}</input>
                                                                 @if($errors->has('phone'))
                                                                 <div class="text-danger">
                                                                     {{ $errors->first('phone')}}
@@ -78,20 +77,20 @@
                                                                 @endif
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Alamat</label>
-                                                                <textarea name="address" class="form-control" placeholder="">{{ $row->address }}</textarea>
-                                                                @if($errors->has('address'))
+                                                                <label>Email</label>
+                                                                <input name="email" class="form-control" placeholder="">{{ $row->email }}</input>
+                                                                @if($errors->has('email'))
                                                                 <div class="text-danger">
-                                                                    {{ $errors->first('address')}}
+                                                                    {{ $errors->first('email')}}
                                                                 </div>
                                                                 @endif
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Deskripsi</label>
-                                                                <textarea name="description" class="form-control" placeholder="">{{ $row->description }}</textarea>
-                                                                @if($errors->has('description'))
+                                                                <label>Alamat</label>
+                                                                <input name="address" class="form-control" placeholder="">{{ $row->address }}</input>
+                                                                @if($errors->has('address'))
                                                                 <div class="text-danger">
-                                                                    {{ $errors->first('description')}}
+                                                                    {{ $errors->first('address')}}
                                                                 </div>
                                                                 @endif
                                                             </div>
@@ -148,7 +147,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Nomor Handphone</label>
-                                                        <textarea name="phone" class="form-control" placeholder=""></textarea>
+                                                        <input name="phone" class="form-control" placeholder=""></input>
                                                         @if($errors->has('phone'))
                                                         <div class="text-danger">
                                                             {{ $errors->first('phone')}}
@@ -156,8 +155,17 @@
                                                         @endif
                                                     </div>
                                                     <div class="form-group">
+                                                        <label>Email</label>
+                                                        <input name="email" class="form-control" placeholder="">{{ $row->email }}</input>
+                                                        @if($errors->has('email'))
+                                                        <div class="text-danger">
+                                                            {{ $errors->first('email')}}
+                                                        </div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label>Alamat</label>
-                                                        <textarea name="address" class="form-control" placeholder=""></textarea>
+                                                        <input name="address" class="form-control" placeholder=""></input>
                                                         @if($errors->has('address'))
                                                         <div class="text-danger">
                                                             {{ $errors->first('address')}}

@@ -19,14 +19,18 @@ class MemberController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'phone' => 'required',
+            'email' => 'required',
             'address' => 'required',
         ]);
 
-        Supplier::create([
+        $faker = Faker::create('id_ID');
+
+        Member::create([
             'name' => $request->name,
+            'member_id' => $faker->numberBetween(1000000,9999999),
             'phone' => $request->phone,
+            'email' => $request->email,
             'address' => $request->address,
-            'member_id' => Faker::create('id_ID')->numberBetween(1000000,9999999),
             'point' => 0,
         ]);
         return redirect('/member');
