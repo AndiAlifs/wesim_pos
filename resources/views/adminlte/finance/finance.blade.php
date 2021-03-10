@@ -35,7 +35,7 @@
                                     <tbody>
                                         @foreach($finances as $row)
                                         <tr role="row">
-                                            <td>0321-TRX00{{ $row->id }}</td>
+                                            <td>0321-TRX-{{ $row->id }}</td>
                                             <td>{{ $row->transaction_name }}</td>
                                             <td>{{ $row->amount }}</td>
                                             <td class="sorting_1" >{{ $row->transaction_date }}</td>
