@@ -32,7 +32,7 @@
             @include('cashier.menu')
 
             {{-- include chart --}}
-            @include('cashier.chart')
+            @include('cashier.cart')
 
             {{-- content --}}
             @yield('content')

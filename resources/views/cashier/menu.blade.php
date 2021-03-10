@@ -1,6 +1,7 @@
 <style>
     .product-item:hover, .category-item:hover {
         background-color:rgb(218, 240, 255);
+        cursor: pointer;
     }   
 </style>
 
@@ -12,6 +13,8 @@
 
         <!-- /.card-header -->
         <div class="card-body">
+
+            {{-- category part --}}
             <div class="category-part px-3">
                 <div class="row px-1">
                     <h3>Kategori Produk</h3>
@@ -29,7 +32,10 @@
                     </div>
                 </div>
             </div>
-            <div class="product-part px-3 py-4">
+            {{-- /.category part --}}
+
+            {{-- product part --}}
+            <div class="product-part px-3 py-4" onclick="addToCart({{$row->id}})">
                 <div class="row px-1">
                     <h3>Produk</h3>
                 </div>
@@ -48,9 +54,19 @@
                         @endforeach
                     </div>
                 </div>
-
             </div>
+            {{-- /.product part --}}
+
         </div>
         <!-- /.card-body -->
     </div>
 </div>
+
+
+<script>
+
+    function addToCart(id){
+        
+    }
+
+</script>
