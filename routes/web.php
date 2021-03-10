@@ -55,4 +55,4 @@ Route::middleware('role:admin')->group(function () {
     
 });
 
-Route::get('/cashier', 'HomeController@cashier')->name('cashier');
+Route::get('/cashier', 'cashier\CashierController@index')->name('cashier');
