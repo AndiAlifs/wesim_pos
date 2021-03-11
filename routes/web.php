@@ -62,7 +62,7 @@ Route::middleware('role:admin')->group(function () {
     
     // Discount Route
     Route::get('/discount', 'DiscountController@index')->name('discount');
-
+    Route::put('/discount/update', 'DiscountController@update')->name('discount_update');
 });
 
 Route::middleware('role:cashier')->group(function() {

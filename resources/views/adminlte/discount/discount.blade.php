@@ -24,31 +24,30 @@
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">ID Produk</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Nama Produk</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Harga Awal</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Besaran Diskon (%)</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Harga Jual</th>
-                                            <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="">Deskripsi</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Harga</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Diskon (%)</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Total</th>
+                                            <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="">Alasan</th>
                                             <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($discounts as $row)
+                                        @foreach($products as $row)
+                                        @if($row->discount_amount != 0)
                                         <tr role="row" class="odd">
                                             <td tabindex="0" class="sorting_1">{{ $loop->iteration }}</td>
                                             <td>{{ $row->product_code }}</td>
                                             <td>{{ $row->name }}</td>
                                             <td>{{ $row->price }}</td>
-                                            <td>{{ $row->purchase_price }}</td>
-                                            <td>{{ $row->price }}</td>
-                                            <td>{{ $row->description }}</td>
-                                            <td>
-                                                <!-- <button type="button" class="btn-sm btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                </button> -->
-                                                <!-- <a class="btn-sm btn-warning> <i class="nav-icon fas fa-edit"></i></a> -->
+                                            <td>{{ $row->discount_amount }}</td>
+                                            <td>{{ $row->price - ($row->price * $row->discount_amount / 100) }}</td>
+                                            <td>{{ $row->discount_reason ?? "Tidak ada" }}</td>
+                                            <td width="10%">
+                                                <a class="btn-sm btn-warning" href="/product/destroy/{{ $row->id }}"> <i class="nav-icon fas fa-edit"></i></a>
                                                 <a onclick="return confirm('Are you sure?')" href="/product/destroy/{{ $row->id }}" class="btn-sm btn-danger"><i class="nav-icon fas fa-trash"></i></a>
                                             </td>
                                         </tr>
+                                        @endif
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -70,31 +69,39 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Tambah Produk</h4>
+                <h4 class="modal-title">Tambah Diskon</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{route('category_store')}}">
+            <form method="post" action="{{route('discount_update')}}">
                 <div class="modal-body">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
 
                     <div class="form-group">
-                        <label>Nama</label>
-                        <input type="text" name="name" class="form-control" placeholder="Masukan Nama" value="">
-                        @if($errors->has('name'))
+                        <label>Produk</label>
+                        <select name="product_code" class="form-control">
+                            @foreach($products as $row)
+                                <option value="{{$row->product_code}}">{{$row->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Jumlah (%)</label>
+                        <input name="discount_amount" min="0" max="100" type="number" class="form-control" placeholder="Masukan Jumlah "></input>
+                        @if($errors->has('discount_amount'))
                         <div class="text-danger">
-                            {{ $errors->first('name')}}
+                            {{ $errors->first('discount_amount')}}
                         </div>
                         @endif
                     </div>
                     <div class="form-group">
-                        <label>Deskripsi</label>
-                        <textarea name="description" class="form-control" placeholder="Masukan Deskripsi"></textarea>
-                        @if($errors->has('description'))
+                        <label>Alasan</label>
+                        <input name="discount_reason"  class="form-control" placeholder="Alasan Diskon"></input>
+                        @if($errors->has('discount_reason'))
                         <div class="text-danger">
-                            {{ $errors->first('description')}}
+                            {{ $errors->first('discount_reason')}}
                         </div>
                         @endif
                     </div>
@@ -113,5 +120,7 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+
 
 @endsection

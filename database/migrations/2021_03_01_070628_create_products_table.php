@@ -19,6 +19,8 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('producer');
             $table->string('purchase_price');
+            $table->integer('discount_amount')->default(0);
+            $table->string('discount_reason')->default('');
             $table->timestamp('last_updated');
             $table->text('description');
             $table->integer('price');
