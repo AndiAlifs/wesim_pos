@@ -15,6 +15,9 @@ class RoleMiddleware
      */
     public function handle($request, Closure $next, $canAccess)
     {
+        if (!Auth()->user()) {
+            return redirect()->route('login');
+        }
 
         /**
         * Role ID Note
@@ -53,6 +56,14 @@ class RoleMiddleware
         $user_role = Auth()->user()->role_id;
         if (in_array($user_role, $roleToId[$canAccess])) {
             return $next($request);
+        }
+
+        if(in_array($user_role, $roleToId['admin']) || in_array($user_role, $roleToId['owner'])) {
+            return redirect()->route('home');
+        }
+
+        if(in_array($user_role, $roleToId['cashier'])) {
+            return redirect()->route('cashier');
         }
 
         return redirect()->route('landing-page');

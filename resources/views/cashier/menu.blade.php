@@ -24,7 +24,7 @@
                         @foreach ($category as $row)
                             <div class="col-sm-2">
                                 <div class="card justify-content-center px-1 py-1 category-item">
-                                    <img src="#" alt="" width="100%" height="100px">
+                                    <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636" alt="" width="100%" height="100px">
                                     <b> {{ $row->name }}</b>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                         @foreach ($product as $row)
                             <div class="col-sm-2">
                                 <div class="card justify-content-center px-1 py-1 product-item">
-                                    <img src="#" alt="" width="100%" height="100px">
+                                    <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636" alt="" width="100%" height="100px">
                                     <div>
                                         <b>{{ $row->name }}</b><br>
                                         <small> Rp.{{ $row->price }}</small>

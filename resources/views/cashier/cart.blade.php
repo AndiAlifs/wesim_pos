@@ -23,7 +23,7 @@
                         <div class="row">
                             <div class="col-sm-2">
                                 <div class="p-2">
-                                    <img src="#" alt="" width="50px" height="50x">
+                                    <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636" alt="" width="50px" height="50x">
                                     {{-- <b> {{ $row->name }}</b> --}}
                                 </div>
                             </div>

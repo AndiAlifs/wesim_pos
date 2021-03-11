@@ -21,12 +21,19 @@ class DiscountController extends Controller
             'discount_reason' => 'required',
         ]);
         $product = Product::where('product_code', $request->product_code)->first();
-        // dd($product);
         $product->discount_amount = $request->discount_amount;
         $product->discount_reason = $request->discount_reason;
         $product->save();
-        return redirect()->to('/product');
+        return redirect()->route('discount');
+    }
 
+    function destroy($id)
+    {
+        $product = Product::find($id);
+        $product->discount_amount = 0;
+        $product->discount_reason = '';
+        $product->save();
+        return redirect()->route('discount');
     }
 
 }

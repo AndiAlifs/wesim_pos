@@ -33,21 +33,77 @@
                                     </thead>
                                     <tbody>
                                         @foreach($products as $row)
-                                        @if($row->discount_amount != 0)
-                                        <tr role="row" class="odd">
-                                            <td tabindex="0" class="sorting_1">{{ $loop->iteration }}</td>
-                                            <td>{{ $row->product_code }}</td>
-                                            <td>{{ $row->name }}</td>
-                                            <td>Rp. {{ $row->price }}</td>
-                                            <td>{{ $row->discount_amount }}%</td>
-                                            <td>Rp. {{ $row->price - ($row->price * $row->discount_amount / 100) }}</td>
-                                            <td>{{ $row->discount_reason ?? "Tidak ada" }}</td>
-                                            <td width="10%">
-                                                <a class="btn-sm btn-warning" href="/product/destroy/{{ $row->id }}"> <i class="nav-icon fas fa-edit"></i></a>
-                                                <a onclick="return confirm('Are you sure?')" href="/product/destroy/{{ $row->id }}" class="btn-sm btn-danger"><i class="nav-icon fas fa-trash"></i></a>
-                                            </td>
-                                        </tr>
-                                        @endif
+                                            @if($row->discount_amount != 0)
+                                                <tr role="row" class="odd">
+                                                    <td tabindex="0" class="sorting_1">{{ $loop->iteration }}</td>
+                                                    <td>{{ $row->product_code }}</td>
+                                                    <td>{{ $row->name }}</td>
+                                                    <td>Rp. {{ $row->price }}</td>
+                                                    <td>{{ $row->discount_amount }}%</td>
+                                                    <td>Rp. {{ $row->price - ($row->price * $row->discount_amount / 100) }}</td>
+                                                    <td>{{ $row->discount_reason ?? "Tidak ada" }}</td>
+                                                    <td width="10%">
+                                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
+                                                            <abbr title="edit"><i class="nav-icon fas fa-edit"></i>
+                                                        </button>
+                                                        <a onclick="return confirm('Are you sure?')" href="{{route('discount_destroy', $row->id)}}" class="btn btn-danger"><abbr title="Hapus"><i class="nav-icon fas fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <!-- modal update -->
+                                                <div class="modal fade" id="modal-default{{ $row->id }}">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Edit Diskon</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <form method="post" action="{{route('discount_update')}}">
+                                                                <div class="modal-body">
+                                                                    {{ csrf_field() }}
+                                                                    {{ method_field('PUT') }}
+
+                                                                    <div class="form-group">
+                                                                        <label>Produk</label>
+                                                                        <input type="hidden" name="product_code" value="{{$row->product_code}}">
+                                                                        <input name="name" class="form-control" readonly="readonly" disabled value="{{$row->name}}"></input>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Jumlah (%)</label>
+                                                                        <input name="discount_amount" min="0" max="100" type="number" value="{{$row->discount_amount}}" class="form-control" placeholder="Masukan Jumlah"></input>
+                                                                        @if($errors->has('discount_amount'))
+                                                                        <div class="text-danger">
+                                                                            {{ $errors->first('discount_amount')}}
+                                                                        </div>
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Alasan</label>
+                                                                        <input name="discount_reason" value="{{$row->discount_reason}}" class="form-control" placeholder="Alasan Diskon"></input>
+                                                                        @if($errors->has('discount_reason'))
+                                                                        <div class="text-danger">
+                                                                            {{ $errors->first('discount_reason')}}
+                                                                        </div>
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="small text-muted text-right">
+                                                                        didaftarkan pada <b>{{ date('Y-m-d') }}</b>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer justify-content-between">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    <input type="submit" class="btn btn-success" value="Simpan">
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
+                                            @endif
+
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -83,7 +139,9 @@
                         <label>Produk</label>
                         <select name="product_code" class="form-control">
                             @foreach($products as $row)
-                                <option value="{{$row->product_code}}">{{$row->name}}</option>
+                                @if($row->discount_amount == 0)
+                                    <option value="{{$row->product_code}}">{{$row->name}}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
