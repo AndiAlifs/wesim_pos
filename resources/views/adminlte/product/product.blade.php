@@ -38,8 +38,8 @@
                                             <td>{{ $row->product_code }}</td>
                                             <td>{{ $row->name }}</td>
                                             <td>{{ $row->producer }}</td>
-                                            <td>{{ $row->purchase_price }}</td>
-                                            <td>{{ $row->price }}</td>
+                                            <td>Rp. {{ $row->purchase_price }}</td>
+                                            <td>Rp. {{ $row->price }}</td>
                                             <td>{{ $row->description }}</td>
                                             <td>
                                                 <!-- <button type="button" class="btn-sm btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">

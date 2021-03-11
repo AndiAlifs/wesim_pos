@@ -38,9 +38,9 @@
                                             <td tabindex="0" class="sorting_1">{{ $loop->iteration }}</td>
                                             <td>{{ $row->product_code }}</td>
                                             <td>{{ $row->name }}</td>
-                                            <td>{{ $row->price }}</td>
-                                            <td>{{ $row->discount_amount }}</td>
-                                            <td>{{ $row->price - ($row->price * $row->discount_amount / 100) }}</td>
+                                            <td>Rp. {{ $row->price }}</td>
+                                            <td>{{ $row->discount_amount }}%</td>
+                                            <td>Rp. {{ $row->price - ($row->price * $row->discount_amount / 100) }}</td>
                                             <td>{{ $row->discount_reason ?? "Tidak ada" }}</td>
                                             <td width="10%">
                                                 <a class="btn-sm btn-warning" href="/product/destroy/{{ $row->id }}"> <i class="nav-icon fas fa-edit"></i></a>

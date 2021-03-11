@@ -20,8 +20,8 @@ class DiscountController extends Controller
             'discount_amount' => 'required',
             'discount_reason' => 'required',
         ]);
-        dd($request->discount_amount);
-        $product = Product::find($request->product_code);
+        $product = Product::where('product_code', $request->product_code)->first();
+        // dd($product);
         $product->discount_amount = $request->discount_amount;
         $product->discount_reason = $request->discount_reason;
         $product->save();
