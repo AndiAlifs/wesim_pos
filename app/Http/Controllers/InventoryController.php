@@ -15,10 +15,7 @@ class InventoryController extends Controller
     public function index()
     {
         $inventories = inventory::get();
-        for ($i=1; $i <= $inventories->count() ; $i++) { 
-            $gambar[$i] = "image/product/gambarIndomie".rand(1,3).".JPG";
-        }
-        return view('adminlte.inventory.inventory', compact('inventories','gambar'));
+        return view('adminlte.inventory.inventory', compact('inventories'));
     }
 
     public function confirm_ship($id)

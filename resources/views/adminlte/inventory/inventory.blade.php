@@ -22,10 +22,10 @@
                                         <tr role="row">
                                             {{-- <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th> --}}
                                             <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">ID Produk</th>
-                                            <th>Image</th>
                                             <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Nama Produk</th>
-                                            <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">In Stock</th>
+                                            <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Minimum Stock</th>
                                             <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Maximum Stock</th>
+                                            <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">In Stock</th>
                                             <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Incoming Stock</th>
                                             <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Stock Status</th>
                                             <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Action</th>
@@ -36,9 +36,14 @@
                                         <tr role="row" class="odd">
                                             {{-- <td tabindex="0" class="sorting_1">{{ $loop->iteration }}</td> --}}
                                             <td>PRD-{{ $row->product->id }}</td>
-                                            <td> <img src={{ asset($gambar[$loop->iteration]) }} height="80em"> </td>
-                                            <td>{{ $row->product->name }}</td>
-                                            @if ( $row->in_stock < 20)
+                                            <td>
+                                                <img src="{{ asset("image/product/gambarIndomie".rand(1,3).".JPG") }}" alt="" height="60em">
+                                                <br>
+                                                {{ $row->product->name }}
+                                            </td>
+                                            <td>{{ $row->min_stock }}</td>
+                                            <td>{{ $row->full_stock }}</td>
+                                            @if ( $row->in_stock < $row->min_stock)
                                                 <td class="text-danger font-weight-bolder">
                                                     {{ $row->in_stock}}
                                                 </td>
@@ -47,7 +52,6 @@
                                                     {{ $row->in_stock}}
                                                 </td>
                                             @endif
-                                            <td>{{ $row->full_stock }}</td>
                                             <td>{{ $row->incoming }}</td>
                                             <td>
                                                 @if ($row->in_stock < 20)

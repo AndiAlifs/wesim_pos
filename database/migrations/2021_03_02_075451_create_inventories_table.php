@@ -18,6 +18,7 @@ class CreateInventoriesTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
             $table->unsignedBigInteger('in_stock');
+            $table->unsignedBigInteger('min_stock');
             $table->unsignedBigInteger('full_stock');
             $table->unsignedBigInteger('incoming');
         });
