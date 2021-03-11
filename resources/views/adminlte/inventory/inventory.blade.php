@@ -36,7 +36,7 @@
                                         <tr role="row" class="odd">
                                             {{-- <td tabindex="0" class="sorting_1">{{ $loop->iteration }}</td> --}}
                                             <td>PRD-{{ $row->product->id }}</td>
-                                            <td> <img src={{ asset('image/product/gambarIndomie.JPG') }} height="80em"> </td>
+                                            <td> <img src={{ asset($gambar[$loop->iteration]) }} height="80em"> </td>
                                             <td>{{ $row->product->name }}</td>
                                             @if ( $row->in_stock < 20)
                                                 <td class="text-danger font-weight-bolder">
