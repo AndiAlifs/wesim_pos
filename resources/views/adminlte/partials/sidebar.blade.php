@@ -65,6 +65,14 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{route('discount')}}" class="nav-link {{Route::is('product') ? 'active' : ''}}">
+            <i class="nav-icon fas fa-archive"></i>
+            <p>
+              Manajemen Diskon
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{route('category')}}" class="nav-link {{Route::is('category') ? 'active' : ''}}">
             <i class="nav-icon fas fa-archive"></i>
             <p>

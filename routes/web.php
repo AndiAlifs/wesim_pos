@@ -18,10 +18,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Apply role middleware
-Route::middleware('role:admin')->group(function () {
-
-    
+// Can accessed by admin and store manager
+Route::middleware('role:admin_owner')->group(function () {
     // Home Route
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -59,4 +57,14 @@ Route::middleware('role:admin')->group(function () {
 
 });
 
-Route::get('/cashier', 'cashier\CashierController@index')->name('cashier');
+// Only for admin
+Route::middleware('role:admin')->group(function () {
+    
+    // Discount Route
+    Route::get('/discount', 'DiscountController@index')->name('discount');
+
+});
+
+Route::middleware('role:cashier')->group(function() {
+    Route::get('/cashier', 'cashier\CashierController@index')->name('cashier');
+});

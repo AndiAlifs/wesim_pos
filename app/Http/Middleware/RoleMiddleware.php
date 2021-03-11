@@ -25,19 +25,25 @@ class RoleMiddleware
         
         $roleToId = [
             /**
-             * Owner can access all admin role
+             * admin role_id is 1
              */
-            "admin" => [1, 2],
+            "admin" => [1],
 
             /**
-             * Only owner can access owner role
+             * owner role_id is 2
              */
             "owner" => [2],
+            
+            /**
+             * Can accessed by admin and owner
+             */
+            "admin_owner" => [1, 2],
             
             /**
              * Cashier role can accessed by admin, owner, cashier
              */
             "cashier" => [1, 2, 3]
+
         
         ];
 
