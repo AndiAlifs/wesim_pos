@@ -81,9 +81,13 @@ class InventoryController extends Controller
      * @param  \App\inventory  $inventory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, inventory $inventory)
-    {
-        //
+    public function update(Request $request, $id)
+    {   
+        $inventory = inventory::find($id);
+        $inventory->incoming = $request->incoming_stock;
+        $inventory->in_stock = $request->in_stock;
+        $inventory->save();
+        return redirect()->route('inventory');
     }
 
     /**

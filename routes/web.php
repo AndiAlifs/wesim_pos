@@ -58,7 +58,7 @@ Route::middleware('role:admin_owner')->group(function () {
     // inventory route
     Route::get('/inventory', 'InventoryController@index')->name('inventory');
     Route::get('/inventory/confirm_ship/{id}', 'InventoryController@confirm_ship');
-
+    Route::put('/inventory/update/{id}', 'InventoryController@update');
 
 });
 

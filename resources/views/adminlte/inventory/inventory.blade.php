@@ -90,44 +90,34 @@
                                                         </button>
                                                     </div>
 
-                                                    <form method="post" action="/user/update/{{ $row->id }}">
+                                                    <form method="post" action="/inventory/update/{{ $row->id }}">
                                                         <div class="modal-body">
                                                             {{ csrf_field() }}
                                                             {{ method_field('PUT') }}
 
                                                             <div class="form-group">
-                                                                <label>Nama</label>
-                                                                <input type="text" name="name" class="form-control" placeholder="Masukan Nama" value="">
-                                                                @if($errors->has('name'))
+                                                                <label>Produk Id</label>
+                                                                <p>PRD-{{ $row->product->id }}</p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Nama Produk</label>
+                                                                <p>{{ $row->product->name }}</p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>In Stock</label>
+                                                                <input type="text" name="in_stock" class="form-control" placeholder="Masukan jumlah stock saat ini " value="{{$row->in_stock}}">
+                                                                @if($errors->has('in_stock'))
                                                                 <div class="text-danger">
-                                                                    {{ $errors->first('name')}}
+                                                                    {{ $errors->first('in_stock')}}
                                                                 </div>
                                                                 @endif
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Username</label>
-                                                                <input type="text" name="username" class="form-control" placeholder="Masukan Username" value="">
-                                                                @if($errors->has('username'))
+                                                                <label>Incoming Stock</label>
+                                                                <input type="text" name="incoming_stock" class="form-control" placeholder="Masukan jumlah stock yang akan datang" value="{{$row->incoming}}">
+                                                                @if($errors->has('incoming_stock'))
                                                                 <div class="text-danger">
-                                                                    {{ $errors->first('username')}}
-                                                                </div>
-                                                                @endif
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Email</label>
-                                                                <input type="text" name="email" class="form-control" placeholder="Masukan Email" value="">
-                                                                @if($errors->has('email'))
-                                                                <div class="text-danger">
-                                                                    {{ $errors->first('email')}}
-                                                                </div>
-                                                                @endif
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Password</label>
-                                                                <input type="password" name="password" class="form-control" placeholder="Masukan Password" value="">
-                                                                @if($errors->has('password'))
-                                                                <div class="text-danger">
-                                                                    {{ $errors->first('password')}}
+                                                                    {{ $errors->first('incoming_stock')}}
                                                                 </div>
                                                                 @endif
                                                             </div>
