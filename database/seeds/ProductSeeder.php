@@ -33,14 +33,15 @@ class ProductSeeder extends Seeder
             
             $new_inventory = new inventory;
             $new_inventory->product_id = $new_product->id;
-            $full_stock = rand(10,30)*5;
-            $new_inventory->full_stock = $full_stock;
-            $in_stock = rand(0,$full_stock);
+            $stocks = rand(2,6);
+            $new_inventory->min_stock = $stocks*5;
+            $new_inventory->full_stock = rand($stocks+2,30)*5;
+            $in_stock = rand(0,$new_inventory->full_stock);
             $new_inventory->in_stock =  $in_stock;
 
             if ($in_stock  <= 20){
                 if(rand(0,1) == 1){
-                    $new_inventory->incoming = rand(10,$full_stock - $in_stock);
+                    $new_inventory->incoming = rand(10,$new_inventory->full_stock - $new_inventory->in_stock);
                 } else {
                     $new_inventory->incoming = 0;
                 }
