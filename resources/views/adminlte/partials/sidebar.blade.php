@@ -32,7 +32,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="{{__('finance')}}" class="nav-link {{Route::is('report') ? 'active' : ''}}">
+          <a href="{{__('finance')}}" class="nav-link {{Route::is('finance') ? 'active' : ''}}">
             <i class="nav-icon fa fa-file"></i>
             <p>
               Informasi Keuangan
@@ -65,7 +65,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{route('discount')}}" class="nav-link {{Route::is('product') ? 'active' : ''}}">
+          <a href="{{route('discount')}}" class="nav-link {{Route::is('discount') ? 'active' : ''}}">
             <i class="nav-icon fas fa-archive"></i>
             <p>
               Manajemen Diskon
