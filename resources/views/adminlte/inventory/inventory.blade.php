@@ -50,21 +50,101 @@
                                             <td>{{ $row->full_stock }}</td>
                                             <td>{{ $row->incoming }}</td>
                                             <td>
-                                                @if ($row->incoming > 0)
-                                                    <button type="button" class="btn btn-sm btn-info">On Delivery</button>
-                                                @endif
                                                 @if ($row->in_stock < 20)
-                                                    <button type="button" class="btn btn-sm btn-danger">Low Stock</button>
+                                                    <div class="progress my-1">
+                                                        <div class="progress-bar w-100 h-30 bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">{{ round($row->in_stock / $row->full_stock * 100)}}%</div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger my-1">Low Stock</button>
+                                                @else
+                                                    <div class="progress my-1">
+                                                        <div class="progress-bar w-100 h-30  bg-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">{{ round($row->in_stock / $row->full_stock * 100)}}%</div>
+                                                    </div>
                                                 @endif
+                                                @if ($row->incoming > 0)
+                                                    <button type="button" class="btn btn-sm btn-outline-info my-1">On Delivery</button>
+                                                @endif
+                                                
                                             </td>
                                             <td>
-                                                <!-- <button type="button" class="btn-sm btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                </button> -->
-                                                <!-- <a class="btn-sm btn-warning> <i class="nav-icon fas fa-edit"></i></a> -->
-                                                <a onclick="return confirm('Are you sure?')" href="/product/destroy/{{ $row->id }}" class="btn-sm btn-danger"><i class="nav-icon fas fa-trash"></i></a>
+                                                @if ($row->incoming > 0)
+                                                    <a onclick="return confirm('Konfirmasi PO telah diterima?')" href="/inventory/confirm_ship/{{ $row->id }}" class="btn btn-sm my-1 btn-success">
+                                                        <i class="nav-icon fas fa-truck"></i> Confirm Ship
+                                                    </a>
+                                                @endif
+                                                <button type="button" class="btn btn-sm my-1 btn-warning" data-toggle="modal" data-target="#modal-tambah-{{ $row->id }}">
+                                                    <i class="nav-icon fas fa-edit"></i> Edit Stock
+                                                </button>
+                                                <a  onclick="return confirm('Are you sure?')" href="/product/destroy/{{ $row->id }}" class="btn btn-sm my-1 btn-danger">
+                                                    <i class="nav-icon fas fa-trash"></i> Delete Stock
+                                                </a>
                                             </td>
                                         </tr>
+
+                                        <div class="modal fade" id="modal-tambah-{{ $row->id }}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Edit Stok</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+
+                                                    <form method="post" action="/user/update/{{ $row->id }}">
+                                                        <div class="modal-body">
+                                                            {{ csrf_field() }}
+                                                            {{ method_field('PUT') }}
+
+                                                            <div class="form-group">
+                                                                <label>Nama</label>
+                                                                <input type="text" name="name" class="form-control" placeholder="Masukan Nama" value="">
+                                                                @if($errors->has('name'))
+                                                                <div class="text-danger">
+                                                                    {{ $errors->first('name')}}
+                                                                </div>
+                                                                @endif
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Username</label>
+                                                                <input type="text" name="username" class="form-control" placeholder="Masukan Username" value="">
+                                                                @if($errors->has('username'))
+                                                                <div class="text-danger">
+                                                                    {{ $errors->first('username')}}
+                                                                </div>
+                                                                @endif
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Email</label>
+                                                                <input type="text" name="email" class="form-control" placeholder="Masukan Email" value="">
+                                                                @if($errors->has('email'))
+                                                                <div class="text-danger">
+                                                                    {{ $errors->first('email')}}
+                                                                </div>
+                                                                @endif
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Password</label>
+                                                                <input type="password" name="password" class="form-control" placeholder="Masukan Password" value="">
+                                                                @if($errors->has('password'))
+                                                                <div class="text-danger">
+                                                                    {{ $errors->first('password')}}
+                                                                </div>
+                                                                @endif
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            <input type="submit" class="btn btn-success" value="Simpan">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        <!-- /.modal -->
+
                                         @endforeach
                                     </tbody>
                                     <!-- <tfoot>
@@ -90,54 +170,5 @@
         </div>
     </div>
 </div>
-
-<!-- modal store -->
-<div class="modal fade" id="modal-store">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Tambah Produk</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="post" action="{{route('category_store')}}">
-                <div class="modal-body">
-                    {{ csrf_field() }}
-                    {{ method_field('PUT') }}
-
-                    <div class="form-group">
-                        <label>Nama</label>
-                        <input type="text" name="name" class="form-control" placeholder="Masukan Nama" value="">
-                        @if($errors->has('name'))
-                        <div class="text-danger">
-                            {{ $errors->first('name')}}
-                        </div>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label>Deskripsi</label>
-                        <textarea name="description" class="form-control" placeholder="Masukan Deskripsi"></textarea>
-                        @if($errors->has('description'))
-                        <div class="text-danger">
-                            {{ $errors->first('description')}}
-                        </div>
-                        @endif
-                    </div>
-                    <div class="small text-muted text-right">
-                        didaftarkan pada <b>{{ date('Y-m-d') }}</b>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-success" value="Simpan">
-                </div>
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 
 @endsection

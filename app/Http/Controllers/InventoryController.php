@@ -21,6 +21,16 @@ class InventoryController extends Controller
         return view('adminlte.inventory.inventory', compact('inventories','gambar'));
     }
 
+    public function confirm_ship($id)
+    {
+        $inventory = inventory::find($id);
+        $inventory->in_stock += $inventory->incoming;
+        $inventory->incoming = 0;
+        $inventory->save();
+
+        return redirect()->route('inventory');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\user;
-use App\Role;
+use App\Role;   
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -17,7 +17,7 @@ class UserController extends Controller
     {
     	$users = User::with("role")->get();
         $roles = Role::get();
-    	return view('adminlte/user/user',['user' => $users, 'roles' => $roles]);
+    	return redirect()->view('adminlte/user/user',['user' => $users, 'roles' => $roles]);
     }
 
     /**
