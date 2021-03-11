@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Product;
+use App\inventory;
 
 class ProductSeeder extends Seeder
 {
@@ -30,6 +31,25 @@ class ProductSeeder extends Seeder
             $new_product->save();
 
             $new_product->Category()->attach(rand(1,3));
+            
+            $new_inventory = new inventory;
+            $new_inventory->product_id = $new_product->id;
+            $full_stock = rand(4,20)*5;
+            $new_inventory->full_stock = $full_stock;
+            $in_stock = rand(0,$full_stock);
+            $new_inventory->in_stock =  $in_stock;
+
+            if ($in_stock  <= 20){
+                if(rand(0,1) == 1){
+                    $new_inventory->incoming = rand(1,$full_stock - $in_stock);
+                } else {
+                    $new_inventory->incoming = 0;
+                }
+            } else {
+                $new_inventory->incoming = 0;
+            }
+
+            $new_inventory->save();
         }
     }
 }
