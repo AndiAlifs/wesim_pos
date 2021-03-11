@@ -27,7 +27,6 @@
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Produser Produk</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Harga Beli</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Harga Jual</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Diskon</th>
                                             <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="">Deskripsi</th>
                                             <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="">Aksi</th>
                                         </tr>
@@ -41,7 +40,6 @@
                                             <td>{{ $row->producer }}</td>
                                             <td>Rp. {{ $row->purchase_price }}</td>
                                             <td>Rp. {{ $row->price - ($row->price * $row->discount_amount) / 100 }}</td>
-                                            <td>@if($row->discount_amount > 0) Ya @elseif($row->discount_amount == 0) Tidak @endif</td>
                                             <td>{{ $row->description }}</td>
                                             <td>
                                                 <!-- <button type="button" class="btn-sm btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
