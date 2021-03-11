@@ -55,6 +55,9 @@ Route::middleware('role:admin_owner')->group(function () {
     // finance route
     Route::get('/finance', 'FinanceController@index')->name('finance');
 
+    // inventory route
+    Route::get('/inventory', 'InventoryController@index')->name('inventory');
+
 });
 
 // Only for admin
