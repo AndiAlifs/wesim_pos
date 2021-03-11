@@ -17,7 +17,7 @@ class UserController extends Controller
     {
     	$users = User::with("role")->get();
         $roles = Role::get();
-    	return redirect()->view('adminlte/user/user',['user' => $users, 'roles' => $roles]);
+    	return view('adminlte/user/user',['user' => $users, 'roles' => $roles]);
     }
 
     /**
