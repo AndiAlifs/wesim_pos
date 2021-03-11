@@ -81,7 +81,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="/#" class="nav-link {{Route::is('warehouse') ? 'active' : ''}}">
+          <a href="{{__('inventory')}}" class="nav-link {{Route::is('inventory') ? 'active' : ''}}">
             <i class="nav-icon fas fa-warehouse"></i>
             <p>
               Gudang

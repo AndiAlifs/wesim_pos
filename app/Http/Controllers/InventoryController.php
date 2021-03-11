@@ -14,7 +14,8 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        //
+        $inventories = inventory::get();
+        return view('adminlte.inventory.inventory', compact('inventories'));
     }
 
     /**
