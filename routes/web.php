@@ -54,6 +54,7 @@ Route::middleware('role:admin_owner')->group(function () {
     
     // finance route
     Route::get('/finance', 'FinanceController@index')->name('finance');
+    Route::post('/finance/store', 'FinanceController@store')->name('finance_store');
 
     // inventory route
     Route::get('/inventory', 'InventoryController@index')->name('inventory');
