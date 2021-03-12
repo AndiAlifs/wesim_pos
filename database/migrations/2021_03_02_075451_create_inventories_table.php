@@ -15,8 +15,12 @@ class CreateInventoriesTable extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('amount');
-            $table->unsignedBigInteger('sold');
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->unsignedBigInteger('in_stock');
+            $table->unsignedBigInteger('min_stock');
+            $table->unsignedBigInteger('full_stock');
+            $table->unsignedBigInteger('incoming');
         });
     }
 

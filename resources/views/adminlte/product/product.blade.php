@@ -24,9 +24,11 @@
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">ID Produk</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Nama Produk</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Kategori Produk</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Produser Produk</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Harga Beli</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Harga Jual</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Profit</th>
                                             <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="">Deskripsi</th>
                                             <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="">Aksi</th>
                                         </tr>
@@ -34,12 +36,23 @@
                                     <tbody>
                                         @foreach($product as $row)
                                         <tr role="row" class="odd">
-                                            <td tabindex="0" class="sorting_1">{{ $loop->iteration }}</td>
-                                            <td>{{ $row->product_code }}</td>
-                                            <td>{{ $row->name }}</td>
+                                            <td tabindex="0" class="sorting_1">PRD-2021-{{ $row->id }}</td>
+                                            <td>
+                                                <img src="https://bwipjs-api.metafloor.com/?bcid=ean13&text={{ $row->product_code }}" alt="{{ $row->product_code }}" height="60em">
+                                                {{ $row->product_code }}
+                                            </td>
+                                            <td>
+                                                <img src="{{ asset("image/product/gambarIndomie".rand(1,3).".JPG") }}" alt="" height="60em">
+                                                <br>
+                                                {{ $row->name }}
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-outline-primary btn-block">{{ $row->category->first()->name }}</button>
+                                            </td>
                                             <td>{{ $row->producer }}</td>
-                                            <td>{{ $row->purchase_price }}</td>
-                                            <td>{{ $row->price }}</td>
+                                            <td>Rp. {{ $row->purchase_price }}</td>
+                                            <td>Rp. {{ $row->price - ($row->price * $row->discount_amount) / 100 }}</td>
+                                            <td class="text-success font-weight-bold">Rp. {{ $row->price - $row->purchase_price }}</td>
                                             <td>{{ $row->description }}</td>
                                             <td>
                                                 <!-- <button type="button" class="btn-sm btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">

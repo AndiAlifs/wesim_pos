@@ -33,7 +33,7 @@ class MemberController extends Controller
             'address' => $request->address,
             'point' => 0,
         ]);
-        return redirect('/member');
+        return redirect()->route('member');
     }
 
     public function update($id, Request $request)
@@ -49,7 +49,7 @@ class MemberController extends Controller
         $member->phone = $request->phone;
         $member->address = $request->address;
         $member->save();
-        return redirect('/member');
+        return redirect()->route('member');
     }
 
     public function destroy($id)
@@ -57,6 +57,6 @@ class MemberController extends Controller
 
         $member = Member::find($id);
         $member->delete();
-        return redirect('/member');
+        return redirect()->route('member');
     }
 }

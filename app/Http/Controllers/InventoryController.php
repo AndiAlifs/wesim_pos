@@ -14,7 +14,18 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        //
+        $inventories = inventory::get();
+        return view('adminlte.inventory.inventory', compact('inventories'));
+    }
+
+    public function confirm_ship($id)
+    {
+        $inventory = inventory::find($id);
+        $inventory->in_stock += $inventory->incoming;
+        $inventory->incoming = 0;
+        $inventory->save();
+
+        return redirect()->route('inventory');
     }
 
     /**
@@ -67,9 +78,13 @@ class InventoryController extends Controller
      * @param  \App\inventory  $inventory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, inventory $inventory)
-    {
-        //
+    public function update(Request $request, $id)
+    {   
+        $inventory = inventory::find($id);
+        $inventory->incoming = $request->incoming_stock;
+        $inventory->in_stock = $request->in_stock;
+        $inventory->save();
+        return redirect()->route('inventory');
     }
 
     /**

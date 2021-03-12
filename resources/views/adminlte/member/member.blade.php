@@ -69,7 +69,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Nomor Handphone</label>
-                                                                <input name="phone" class="form-control" placeholder="">{{ $row->phone }}</input>
+                                                                <input name="phone" class="form-control" placeholder="" value="{{ $row->phone }}"></input>
                                                                 @if($errors->has('phone'))
                                                                 <div class="text-danger">
                                                                     {{ $errors->first('phone')}}
@@ -78,7 +78,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Email</label>
-                                                                <input name="email" class="form-control" placeholder="">{{ $row->email }}</input>
+                                                                <input name="email" class="form-control" placeholder="" value="{{ $row->email }}"></input>
                                                                 @if($errors->has('email'))
                                                                 <div class="text-danger">
                                                                     {{ $errors->first('email')}}
@@ -87,7 +87,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Alamat</label>
-                                                                <input name="address" class="form-control" placeholder="">{{ $row->address }}</input>
+                                                                <input name="address" class="form-control" placeholder="" value="{{ $row->address }}"></input>
                                                                 @if($errors->has('address'))
                                                                 <div class="text-danger">
                                                                     {{ $errors->first('address')}}
@@ -156,7 +156,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Email</label>
-                                                        <input name="email" class="form-control" placeholder="">{{ $row->email }}</input>
+                                                        <input name="email" class="form-control" placeholder=""></input>
                                                         @if($errors->has('email'))
                                                         <div class="text-danger">
                                                             {{ $errors->first('email')}}

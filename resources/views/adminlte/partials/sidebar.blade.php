@@ -22,6 +22,7 @@
             </p>
           </a>
         </li>
+        @if(auth()->user()->role_id == 2)
         <li class="nav-item">
           <a href="{{route('user')}}" class="nav-link {{Route::is('user') ? 'active' : ''}}">
             <i class="nav-icon fas fa-user"></i>
@@ -30,7 +31,7 @@
             </p>
           </a>
         </li>
-
+        @endif
         <li class="nav-item">
           <a href="{{__('finance')}}" class="nav-link {{Route::is('finance') ? 'active' : ''}}">
             <i class="nav-icon fa fa-file"></i>
@@ -64,6 +65,7 @@
             </p>
           </a>
         </li>
+        @if(auth()->user()->role_id == 1)
         <li class="nav-item">
           <a href="{{route('discount')}}" class="nav-link {{Route::is('discount') ? 'active' : ''}}">
             <i class="nav-icon fas fa-archive"></i>
@@ -72,6 +74,7 @@
             </p>
           </a>
         </li>
+        @endif
         <li class="nav-item">
           <a href="{{route('category')}}" class="nav-link {{Route::is('category') ? 'active' : ''}}">
             <i class="nav-icon fas fa-archive"></i>
@@ -81,7 +84,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="/#" class="nav-link {{Route::is('warehouse') ? 'active' : ''}}">
+          <a href="{{__('inventory')}}" class="nav-link {{Route::is('inventory') ? 'active' : ''}}">
             <i class="nav-icon fas fa-warehouse"></i>
             <p>
               Gudang

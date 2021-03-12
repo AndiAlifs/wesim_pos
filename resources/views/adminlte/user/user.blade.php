@@ -38,10 +38,10 @@
                                             <td>{{ $row->email }}</td>
                                             <td>{{ $row->role->role_name }}</td>
                                             <td>
-                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
+                                                <button type="button" class="btn btn-sm btn-warning m-1" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
                                                     <i class="nav-icon fas fa-edit"></i>
                                                 </button>
-                                                <a onclick="return confirm('Are you sure?')" href="/user/destroy/{{ $row->id }}" class="btn btn-danger"><i class="nav-icon fas fa-trash"></i></a>
+                                                <a onclick="return confirm('Are you sure?')" href="/user/destroy/{{ $row->id }}" class="btn btn-sm btn-danger m-1"><i class="nav-icon fas fa-trash"></i></a>
                                             </td>
                                         </tr>
 

@@ -55,7 +55,7 @@
                         <div class="col-sm-2">
                             <div type="button" class="btn card justify-content-center px-1 py-1 product-item"
                                 data-toggle="modal" data-target="#modal-default{{ $row->id }}"">
-                                    <img src=" #" alt="" width="100%" height="100px">
+                                    <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636" alt="" width="100%" height="100px">
                                 <div>
                                     <b>{{ $row->name }}</b><br>
                                     <small> Rp.{{ $row->price }}</small>
@@ -73,10 +73,10 @@
                                         </button>
                                     </div>
                                     <form method="post" class="form-horizontal mx-3"
-                                        action="{{ route('add_to_cart') }}">
+                                        >
 
-                                        {{ csrf_field() }}
-                                        {{ method_field('PUT') }}
+                                        
+                                        
 
                                         <div class="modal-body">
                                             <div class="form-group text-center">
@@ -112,8 +112,8 @@
                                             {{-- number_format(number,desimal_digit, desimal_seperator, thousand_seperator) --}}
                                             <button class="btn btn-block btn-modal bg-gradient-primary text-center"
                                                 type="submit"
-                                                {{-- onclick="addToCart( {{ $loop->iteration }}, '{{ $row->name }}'
-                                                ,{{ $row->price }},{{ $row->id }})" --}}>
+                                                onclick="addToCart({{ $loop->iteration }}, '{{ $row->name }}'
+                                                ,{{ $row->price }},{{ $row->id }})">
                                                 <b>Masukkan
                                                     ke
                                                     Keranjang</b>
@@ -145,7 +145,7 @@
         <div class="row">
             <div class="col-sm-2">
                 <div class="p-2">
-                    <img src="#" alt="" width="50px" height="50x">
+                    <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636" alt="" width="50px" height="50x">
                     {{-- <b> {{ $row->name }}</b> --}}
                 </div>
             </div>

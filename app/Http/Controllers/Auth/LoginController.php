@@ -56,5 +56,6 @@ class LoginController extends Controller
         /**
          * Berarti yang login admin atau owner
          */
+        return redirect()->route('home');
     }
 }

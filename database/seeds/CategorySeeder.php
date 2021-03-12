@@ -13,15 +13,15 @@ class CategorySeeder extends Seeder
     public function run()
     {
         category::create([
-            "name" => "primary",
+            "name" => "Primary",
             "description" => "kategori produk primary"
         ]);
         category::create([
-            "name" => "special",
+            "name" => "Special",
             "description" => "kategori produk special"
         ]);
         category::create([
-            "name" => "rare",
+            "name" => "Rare",
             "description" => "kategori produk rare"
         ]);
     }
