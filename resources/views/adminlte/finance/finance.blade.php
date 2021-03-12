@@ -162,18 +162,22 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Tambah User</h4>
+                <h4 class="modal-title">Tambah Transaski</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{route('user_store')}}">
+            <form method="post" action="{{ route('finance_store') }}">
                 <div class="modal-body">
                     @csrf
 
                     <div class="form-group">
-                        <label>Nama</label>
-                        <input type="text" name="name" class="form-control" placeholder="Masukan Nama" value="">
+                        <label>Id Transaksi</label>
+                        <input type="text" name="id" class="form-control" placeholder="Masukan id" value="TRX-0321-{{ $finances->count() + 1}}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Transaski</label>
+                        <input type="text" name="name" class="form-control" placeholder="Masukan Nama Transaksi" value="">
                         @if($errors->has('name'))
                         <div class="text-danger">
                             {{ $errors->first('name')}}
@@ -181,47 +185,36 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" name="username" class="form-control" placeholder="Masukan Username" value="">
-                        @if($errors->has('username'))
+                        <label>Tanggal Transakski</label>
+                        <input type="date" name="date" class="form-control" placeholder="Masukan tanggal transaksi " value="">
+                        @if($errors->has('date'))
                         <div class="text-danger">
-                            {{ $errors->first('username')}}
+                            {{ $errors->first('date')}}
                         </div>
                         @endif
                     </div>
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="text" name="email" class="form-control" placeholder="Masukan Email" value="">
-                        @if($errors->has('email'))
-                        <div class="text-danger">
-                            {{ $errors->first('email')}}
-                        </div>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Masukan Password" value="">
-                        @if($errors->has('password'))
-                        <div class="text-danger">
-                            {{ $errors->first('password')}}
-                        </div>
-                        @endif
-                    </div>
-                    {{-- <div class="form-group">
-                        <label>Role</label>
+                        <label>Jenis Transaksi</label>
                         <br>
-                        <select name="role" id="role">
-                            @foreach($roles as $role)
-                            <option value="{{ $role->id }}">{{ $role->role_name }}</option>
-                            @endforeach
+                        <select name="type" id="type">
+                            <option value="debit">Debit</option>
+                            <option value="kredit">Kredit</option>
                         </select>
                         @if($errors->has('role'))
                         <div class="text-danger">
                             {{ $errors->first('role')}}
                         </div>
                         @endif
-                    </div> --}}
-                    
+                    </div>
+                    <div class="form-group">
+                        <label>Jumlah Transaksi</label>
+                        <input type="number" name="amount" class="form-control" placeholder="Masukan jumlah transaksi " value="">
+                        @if($errors->has('amount'))
+                        <div class="text-danger">
+                            {{ $errors->first('amount')}}
+                        </div>
+                        @endif
+                    </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -236,3 +229,11 @@
 <!-- /.modal -->
 
 @endsection
+
+@push('scripts-footer')
+    @if ($kas["debit"] != $kas["kredit"])
+        <script>
+            alert('Kredit dan debit tidak seimbang');
+        </script>       
+    @endif
+@endpush
