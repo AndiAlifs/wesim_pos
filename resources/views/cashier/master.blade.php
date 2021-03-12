@@ -18,12 +18,14 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- CSS Datatable -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
+    <!-- Mycss -->
+    <link rel="stylesheet" href="{{ asset('assets/cashier/css/mystyle.css') }}">
 
     @stack('scripts-header')
 </head>
 
 <body class="">
-    <div class="container-fluid">
+    <div class="container-fluid light-scrollbar">
         <!-- include navbar -->
         @include('cashier.partials.navbar')
         <div class="row justify-content-center px-5 py-3">
@@ -39,8 +41,6 @@
 
         </div>
     </div>
-
-
 
 
     <!-- jQuery -->
