@@ -21,7 +21,7 @@
                                 <table id="datatable_pagination" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th>
+                                            {{-- <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th> --}}
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">ID Produk</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Nama Produk</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Kategori Produk</th>
@@ -36,7 +36,7 @@
                                     <tbody>
                                         @foreach($product as $row)
                                         <tr role="row" class="odd">
-                                            <td tabindex="0" class="sorting_1">PRD-2021-{{ $row->id }}</td>
+                                            {{-- <td tabindex="0" class="sorting_1">PRD-2021-{{ $row->id }}</td> --}}
                                             <td>
                                                 <img src="https://bwipjs-api.metafloor.com/?bcid=ean13&text={{ $row->product_code }}" alt="{{ $row->product_code }}" height="60em">
                                                 {{ $row->product_code }}
