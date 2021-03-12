@@ -67,4 +67,5 @@ Route::middleware('role:admin')->group(function () {
 
 Route::middleware('role:cashier')->group(function() {
     Route::get('/cashier', 'cashier\CashierController@index')->name('cashier');
+    Route::put('/cashier', 'cashier\CashierController@add_to_cart')->name('add_to_cart');
 });
