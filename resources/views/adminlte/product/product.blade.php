@@ -24,6 +24,7 @@
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">ID Produk</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Nama Produk</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Kategori Produk</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Produser Produk</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Harga Beli</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Harga Jual</th>
@@ -44,6 +45,9 @@
                                                 <img src="{{ asset("image/product/gambarIndomie".rand(1,3).".JPG") }}" alt="" height="60em">
                                                 <br>
                                                 {{ $row->name }}
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-outline-primary btn-block">{{ $row->category->first()->name }}</button>
                                             </td>
                                             <td>{{ $row->producer }}</td>
                                             <td>Rp. {{ $row->purchase_price }}</td>
