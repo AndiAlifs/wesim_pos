@@ -64,16 +64,19 @@
                                         </tr>
                                         @endforeach
                                     </tbody>
-                                    <!-- <tfoot>
+                                    <tfoot>
                                         <tr>
-                                            <th rowspan="1" colspan="1">No</th>
-                                            <th rowspan="1" colspan="1">Name</th>
-                                            <th rowspan="1" colspan="1">Username</th>
-                                            <th rowspan="1" colspan="1">Em  ail</th>
-                                            <th rowspan="1" colspan="1">Role</th>
-                                            <th rowspan="1" colspan="1">Aksi</th>
+                                            <th>ID Produk</th>
+                                            <th>Nama Produk</th>
+                                            <th>Kategori Produk</th>
+                                            <th>Produser Produk</th>
+                                            <th>Harga Beli</th>
+                                            <th>Harga Jual</th>
+                                            <th>Profit</th>
+                                            <th>Deskripsi</th>
+                                            <th>Aksi</th>
                                         </tr>
-                                    </tfoot> -->
+                                    </tfoot>
                                 </table>
                                 <div class="float-right pt-3">
                                     <a class="btn btn-primary" href="" data-toggle="modal" data-target="#modal-store"><i class='fa fa-plus-circle'></i> Tambah</a>
