@@ -23,12 +23,6 @@ Route::middleware('role:admin_owner')->group(function () {
     // Home Route
     Route::get('/home', 'HomeController@index')->name('home');
 
-    // User Route
-    Route::get('/user', 'UserController@index')->name('user');
-    Route::post('/user/store', 'UserController@store')->name('user_store');
-    Route::put('/user/update/{id}', 'UserController@update');
-    Route::get('/user/destroy/{id}', 'userController@destroy');
-    
     // Member Route
     Route::get('/member', 'MemberController@index')->name('member');
     Route::put('/member/update/{id}', 'MemberController@update')->name('update_member');
@@ -71,6 +65,18 @@ Route::middleware('role:admin')->group(function () {
     Route::put('/discount/update', 'DiscountController@update')->name('discount_update');
     Route::get('/discount/destroy/{id}', 'DiscountController@destroy')->name('discount_destroy');
 });
+
+// Only for owner
+Route::middleware('role:owner')->group(function () {
+
+    // User Route
+    Route::get('/user', 'UserController@index')->name('user');
+    Route::post('/user/store', 'UserController@store')->name('user_store');
+    Route::put('/user/update/{id}', 'UserController@update');
+    Route::get('/user/destroy/{id}', 'userController@destroy');
+
+});
+
 
 Route::middleware('role:cashier')->group(function() {
     Route::get('/cashier', 'cashier\CashierController@index')->name('cashier');

@@ -45,9 +45,12 @@ class RoleMiddleware
             /**
              * Cashier role can accessed by admin, owner, cashier
              */
-            "cashier" => [1, 2, 3]
-
-        
+            "cashier" => [1, 2, 3, 4],
+            
+            /**
+             * Cashier role can accessed by admin, owner, cashier
+             */
+            "apoteker" => [4],
         ];
 
         /**
@@ -65,7 +68,6 @@ class RoleMiddleware
         if(in_array($user_role, $roleToId['cashier'])) {
             return redirect()->route('cashier');
         }
-
         return redirect()->route('landing-page');
     }
 }
