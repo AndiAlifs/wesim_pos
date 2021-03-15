@@ -46,12 +46,6 @@ class FinanceSeeder extends Seeder
             "transaction_date" => $dateNow->yesterday()->toDateString()
         ]);
         finance::create([
-            "transaction_name" => "Konsumsi",
-            "amount" => 1500000,
-            "jenis" => "debit",
-            "transaction_date" => $dateNow->yesterday()->toDateString()
-        ]);
-        finance::create([
             "transaction_name" => "Gaji",
             "amount" => 2500000,
             "jenis" => "debit",
@@ -59,19 +53,13 @@ class FinanceSeeder extends Seeder
         ]);
         finance::create([
             "transaction_name" => "Utang Bank",
-            "amount" => 3000000,
+            "amount" => 1500000,
             "jenis" => "kredit",
             "transaction_date" => $dateNow->yesterday()->yesterday()->toDateString()
         ]);
         finance::create([
-            "transaction_name" => "Modal Fatwa",
-            "amount" => 450000,
-            "jenis" => "kredit",
-            "transaction_date" => $dateNow->toDateString()
-        ]);
-        finance::create([
             "transaction_name" => "Modal Alip",
-            "amount" => 850000,
+            "amount" => 1300000,
             "jenis" => "kredit",
             "transaction_date" => $dateNow->toDateString()
         ]);

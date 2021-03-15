@@ -23,10 +23,7 @@
                                         aria-describedby="example1_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1" aria-sort="ascending"
-                                                    aria-label="Rendering engine: activate to sort column descending">No
-                                                </th>
+                                                {{-- <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th> --}}
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1" aria-label="Browser: activate to sort column ascending">ID
                                                     Produk</th>
@@ -58,10 +55,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {{-- {{ $product }} --}}
                                             @foreach ($product as $row)
                                                 <tr role="row" class="odd">
-                                                    <td tabindex="0" class="sorting_1">PRD-2021-{{ $row->id }}</td>
+                                                    {{-- <td tabindex="0" class="sorting_1">PRD-2021-{{ $row->id }}</td> --}}
                                                     <td>
                                                         <img src="https://bwipjs-api.metafloor.com/?bcid=ean13&text={{ $row->product_code }}"
                                                             alt="{{ $row->product_code }}" height="60em">
@@ -87,8 +83,8 @@
                                                     <td>{{ $row->description }}</td>
                                                     <td>
                                                         <!-- <button type="button" class="btn-sm btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
-                                                        <i class="nav-icon fas fa-edit"></i>
-                                                    </button> -->
+                                                            <i class="nav-icon fas fa-edit"></i>
+                                                        </button> -->
                                                         <!-- <a class="btn-sm btn-warning> <i class="nav-icon fas fa-edit"></i></a> -->
                                                         <a onclick="return confirm('Are you sure?')"
                                                             href="/product/destroy/{{ $row->id }}"
@@ -98,16 +94,19 @@
                                                 </tr>
                                             @endforeach
                                         </tbody>
-                                        <!-- <tfoot>
+                                        <tfoot>
                                             <tr>
-                                                <th rowspan="1" colspan="1">No</th>
-                                                <th rowspan="1" colspan="1">Name</th>
-                                                <th rowspan="1" colspan="1">Username</th>
-                                                <th rowspan="1" colspan="1">Em  ail</th>
-                                                <th rowspan="1" colspan="1">Role</th>
-                                                <th rowspan="1" colspan="1">Aksi</th>
+                                                <th>ID Produk</th>
+                                                <th>Nama Produk</th>
+                                                <th>Kategori Produk</th>
+                                                <th>Produser Produk</th>
+                                                <th>Harga Beli</th>
+                                                <th>Harga Jual</th>
+                                                <th>Profit</th>
+                                                <th>Deskripsi</th>
+                                                <th>Aksi</th>
                                             </tr>
-                                        </tfoot> -->
+                                        </tfoot>
                                     </table>
                                     <div class="float-right pt-3">
                                         <a class="btn btn-primary" href="" data-toggle="modal" data-target="#modal-store"><i

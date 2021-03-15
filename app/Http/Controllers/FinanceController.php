@@ -49,8 +49,16 @@ class FinanceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        // dd($request);
+        $new_transaction = new finance;
+        $new_transaction->transaction_name = $request->name;
+        $new_transaction->transaction_date = $request->date;
+        $new_transaction->jenis = $request->type;
+        $new_transaction->amount = $request->amount;
+        $new_transaction->save();
+
+        return redirect()->route('finance');
     }
 
     /**

@@ -23,12 +23,6 @@ Route::middleware('role:admin_owner')->group(function () {
     // Home Route
     Route::get('/home', 'HomeController@index')->name('home');
 
-    // User Route
-    Route::get('/user', 'UserController@index')->name('user');
-    Route::post('/user/store', 'UserController@store')->name('user_store');
-    Route::put('/user/update/{id}', 'UserController@update');
-    Route::get('/user/destroy/{id}', 'userController@destroy');
-
     // Member Route
     Route::get('/member', 'MemberController@index')->name('member');
     Route::put('/member/update/{id}', 'MemberController@update')->name('update_member');
@@ -54,6 +48,7 @@ Route::middleware('role:admin_owner')->group(function () {
 
     // finance route
     Route::get('/finance', 'FinanceController@index')->name('finance');
+    Route::post('/finance/store', 'FinanceController@store')->name('finance_store');
 
     // inventory route
     Route::get('/inventory', 'InventoryController@index')->name('inventory');
@@ -71,10 +66,25 @@ Route::middleware('role:admin')->group(function () {
 });
 
 Route::middleware('role:cashier')->group(function () {
+// Only for owner
+});
+
+Route::middleware('role:owner')->group(function () {
+
+    // User Route
+    Route::get('/user', 'UserController@index')->name('user');
+    Route::post('/user/store', 'UserController@store')->name('user_store');
+    Route::put('/user/update/{id}', 'UserController@update');
+    Route::get('/user/destroy/{id}', 'userController@destroy');
+
+});
+
+
+Route::middleware('role:cashier')->group(function() {
     Route::get('/cashier', 'cashier\CashierController@index')->name('cashier');
     Route::put('/cashier/{id}', 'cashier\CashierController@add_to_cart')->name('add_to_cart');
     Route::post('/cashier/add_to_hold/', 'cashier\CashierController@add_to_hold')->name('add_to_hold');
     Route::post('/cashier/load_cart/', 'cashier\CashierController@load_cart')->name('load_cart');
     Route::post('/cashier/get_modal_data/', 'cashier\CashierController@get_modal_data')->name('get_modal_data');
     Route::post('/cashier/delete_item/', 'cashier\CashierController@delete_item')->name('delete_item');
-});
+})
