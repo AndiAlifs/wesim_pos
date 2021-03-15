@@ -24,11 +24,21 @@
     @stack('scripts-header')
 </head>
 
-<body class="">
+<body>
+    {{ csrf_field() }}
     <div class="container-fluid light-scrollbar">
         <!-- include navbar -->
         @include('cashier.partials.navbar')
-        <div class="row justify-content-center px-5 py-3">
+        <div class="row justify-content-center px-5">
+
+            {{-- include hold window --}}
+            @include('cashier.hold')
+
+            {{-- include chart --}}
+            @include('cashier.partials.product-modal')
+
+            {{-- include chart --}}
+            @include('cashier.partials.cart-row')
 
             {{-- include menu --}}
             @include('cashier.menu')
@@ -56,6 +66,9 @@
     <script src="{{ asset('/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('/adminlte/dist/js/demo.js') }}"></script>
+
+    <!-- My Script -->
+    <script src="{{ asset('/assets/cashier/js/myscript.js') }}"></script>
 
     <!-- page script -->
     <script>

@@ -1,7 +1,17 @@
+/* body */
+.no-wrap {
+    white-space: nowrap;
+}
+
 /* nav */
 .my-nav {
     height: 10vh;
     /* border: 1px black solid; */
+}
+
+/* hold */
+.maxwidth-18 {
+    max-width: 18vw;
 }
 
 /* menu css */
@@ -32,7 +42,8 @@
     border-radius: 20px;
     border: 3px solid white;
 }
-.cart-scrollbar{
+
+.cart-scrollbar {
     max-width: 100%;
     overflow-x: hidden !important;
 }
@@ -43,7 +54,7 @@
 }
 
 .cart-list {
-    height: 36vh;
+    height: 45vh;
 }
 
 .product-item:hover,
@@ -57,7 +68,7 @@
 
 .modal-head {
     height: 300px;
-    background-image: url();
+    background-image: url(https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636);
 }
 
 .btn-modal {
@@ -76,7 +87,7 @@
     margin-top: 20px;
 }
 
-.cart-item:hover {
+.cart-hover:hover {
     background-color: rgb(218, 240, 255);
 }
 

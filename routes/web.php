@@ -28,7 +28,7 @@ Route::middleware('role:admin_owner')->group(function () {
     Route::post('/user/store', 'UserController@store')->name('user_store');
     Route::put('/user/update/{id}', 'UserController@update');
     Route::get('/user/destroy/{id}', 'userController@destroy');
-    
+
     // Member Route
     Route::get('/member', 'MemberController@index')->name('member');
     Route::put('/member/update/{id}', 'MemberController@update')->name('update_member');
@@ -40,18 +40,18 @@ Route::middleware('role:admin_owner')->group(function () {
     Route::put('/supplier/update/{id}', 'SupplierController@update')->name('update_supplier');
     Route::get('/supplier/destroy/{id}', 'SupplierController@destroy')->name('delete_supplier');
     Route::put('/supplier/store', 'SupplierController@store')->name('supplier_store');
-    
+
     // Product Route
     Route::get('/product', 'ProductController@index')->name('product');
     Route::post('/product/store', 'ProductController@store')->name('product_store');
     Route::get('/product/destroy/{id}', 'ProductController@destroy');
-    
+
     // Category Route
     Route::get('/category', 'CategoryController@index')->name('category');
     Route::put('/category/update/{id}', 'CategoryController@update');
     Route::get('/category/destroy/{id}', 'CategoryController@destroy');
     Route::put('/category/store', 'CategoryController@store')->name('category_store');
-    
+
     // finance route
     Route::get('/finance', 'FinanceController@index')->name('finance');
 
@@ -59,19 +59,22 @@ Route::middleware('role:admin_owner')->group(function () {
     Route::get('/inventory', 'InventoryController@index')->name('inventory');
     Route::get('/inventory/confirm_ship/{id}', 'InventoryController@confirm_ship');
     Route::put('/inventory/update/{id}', 'InventoryController@update');
-
 });
 
 // Only for admin
 Route::middleware('role:admin')->group(function () {
-    
+
     // Discount Route
     Route::get('/discount', 'DiscountController@index')->name('discount');
     Route::put('/discount/update', 'DiscountController@update')->name('discount_update');
     Route::get('/discount/destroy/{id}', 'DiscountController@destroy')->name('discount_destroy');
 });
 
-Route::middleware('role:cashier')->group(function() {
+Route::middleware('role:cashier')->group(function () {
     Route::get('/cashier', 'cashier\CashierController@index')->name('cashier');
-    Route::put('/cashier', 'cashier\CashierController@add_to_cart')->name('add_to_cart');
+    Route::put('/cashier/{id}', 'cashier\CashierController@add_to_cart')->name('add_to_cart');
+    Route::post('/cashier/add_to_hold/', 'cashier\CashierController@add_to_hold')->name('add_to_hold');
+    Route::post('/cashier/load_cart/', 'cashier\CashierController@load_cart')->name('load_cart');
+    Route::post('/cashier/get_modal_data/', 'cashier\CashierController@get_modal_data')->name('get_modal_data');
+    Route::post('/cashier/delete_item/', 'cashier\CashierController@delete_item')->name('delete_item');
 });
