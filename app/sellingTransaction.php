@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class sellingTransaction extends Model
+class SellingTransaction extends Model
 {
-    //
+    protected $table = "selling_Transactions";
 }

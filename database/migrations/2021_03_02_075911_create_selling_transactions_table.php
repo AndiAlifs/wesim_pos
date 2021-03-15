@@ -15,9 +15,10 @@ class CreateSellingTransactionsTable extends Migration
     {
         Schema::create('selling_transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('transaction_number');
-            
-            $table->enum('status', ["Succesfully", "Holded", "PO"])->nullable();
+            $table->string('transaction_number');
+
+            $table->unsignedBigInteger('status_id');
+            $table->foreign('status_id')->references('id')->on('transaction_statuses');
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

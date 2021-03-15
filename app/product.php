@@ -9,7 +9,7 @@ class Product extends Model
     public $timestamps = false;
     public function Category()
     {
-        return $this->belongsToMany('App\category','product_categories','product_id','category_id');
+        return $this->belongsToMany('App\category', 'product_categories', 'product_id', 'category_id');
     }
 
     /**
@@ -20,5 +20,10 @@ class Product extends Model
     public function inventory()
     {
         return $this->hasOne('App\inventory');
+    }
+
+    public function selling()
+    {
+        return $this->belongsToMany('App\selling');
     }
 }
