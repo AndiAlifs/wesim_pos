@@ -87,4 +87,4 @@ Route::middleware('role:cashier')->group(function() {
     Route::post('/cashier/load_cart/', 'cashier\CashierController@load_cart')->name('load_cart');
     Route::post('/cashier/get_modal_data/', 'cashier\CashierController@get_modal_data')->name('get_modal_data');
     Route::post('/cashier/delete_item/', 'cashier\CashierController@delete_item')->name('delete_item');
-})
+});
