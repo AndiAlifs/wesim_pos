@@ -59,6 +59,31 @@ function addNewTransaction() {
     });
 }
 
+function deleteCart() {
+    selling_transaction_id = localStorage.selling_transaction_id;
+
+    //cek if cart not empty
+    // if ($('.cart-list').html() != "")
+    var confirm_delete = confirm('anda yakin menghapus keranjang ini ??')
+    if (!confirm_delete)
+        return 0;
+
+    $.ajax({
+        type: "GET",
+        url: "/cashier/delete_cart",
+        data: {
+            'selling_transaction_id': selling_transaction_id,
+            '_token': $('input[name=_token]').val(),
+        },
+        success: function (data) {
+            console.log('susces');
+            if (localStorage.tab_index == ($('.tab-parent').length - 1))
+                localStorage.tab_index = (localStorage.tab_index - 1);
+            location.reload();
+        }
+    });
+}
+
 // menu
 function filterCategory(category_id) {
     $.ajax({

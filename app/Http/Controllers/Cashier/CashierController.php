@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 use SebastianBergmann\Environment\Console;
+use SellingTransactionSeeder;
 
 class CashierController extends Controller
 {
@@ -43,8 +44,15 @@ class CashierController extends Controller
             'member_id' => 1,
         ]);
 
-        return $transaction_number;
+        $selling_tansaction_id = SellingTransaction::where('transaction_number', $transaction_number)->get();
+        return $selling_tansaction_id[0]->id;
     }
+    function delete_cart(Request $request)
+    {
+        selling::where('selling_transaction_id', $request['selling_transaction_id'])->delete();
+        sellingTransaction::find($request['selling_transaction_id'])->delete();
+    }
+
 
     // selesai utk sementara
     public function filter_category($id, Request $request)

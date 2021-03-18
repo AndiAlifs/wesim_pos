@@ -56,7 +56,6 @@ Route::middleware('role:admin_owner')->group(function () {
     Route::put('/inventory/update/{id}', 'InventoryController@update');
 
     Route::get('/report', 'ReportController@index')->name('report');
-
 });
 
 // Only for admin
@@ -100,4 +99,5 @@ Route::middleware('role:cashier')->group(function () {
     // modal
     Route::post('/cashier/get_modal_data/', 'cashier\CashierController@get_modal_data')->name('get_modal_data');
     Route::post('/cashier/add_to_cart/', 'cashier\CashierController@add_to_cart')->name('add_to_cart');
+    Route::get('/cashier/delete_cart/', 'cashier\CashierController@delete_cart')->name('delete_cart');
 });

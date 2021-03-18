@@ -28,7 +28,7 @@
     border: 0;
 }
 
-.trx-tab:hover {}
+/* .trx-tab:hover {} */
 
 .trx-active {
     background-color: rgb(255, 255, 255);

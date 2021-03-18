@@ -41,9 +41,9 @@
                 </div>
                 <div class="row">
                     <button type="button" class="btn col-3 bg-gradient-danger btn-lg ml-1 mr-1"
-                        onclick="deleteAllCart()">Batal</button>
+                        onclick="deleteCart()">Batal</button>
                     <button type="button" class="btn col-3 bg-gradient-warning btn-lg ml-1 mr-1"
-                        onclick="store_transaction()">Hold</button>
+                        onclick="addNewTransaction()">Hold</button>
                     <button type="button" class="btn col-5 bg-gradient-primary btn-lg ml-1 mr-1">Bayar</button>
                 </div>
                 {{-- /.sub total --}}
