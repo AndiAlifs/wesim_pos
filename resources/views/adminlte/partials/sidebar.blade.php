@@ -92,7 +92,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="/#" class="nav-link {{Route::is('report') ? 'active' : ''}}">
+          <a href="{{__('report')}}" class="nav-link {{Route::is('report') ? 'active' : ''}}">
             <i class="nav-icon fa fa-file"></i>
             <p>
               Laporan

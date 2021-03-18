@@ -56,9 +56,11 @@ $(function () {
             callback: function (value, index, values) {
               if (value >= 1000) {
                 value /= 1000
+                value += 'jt'
+              } else if(value > 0){
                 value += 'k'
               }
-              return '$' + value
+              return 'Rp. ' + value
             }
           }, ticksStyle)
         }],
