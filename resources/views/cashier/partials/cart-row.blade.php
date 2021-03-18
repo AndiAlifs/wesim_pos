@@ -2,8 +2,8 @@
 <div class="hide-list" id="hide-list">
     <div class="card cart-item border" id="cart-item" type="button">
         <div class="row">
-            <div class="col-8 border-right border-secondary" data-toggle="modal" data-target="#modal-default"
-                id="cart-hover">
+            <div class="col-8 border-right border-secondary cart-hover" data-toggle="modal"
+                data-target="#modal-default">
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="p-1">

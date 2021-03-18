@@ -4,6 +4,7 @@ namespace App\Http\Controllers\cashier;
 
 use App\product;
 use App\category;
+use App\productCategory;
 use App\sellingTransaction;
 use App\selling;
 use App\cart;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\SellingTransaction as AppSellingTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 use SebastianBergmann\Environment\Console;
 
 class CashierController extends Controller
@@ -19,95 +21,120 @@ class CashierController extends Controller
     public function index()
     {
         $category = Category::all();
-        $product = Product::all();
+        $product = ProductCategory::with('product')->get();
         $selling = Selling::all();
         $sellingTransaction = SellingTransaction::where('status_id', '2')->get();
 
-        return view('cashier/master', ['category' => $category, 'product' => $product, 'selling' => $selling, 'sellingTransaction' => $sellingTransaction]);
+        return view('cashier/master', [
+            'category' => $category,
+            'product' => $product,
+            'selling' => $selling,
+            'sellingTransaction' => $sellingTransaction
+        ]);
     }
 
-
-    public function new_transaction(Request $request)
+    public function add_new_transaction(Request $request)
     {
-        $this->validate($request, [
-            'status' => 'required',
-            'transaction_number' => 'required',
-        ]);
-
+        $transaction_number = 'Cart ' . time() . rand(1000, 9999);
         sellingTransaction::create([
-            'status' => $request->status,
-            'transaction_number' => $request->transaction_number,
+            'transaction_number' => $transaction_number,
+            'status_id' => 2,
             'user_id' => $request->user_id,
-            'member_id' => $request->member_id,
+            'member_id' => 1,
         ]);
+
+        return $transaction_number;
     }
 
-    public function add_to_cart($id, Request $request)
+    // selesai utk sementara
+    public function filter_category($id, Request $request)
     {
+        $category = Category::all();
+        $product = ProductCategory::with('product')->with('category')
+            ->where('category_id', $id)
+            ->get();
+        $selling = selling::all();
+        $sellingTransaction = SellingTransaction::where('status_id', '2')->get();
 
-        $this->validate($request, [
-            // 'selling_transaction_id' => 'required',
-            'product_id' => 'required',
-            'amount' => 'required',
-            'price' => 'required',
+        return view('cashier/master', [
+            'category' => $category,
+            'product' => $product,
+            'selling' => $selling,
+            'sellingTransaction' => $sellingTransaction
         ]);
-
-        selling::create([
-            'selling_transaction_id' => 1,
-            'product_id' => $request->product_id,
-            'amount' => $request->amount,
-            'price' => $request->price,
-        ]);
-
-        return $this->index();
     }
 
-    // tryy ajax--------------------------------------------
-    public function add_to_hold(Request $request)
+    // blum sama skali
+    public function search_box(Request $request)
     {
-        // get request
-        $product = $request->product;
+        $category = Category::all();
+        $selling = Selling::all();
+        $sellingTransaction = SellingTransaction::where('status_id', '2')->get();
 
-        // delete old product from table selling
-        $selling = Selling::where('selling_transaction_id', $product['transaction_id'])
-            ->where('product_id', $product['product_id'])
-            ->delete();
+        $key = $request->key;
+        $product = ProductCategory::with('product');
+        $product = ProductCategory::where('product.name', 'like', "%" . $key . "%")->get();
 
-        // store new product to table selling
-        Selling::create([
-            'selling_transaction_id' => $product['transaction_id'],
-            'product_id' => $product['product_id'],
-            'amount' => $product['amount'],
-            'price' => ($product['price'] * $product['amount']),
+        return view('cashier/master', [
+            'category' => $category,
+            'product' => $product,
+            'selling' => $selling,
+            'sellingTransaction' => $sellingTransaction,
         ]);
     }
-    public function delete_item(Request $request)
-    {
-        Selling::where('selling_transaction_id', $request->selling_transaction_id)
-            ->where('product_id', $request->product_id)
-            ->delete();
-    }
 
+    // selesai
     public function load_cart(Request $request)
     {
-        $status_id = 2;
-        $sellingTransaction = SellingTransaction::where('id', $request->selling_transaction_id)->get();
-        $selling = Selling::with('product')->where('selling_transaction_id', $sellingTransaction[0]->id)->get();
-
+        $selling = Selling::with('product')
+            ->where('selling_transaction_id', $request['selling_transaction_id'])
+            ->get();
         return $selling;
     }
 
     public function get_modal_data(Request $request)
     {
-        // cek if product already in cart 
-
-        $sellingTransaction = SellingTransaction::where('transaction_number', $request->transaction_number)->get();
-        $product = Selling::with('product')
-            ->where('selling_transaction_id', $sellingTransaction[0]->id)
-            ->where('product_id', $request->product_id)
-            ->get();
-
-        return $product;
+        $selling = Selling::where('selling_transaction_id', $request['selling_transaction_id'])
+            ->where('product_id', $request['product_id']);
+        $cek = $selling->count();
+        if ($cek) {
+            $get = $selling->get();
+            $data = Selling::with('product')->find($get[0]->id);
+            $data->already_in_cart = true;
+            return $data;
+        } else {
+            $data = Product::find($request['product_id']);
+            $data->already_in_cart = false;
+            return $data;
+        }
     }
-    // end try ajax---------------------------------
+
+    public function add_to_cart(Request $request)
+    {
+        $selling = Selling::where('selling_transaction_id', $request['selling_transaction_id'])
+            ->where('product_id', $request['product_id']);
+        $product = Product::find($request['product_id']);
+        $cek = $selling->count();
+        if ($cek) {
+
+            $get = $selling->get();
+            echo $get[0]->id;
+            $data = Selling::find($get[0]->id);
+            $data->amount = $request['product_amount'];
+            $data->price = ($product->price * $request['product_amount']);
+            $data->save();
+        } else {
+            Selling::create([
+                'selling_transaction_id' => $request['selling_transaction_id'],
+                'product_id' => $request['product_id'],
+                'amount' => $request['product_amount'],
+                'price' => ($product->price * $request['product_amount']),
+            ]);
+        }
+    }
+
+    function delete_item(Request $request)
+    {
+        Selling::find($request['selling_id'])->delete();
+    }
 }

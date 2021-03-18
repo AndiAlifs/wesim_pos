@@ -83,8 +83,8 @@
                                                     <td>{{ $row->description }}</td>
                                                     <td>
                                                         <!-- <button type="button" class="btn-sm btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
-                                                            <i class="nav-icon fas fa-edit"></i>
-                                                        </button> -->
+                                                                <i class="nav-icon fas fa-edit"></i>
+                                                            </button> -->
                                                         <!-- <a class="btn-sm btn-warning> <i class="nav-icon fas fa-edit"></i></a> -->
                                                         <a onclick="return confirm('Are you sure?')"
                                                             href="/product/destroy/{{ $row->id }}"

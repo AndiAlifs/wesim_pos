@@ -68,7 +68,7 @@
     <script src="{{ asset('/adminlte/dist/js/demo.js') }}"></script>
 
     <!-- My Script -->
-    <script src="{{ asset('/assets/cashier/js/myscript.js') }}"></script>
+    <script src="{{ asset('/assets/cashier/js/myjs.js') }}"></script>
 
     <!-- page script -->
     <script>

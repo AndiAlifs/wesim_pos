@@ -7,15 +7,17 @@
                 </div>
                 <div class="col-4">
                     <div class="float-left">
-                        {{-- <form> --}}
-                        <div class="input-group">
-                            <input type="text" class="form-control search-box" value="" id="fokus" autofocus
-                                placeholder="Cari Produk disini">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <form method="GET" action="{{ route('search_box') }}">
+
+                            <div class="input-group">
+                                <input type="text" class="form-control search-box" value="" id="search-box" autofocus
+                                    placeholder="Cari Produk disini" name="key">
+                                <div class="input-group-append">
+                                    <button class="input-group-text" type="submit"><i
+                                            class="fas fa-search"></i></button>
+                                </div>
                             </div>
-                        </div>
-                        {{-- </form> --}}
+                        </form>
                     </div>
                 </div>
             </div>
@@ -30,13 +32,24 @@
                 </div>
                 <div>
                     <div class="row">
-                        @foreach ($category as $row)
-                            <div class="col-2 text-center">
+                        <div class="col-2 text-center btn">
+                            <a href="{{ route('cashier') }}">
                                 <div class="card justify-content-center px-1 py-1 category-item">
                                     <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636"
                                         alt="" width="100%" height="100px">
-                                    <b> {{ $row->name }}</b>
+                                    <b class="text-dark"> Semua Kategori</b>
                                 </div>
+                            </a>
+                        </div>
+                        @foreach ($category as $row)
+                            <div class="col-2 text-center btn">
+                                <a href="{{ route('filter_category', $row->id) }}">
+                                    <div class="card justify-content-center px-1 py-1 category-item">
+                                        <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636"
+                                            alt="" width="100%" height="100px">
+                                        <b class="text-dark"> {{ $row->name }}</b>
+                                    </div>
+                                </a>
                             </div>
                         @endforeach
                     </div>
@@ -47,23 +60,27 @@
             {{-- product part --}}
             <div class="product-part px-3 py-4">
                 <div class="row px-1">
-                    <h3>Produk</h3>
+                    <h3>
+                        Produk <small class="text-muted small"> > </small> Kategori {{ $product[0]->category->name }}
+                    </h3>
                 </div>
                 <div>
                     <div class="row">
                         @foreach ($product as $row)
                             <div class="col-sm-2">
-                                <div type="button" class="btn card justify-content-center px-1 py-1 product-item"
-                                    data-toggle="modal" data-target="#modal-default"
-                                    onclick="callModal('{{ $row->id }}','{{ $row->price }}','{{ $row->name }}')">
-                                    <img src="
+                                <a href="#">
+                                    <div type="button" class="btn card justify-content-center px-1 py-1 product-item"
+                                        data-toggle="modal" data-target="#modal-default"
+                                        onclick="callModal('','{{ $row->id }}')">
+                                        <img src="
                                     https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636"
-                                        alt="" width="100%" height="100px">
-                                    <div>
-                                        <b>{{ $row->name }}</b><br>
-                                        <small> Rp.{{ $row->price }}</small>
+                                            alt="" width="100%" height="100px">
+                                        <div>
+                                            <b class="text-dark">{{ $row->product->name }}</b><br>
+                                            <small class="text-dark"> Rp.{{ $row->product->price }}</small>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         @endforeach
                     </div>

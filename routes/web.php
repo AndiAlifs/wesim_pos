@@ -66,7 +66,7 @@ Route::middleware('role:admin')->group(function () {
 });
 
 Route::middleware('role:cashier')->group(function () {
-// Only for owner
+    // Only for owner
 });
 
 Route::middleware('role:owner')->group(function () {
@@ -76,15 +76,25 @@ Route::middleware('role:owner')->group(function () {
     Route::post('/user/store', 'UserController@store')->name('user_store');
     Route::put('/user/update/{id}', 'UserController@update');
     Route::get('/user/destroy/{id}', 'userController@destroy');
-
 });
 
+Route::middleware('role:cashier')->group(function () {
 
-Route::middleware('role:cashier')->group(function() {
+    // cashier route
     Route::get('/cashier', 'cashier\CashierController@index')->name('cashier');
-    Route::put('/cashier/{id}', 'cashier\CashierController@add_to_cart')->name('add_to_cart');
-    Route::post('/cashier/add_to_hold/', 'cashier\CashierController@add_to_hold')->name('add_to_hold');
+
+    // hold
+    Route::post('/cashier/add_new_transaction/', 'cashier\CashierController@add_new_transaction')->name('add_new_transaction');
+
+    // menu
+    Route::get('/cashier/filter_category/{id}', 'cashier\CashierController@filter_category')->name('filter_category');
+    Route::get('/cashier/search_box/', 'cashier\CashierController@search_box')->name('search_box');
+
+    // cart
     Route::post('/cashier/load_cart/', 'cashier\CashierController@load_cart')->name('load_cart');
-    Route::post('/cashier/get_modal_data/', 'cashier\CashierController@get_modal_data')->name('get_modal_data');
     Route::post('/cashier/delete_item/', 'cashier\CashierController@delete_item')->name('delete_item');
-})
+
+    // modal
+    Route::post('/cashier/get_modal_data/', 'cashier\CashierController@get_modal_data')->name('get_modal_data');
+    Route::post('/cashier/add_to_cart/', 'cashier\CashierController@add_to_cart')->name('add_to_cart');
+});
