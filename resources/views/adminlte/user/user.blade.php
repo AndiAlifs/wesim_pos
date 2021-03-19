@@ -107,6 +107,26 @@
                                                                 </div>
                                                                 @endif
                                                             </div>
+
+                                                            <div class="form-group">
+                                                                <label>Status</label>
+                                                                <br>
+                                                                <select name="status" id="status">
+                                                                    @if ($row->status == 'active')
+                                                                        <option value="active" selected>Active</option>
+                                                                        <option value="not active">Not Active</option>
+                                                                    @else
+                                                                        <option value="active">Active</option>
+                                                                        <option value="not active" selected>Not Active</option>
+                                                                    @endif
+                                                                </select>
+                                                                @if($errors->has('status'))
+                                                                <div class="text-danger">
+                                                                    {{ $errors->first('status')}}
+                                                                </div>
+                                                                @endif
+                                                            </div>
+
                                                             <div class="form-group">
                                                                 <label>Role</label>
                                                                 <br>

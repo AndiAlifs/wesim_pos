@@ -89,6 +89,7 @@ class UserController extends Controller
             'username' => 'required',
             'email' => 'required',
             'role' => 'required',
+            'status' => 'required',
         ]);
 
         $user = User::find($id);
@@ -99,6 +100,7 @@ class UserController extends Controller
         if ($request -> password){
             $user->password = bcrypt($request->password);
         }
+        $user->status = $request->status;
         $user->save();
 
         return redirect()->route('user');
