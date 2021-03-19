@@ -17,16 +17,8 @@ class FinanceController extends Controller
         $finances = finance::orderByDesc('transaction_date')->get();
         // dd($finances);
 
-        $kas["debit"] = 0;
-        $kas["kredit"] = 0;
-
-        foreach ($finances as $finance) {
-            if($finance->jenis == "debit"){
-                $kas["debit"] += $finance->amount;
-            } else {
-                $kas["kredit"] += $finance->amount;
-            }
-        }
+        $kas["debit"] = finance::where('jenis','debit')->sum('amount');
+        $kas["kredit"] = finance::where('jenis','kredit')->sum('amount');
 
         // dd($kas);
         return view('adminlte/finance/finance', compact('finances','kas'));

@@ -65,6 +65,7 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="card">
+
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title">Store Visitors</h3>
@@ -79,6 +80,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="card-body">
                     <div class="d-flex">
                         <p class="d-flex flex-column">
@@ -211,7 +213,7 @@
                         <h3 class="card-title">Sales</h3>
                         <div class="card-tools">
                             {{-- <a href="javascript:void(0);">View Report</a> --}}
-                            <a href="#" class="btn btn-sm btn-tool">
+                            <a href="{{ route('report_finance') }}" class="btn btn-sm btn-tool">
                                 <i class="fas fa-download"></i>
                             </a>
                             <a href="#" class="btn btn-sm btn-tool">

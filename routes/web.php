@@ -58,6 +58,8 @@ Route::middleware('role:admin_owner')->group(function () {
     //report route
     Route::get('/report', 'ReportController@index')->name('report');
     Route::get('/report/visitor', 'ReportController@indexVisitor')->name('report_visitor');
+    Route::get('/report/finance', 'ReportController@indexfinance')->name('report_finance');
+
 });
 
 // Only for admin

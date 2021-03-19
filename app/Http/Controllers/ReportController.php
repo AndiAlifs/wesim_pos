@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Member;
+use App\Finance;
 use App\Exports\VisitorExport;
+use App\Exports\FinanceExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
@@ -20,4 +22,10 @@ class ReportController extends Controller
     {
         return Excel::download(new VisitorExport, 'visitors.xlsx');    
     }
+
+    public function indexFinance()
+    {
+        return Excel::download(new FinanceExport, 'finances.xlsx');
+    }
+
 }
