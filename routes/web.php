@@ -55,7 +55,9 @@ Route::middleware('role:admin_owner')->group(function () {
     Route::get('/inventory/confirm_ship/{id}', 'InventoryController@confirm_ship');
     Route::put('/inventory/update/{id}', 'InventoryController@update');
 
+    //report route
     Route::get('/report', 'ReportController@index')->name('report');
+    Route::get('/report/visitor', 'ReportController@indexVisitor')->name('report_visitor');
 });
 
 // Only for admin
