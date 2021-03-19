@@ -26,6 +26,9 @@
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Username</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Email</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Role</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Last Login</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Last IP</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Status</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Aksi</th>
                                         </tr>
                                     </thead>
@@ -37,6 +40,15 @@
                                             <td>{{ $row->username }}</td>
                                             <td>{{ $row->email }}</td>
                                             <td>{{ $row->role->role_name }}</td>
+                                            <td>{{ $row->last_login }}</td>
+                                            <td>{{ $row->last_ip }}</td>
+                                            <td>
+                                                @if ($row->status == 'active')
+                                                    <span class="text-success font-weight-bold">Active</span>
+                                                @else
+                                                    <span class="text-danger font-weight-bold">Not Active</span>                                                    
+                                                @endif
+                                            </td>
                                             <td>
                                                 <button type="button" class="btn btn-sm btn-warning m-1" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
                                                     <i class="nav-icon fas fa-edit"></i>
@@ -131,8 +143,11 @@
                                             <th rowspan="1" colspan="1">No</th>
                                             <th rowspan="1" colspan="1">Name</th>
                                             <th rowspan="1" colspan="1">Username</th>
-                                            <th rowspan="1" colspan="1">Em  ail</th>
+                                            <th rowspan="1" colspan="1">Email</th>
                                             <th rowspan="1" colspan="1">Role</th>
+                                            <th rowspan="1" colspan="1">Last Login</th>
+                                            <th rowspan="1" colspan="1">Last IP</th>
+                                            <th rowspan="1" colspan="1">Status</th>
                                             <th rowspan="1" colspan="1">Aksi</th>
                                         </tr>
                                     </tfoot>

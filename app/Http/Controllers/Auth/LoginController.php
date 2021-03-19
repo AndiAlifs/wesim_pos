@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class LoginController extends Controller
 {
@@ -45,10 +46,16 @@ class LoginController extends Controller
     }
 
     public function authenticated(Request $request, $user)
-    {
+    {   
+
+        $user->update([
+            'last_login' => Carbon::now(),
+            'last_ip' => $request->getClientIp()
+        ]);
         /**
          * Cashier tidak boleh ke halaman admin
          */
+        
         if ($user->role_id === 3) {
             return redirect()->route('cashier');
         }

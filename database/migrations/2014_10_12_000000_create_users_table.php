@@ -20,7 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->rememberToken();
-            $table->string('ip_address')->nullable();
+            $table->timestamp('last_login')->nullable();
+            $table->string('last_ip')->nullable();
+            $table->enum('status', ['active', 'not active'])->default('active');
             $table->timestamps();
         });
     }
