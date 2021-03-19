@@ -34,14 +34,14 @@
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>44</h3>
+                    <h3>{{ $jumlahMember }}</h3>
     
-                    <p>User Registrations</p>
+                    <p>Member Registered</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{__('member')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -69,8 +69,8 @@
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title">Store Visitors</h3>
                         <div class="card-tools">
-                            <a href="javascript:void(0);">View Report</a>
-                            <a href="#" class="btn btn-sm btn-tool">
+                            {{-- <a href="javascript:void(0);">View Report</a> --}}
+                            <a href="{{route('report_visitor')}}" class="btn btn-sm btn-tool" target="_blank">
                                 <i class="fas fa-download"></i>
                             </a>
                             <a href="#" class="btn btn-sm btn-tool">
@@ -210,7 +210,7 @@
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title">Sales</h3>
                         <div class="card-tools">
-                            <a href="javascript:void(0);">View Report</a>
+                            {{-- <a href="javascript:void(0);">View Report</a> --}}
                             <a href="#" class="btn btn-sm btn-tool">
                                 <i class="fas fa-download"></i>
                             </a>
