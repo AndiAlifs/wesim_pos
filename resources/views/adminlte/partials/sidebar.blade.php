@@ -15,13 +15,15 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-header">Dashboard</li>
         <li class="nav-item">
-          <a href="{{route('home')}}" class="nav-link {{Route::is('home') ? 'active' : ''}}">
+          <a href="{{route('home')}}" class="nav-link {{Route::is('report') ? 'active' : ''}}">
             <i class="nav-icon fas fa-home"></i>
             <p>
               Beranda
             </p>
           </a>
         </li>
+
+
         @if(auth()->user()->role_id == 2)
         <li class="nav-item">
           <a href="{{route('user')}}" class="nav-link {{Route::is('user') ? 'active' : ''}}">
@@ -32,6 +34,8 @@
           </a>
         </li>
         @endif
+
+
         <li class="nav-item">
           <a href="{{__('finance')}}" class="nav-link {{Route::is('finance') ? 'active' : ''}}">
             <i class="nav-icon fa fa-file"></i>
@@ -49,6 +53,8 @@
             </p>
           </a>
         </li>
+
+
         <li class="nav-item">
           <a href="/supplier" class="nav-link {{Route::is('supplier') ? 'active' : ''}}">
             <i class="nav-icon fas fa-cart-arrow-down"></i>
@@ -57,6 +63,8 @@
             </p>
           </a>
         </li>
+
+
         <li class="nav-item">
           <a href="{{route('product')}}" class="nav-link {{Route::is('product') ? 'active' : ''}}">
             <i class="nav-icon fas fa-archive"></i>
@@ -65,6 +73,8 @@
             </p>
           </a>
         </li>
+
+
         @if(auth()->user()->role_id == 1)
         <li class="nav-item">
           <a href="{{route('discount')}}" class="nav-link {{Route::is('discount') ? 'active' : ''}}">
@@ -75,6 +85,8 @@
           </a>
         </li>
         @endif
+
+
         <li class="nav-item">
           <a href="{{route('category')}}" class="nav-link {{Route::is('category') ? 'active' : ''}}">
             <i class="nav-icon fas fa-archive"></i>
@@ -83,6 +95,8 @@
             </p>
           </a>
         </li>
+
+
         <li class="nav-item">
           <a href="{{__('inventory')}}" class="nav-link {{Route::is('inventory') ? 'active' : ''}}">
             <i class="nav-icon fas fa-warehouse"></i>
@@ -91,14 +105,16 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="{{__('report')}}" class="nav-link {{Route::is('report') ? 'active' : ''}}">
+
+
+        {{-- <li class="nav-item">
+          <a href="{{__('report')}}" class="nav-link">
             <i class="nav-icon fa fa-file"></i>
             <p>
               Laporan
             </p>
           </a>
-        </li>
+        </li> --}}
         
       </ul>
     </nav>
