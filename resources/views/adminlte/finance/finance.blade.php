@@ -1,15 +1,14 @@
 @extends('adminlte.master')
 
 @section('content')
-<div class="container-fluid"
-    <div class="d-flex justify-content-center">
-        <h3 class="display-4">Informasi Keuangan</h3>
-        <h4 class="d-flex display-5">Maret 2021</h4>
-    </div>
-    <br>
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
+                <div class="bg-info p-2 rounded card-title">
+                    <h3 class="display-4 text-center text-uppercase">Informasi Keuangan</h3>
+                    <h4 class="text-center">Maret 2021</h4>
+                </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     @if (session('status'))
