@@ -50,6 +50,7 @@ function allFunction() { //note
     // general
     tabEmpty(); // if tab is emprty > make a new transaction
     addNewTransaction(); // add a new transaction "tombol '+' di tab, tombol hold"
+    pay(); //pay button "tombol bayar"
     filterCategory(); // filter by product category
     searchBox(); // search box
     callModal(); // call product modal
@@ -58,6 +59,7 @@ function allFunction() { //note
     createList(); // load loop
     deleteBtn(); // delete this item in cart "tombol delete item di cart"
     deleteCart(); // delete this transaction "tombol batal"
+    closeTab(); // close tab "tombol 'x' di tab"
 }
 
 // if tab is emprty > make a new transaction
@@ -172,6 +174,7 @@ function addToCart() {
     $(".search-box")[0].focus();
 
     // window.scrollTo(0,$('#scrolltohere').scrollHeight);
+
 }
 
 // load cart
@@ -191,8 +194,11 @@ function loadCart() {
         },
         success: function (data) {
             data.forEach(createList);
+            if (data.length == 0)
+                $(".cart-list")[0].innerHTML = "<p class='text-muted text-center'><b>Keranjang Kosong!!!</b></p>";
         }
     });
+    $(".cart-item")[($(".cart-item").length) - 1].scrollIntoView();
 }
 // create list selesai
 var total_price = 0;

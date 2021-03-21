@@ -35,10 +35,7 @@
             @include('cashier.hold')
 
             {{-- include chart --}}
-            @include('cashier.partials.product-modal')
-
-            {{-- include chart --}}
-            @include('cashier.partials.cart-row')
+            @include('cashier.partials.partials')
 
             {{-- include menu --}}
             @include('cashier.menu')

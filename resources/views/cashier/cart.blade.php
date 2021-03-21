@@ -8,7 +8,6 @@
             <div>
                 <div class="cart-list overflow-auto cart-scrollbar">
                     {{-- list menu --}}
-
                 </div>
                 {{-- /.list menu --}}
 
@@ -44,7 +43,8 @@
                         onclick="deleteCart()">Batal</button>
                     <button type="button" class="btn col-3 bg-gradient-warning btn-lg ml-1 mr-1"
                         onclick="addNewTransaction()">Hold</button>
-                    <button type="button" class="btn col-5 bg-gradient-primary btn-lg ml-1 mr-1">Bayar</button>
+                    <button type="button" class="btn col-5 bg-gradient-primary btn-lg ml-1 mr-1" data-toggle="modal"
+                        data-target="#modal-pay">Bayar</button>
                 </div>
                 {{-- /.sub total --}}
 

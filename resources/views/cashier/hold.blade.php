@@ -13,7 +13,7 @@
                 </div>
             </div>
         @endforeach
-        <div class="col mr-1 ml-1 width-25px hover" onclick="addNewTransaction()">
+        <div class="col mr-1 ml-1 hover add-tab" onclick="addNewTransaction()">
             +
         </div>
     </div>
