@@ -11,6 +11,38 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+                    <form action="" method="get">
+                        <div class="form-row">
+                                <div class="col-8">
+                                    <label for="bulan">Bulan</label>
+                                    <select name="bulan" id="bulan" class="form-control">
+                                        <option value="1">Januari</option>
+                                        <option value="2">Februari</option>
+                                        <option value="3">Maret</option>
+                                        <option value="4">April</option>
+                                        <option value="5">Mei</option>
+                                        <option value="6">Juni</option>
+                                        <option value="7">Juli</option>
+                                        <option value="8">Agustus</option>
+                                        <option value="9">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="11">November</option>
+                                        <option value="12">Desember</option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label for="tahun">Tahun</label>
+                                    <select name="tahun" id="tahun" class="form-control">
+                                        <option value="2020">2020</option>
+                                        <option value="2020">2021</option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label for="submit"> Cari </label>
+                                    <button type="submit" class="btn btn-primary btn-block form-control">Cari</button>
+                                </div>
+                            </div>
+                    </form>
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
