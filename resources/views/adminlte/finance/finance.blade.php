@@ -91,10 +91,10 @@
                                     <tbody>
                                         @foreach($finances as $row)
                                         <tr role="row">
-                                            <td>TRX-0321-{{ $row->id }}</td>
+                                            <td>TRX-{{substr($row->transaction_date,5,2)}}21-{{ $row->id }}</td>
                                             <td>{{ $row->transaction_name }}</td>
                                             {{-- <td>{{ $row->amount }}</td> --}}
-                                            <td class="sorting_1" >{{ $row->transaction_date }}</td>
+                                            <td>{{ $row->transaction_date }}</td>
                                             @if ($row->jenis == "debit")
                                                 <td>Rp. {{ $row->amount }}</td>
                                                 <td></td>
