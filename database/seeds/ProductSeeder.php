@@ -22,6 +22,7 @@ class ProductSeeder extends Seeder
 
             $new_product->name = "Mie ".$faker->firstName();
             $temp_angka = rand(0,2);
+            $new_product->image = "image/product/gambarIndomie".($temp_angka+1).".JPG";
             $new_product->product_code = $faker->isbn13();
             $new_product->producer = $faker->lastName();
             $new_product->description = $faker->sentence(5);

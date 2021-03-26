@@ -18,9 +18,9 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>150</h3>
+                    <h3>{{$sellingToday}}</h3>
     
-                    <p>New Orders</p>
+                    <p>Selling Today</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
@@ -68,7 +68,7 @@
 
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
-                        <h3 class="card-title">Store Visitors</h3>
+                        <h3 class="card-title">Total Sales</h3>
                         <div class="card-tools">
                             {{-- <a href="javascript:void(0);">View Report</a> --}}
                             <a href="{{route('report_visitor')}}" class="btn btn-sm btn-tool" target="_blank">
@@ -84,8 +84,8 @@
                 <div class="card-body">
                     <div class="d-flex">
                         <p class="d-flex flex-column">
-                            <span class="text-bold text-lg">160</span>
-                            <span>Visitors This Week</span>
+                            <span class="text-bold text-lg">{{ $sellingToday * 5 }}</span>
+                            <span>Sales This Week</span>
                         </p>
                         <p class="ml-auto d-flex flex-column text-right">
                             <span class="text-success">
@@ -136,69 +136,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <img src="{{asset('image/product/gambarIndomie1.JPG')}}" alt="Product 1"
-                                        class="img-circle img-size-32 mr-2">
-                                    Mie Goreng
-                                </td>
-                                <td>Rp. 3000</td>
-                                <td>
-                                    <small class="text-success mr-1">
-                                        <i class="fas fa-arrow-up"></i>
-                                        12%
-                                    </small>
-                                    <br>
-                                    120 Sold
-                                </td>
-                                <td>
-                                    <a href="#" class="text-muted">
-                                        <i class="fas fa-search"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="{{asset('image/product/gambarIndomie2.JPG')}}" alt="Product 1"
-                                        class="img-circle img-size-32 mr-2">
-                                    Mie Rendang
-                                </td>
-                                <td>Rp. 4000</td>
-                                <td>
-                                    <small class="text-warning mr-1">
-                                        <i class="fas fa-arrow-down"></i>
-                                        0.5%
-                                    </small>
-                                    <br>
-                                    35 Sold
-                                </td>
-                                <td>
-                                    <a href="#" class="text-muted">
-                                        <i class="fas fa-search"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="{{asset('image/product/gambarIndomie3.JPG')}}" alt="Product 1"
-                                        class="img-circle img-size-32 mr-2">
-                                    Mie Soto
-                                </td>
-                                <td>Rp. 5000</td>
-                                <td>
-                                    <small class="text-danger mr-1">
-                                        <i class="fas fa-arrow-down"></i>
-                                        3%
-                                    </small> <br>
-                                    10 Sold
-                                </td>
-                                <td>
-                                    <a href="#" class="text-muted">
-                                        <i class="fas fa-search"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            
+                            @foreach ($topProduk as $item)
+                                <tr>
+                                    <td>
+                                        <img src="{{ asset($item["image"]) }}" alt="Product 1"
+                                            class="img-circle img-size-32 mr-2">
+                                        {{$item["nama"]}}
+                                    </td>
+                                    <td>Rp. {{$item["harga"]}}</td>
+                                    <td>
+                                        {{-- <small class="text-success mr-1">
+                                            <i class="fas fa-arrow-up"></i>
+                                            12%
+                                        </small> --}}
+                                        {{-- <br> --}}
+                                        {{$item["jumlah_penjualan"]}}
+                                    </td>
+                                    <td>
+                                        <a href="{{route('product')}}" class="text-muted">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -313,10 +273,154 @@
 <!-- /.container-fluid -->
 
 @push('scripts-footer')
-    <!-- OPTIONAL SCRIPTS -->
+    {{-- script buat chart --}}
     <script src="{{ asset('adminlte/plugins/chart.js/Chart.min.js') }}"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{ asset('adminlte/dist/js/pages/dashboard3.js') }}"></script>
+
+    {{-- jumlah sales --}}
+    <script>
+        $(function () {
+            'use strict'
+
+            var ticksStyle = {
+                fontColor: '#495057',
+                fontStyle: 'bold'
+            }
+
+            var mode      = 'index'
+            var intersect = true
+
+            var $salesChart = $('#sales-chart')
+            var salesChart  = new Chart($salesChart, {
+                type   : 'bar',
+                data   : {
+                labels  : ['JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+                datasets: [
+                    {
+                    backgroundColor: '#007bff',
+                    borderColor    : '#007bff',
+                    data           : [1000, 2000, 3000, 2500, 2700, 2500, 3000]
+                    },
+                    {
+                    backgroundColor: '#ced4da',
+                    borderColor    : '#ced4da',
+                    data           : [700, 1700, 2700, 2000, 1800, 1500, 2000]
+                    }
+                ]
+                },
+                options: {
+                maintainAspectRatio: false,
+                tooltips           : {
+                    mode     : mode,
+                    intersect: intersect
+                },
+                hover              : {
+                    mode     : mode,
+                    intersect: intersect
+                },
+                legend             : {
+                    display: false
+                },
+                scales             : {
+                    yAxes: [{
+                    // display: false,
+                    gridLines: {
+                        display      : true,
+                        lineWidth    : '4px',
+                        color        : 'rgba(0, 0, 0, .2)',
+                        zeroLineColor: 'transparent'
+                    },
+                    ticks    : $.extend({
+                        beginAtZero: true,
+
+                        // Include a dollar sign in the ticks
+                        callback: function (value, index, values) {
+                        if (value >= 1000) {
+                            value /= 1000
+                            value += 'jt'
+                        } else if(value > 0){
+                            value += 'k'
+                        }
+                        return 'Rp. ' + value
+                        }
+                    }, ticksStyle)
+                    }],
+                    xAxes: [{
+                    display  : true,
+                    gridLines: {
+                        display: false
+                    },
+                    ticks    : ticksStyle
+                    }]
+                }
+                }
+            })
+
+            var $visitorsChart = $('#visitors-chart')
+            var visitorsChart  = new Chart($visitorsChart, {
+                data   : {
+                labels  : ['18th', '20th', '22nd', '24th', '26th', '28th', '30th'],
+                datasets: [{
+                    type                : 'line',
+                    data                : [100, 120, 170, 167, 180, 177, {{$sellingToday}}],
+                    backgroundColor     : 'transparent',
+                    borderColor         : '#007bff',
+                    pointBorderColor    : '#007bff',
+                    pointBackgroundColor: '#007bff',
+                    fill                : false
+                    // pointHoverBackgroundColor: '#007bff',
+                    // pointHoverBorderColor    : '#007bff'
+                },
+                    {
+                    type                : 'line',
+                    data                : [60, 80, 70, 67, 80, 77, 120],
+                    backgroundColor     : 'tansparent',
+                    borderColor         : '#ced4da',
+                    pointBorderColor    : '#ced4da',
+                    pointBackgroundColor: '#ced4da',
+                    fill                : false
+                    // pointHoverBackgroundColor: '#ced4da',
+                    // pointHoverBorderColor    : '#ced4da'
+                    }]
+                },
+                options: {
+                maintainAspectRatio: false,
+                tooltips           : {
+                    mode     : mode,
+                    intersect: intersect
+                },
+                hover              : {
+                    mode     : mode,
+                    intersect: intersect
+                },
+                legend             : {
+                    display: false
+                },
+                scales             : {
+                    yAxes: [{
+                    // display: false,
+                    gridLines: {
+                        display      : true,
+                        lineWidth    : '4px',
+                        color        : 'rgba(0, 0, 0, .2)',
+                        zeroLineColor: 'transparent'
+                    },
+                    ticks    : $.extend({
+                        beginAtZero : true,
+                        suggestedMax: 200
+                    }, ticksStyle)
+                    }],
+                    xAxes: [{
+                    display  : true,
+                    gridLines: {
+                        display: false
+                    },
+                    ticks    : ticksStyle
+                    }]
+                    }
+                }
+            })
+        })
+    </script>
 @endpush
 
 @endsection
