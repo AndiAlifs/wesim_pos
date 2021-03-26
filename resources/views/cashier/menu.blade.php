@@ -61,7 +61,10 @@
             <div class="product-part px-3 py-4">
                 <div class="row px-1">
                     <h3>
-                        Produk <small class="text-muted small"> > </small> Kategori {{ $product[0]->category->name }}
+                        Daftar Produk
+                        <b id="product-category">
+                            {{ Route::is('filter_category') ? '| Kategori ' . $product[0]->category->name : '' }}
+                        </b>
                     </h3>
                 </div>
                 <div>

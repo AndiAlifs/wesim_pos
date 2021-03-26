@@ -8,8 +8,6 @@
                         <input id="selling-transaction-id" type="hidden" value="{{ $row->id }}">
                         <span class="trx-number" id="selling-transaction-number">{{ $row->transaction_number }}</span>
                     </div>
-                    <div class="col-2 text-right small text-muted"><small class="hover btn-xs close-tab"
-                            onclick="closeTab({{ $row->id }})">&#10005;</small></div>
                 </div>
             </div>
         @endforeach

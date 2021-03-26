@@ -8,6 +8,7 @@ var bs_color = {
 var total_price = 0;
 var list = "";
 var product_list = "";
+var product_id = "";
 // end global variabel ----------------
 
 // delay modal call so it has time to load to the modal -----
@@ -53,4 +54,47 @@ function getNowTime() {
     var nowTime = yyyy + '-' + mm + '-' + dd + 'T' + hh + ':' + ii;
 
     return nowTime;
+}
+
+function loadCart() {
+    selling_transaction_id = $('.trx-active > .trx > input').val();
+    total_price = 0;
+    list = "";
+    // ---------------------------------------
+    $.ajax({
+        type: "POST",
+        url: "/cashier/load_cart",
+        data: {
+            'selling_transaction_id': selling_transaction_id,
+            '_token': $('input[name=_token]').val(),
+        },
+        success: function (data) {
+            if (data.length == 0) {
+                $("#cart-list").html("<p class='text-muted text-center'><b>Keranjang Kosong!!!</b></p>");
+                $("#total-price").html(0);
+
+                return 0;
+            }
+            data.forEach(function (selling, index) {
+                // passing new data to #cart-item
+                $("#set-name").html(selling.product.name);
+                $("#set-price").html(toNumberFormat(selling.product.price));
+                $("#set-amount").html(toNumberFormat(selling.amount));
+                $("#set-total").html(toNumberFormat(selling.product.price * selling.amount));
+
+                $("#close-btn").html('<button type="button" class="btn bg-gradient-danger btn-xs float-right mr-2" onclick="deleteBtn(' + selling.id + ',' + selling.amount + ')">&#10005;</button>');
+                $(".cart-hover")[0].setAttribute("onclick", ("callModal('" + selling.id + "','" + selling.product.id + "')"));
+
+                // set new list to .cart-list
+                list += $(".hide-list")[0].innerHTML;
+
+                // set value to .total
+                total_price = total_price + (selling.product.price * selling.amount);
+            });
+
+            $("#cart-list").html(list);
+            $("#total-price").html(toNumberFormat(total_price));
+        }
+    });
+
 }

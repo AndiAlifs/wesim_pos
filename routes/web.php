@@ -104,9 +104,9 @@ Route::middleware('role:cashier')->group(function () {
     // cart
     Route::post('/cashier/load_cart/', 'cashier\CashierController@load_cart')->name('load_cart');
     Route::post('/cashier/delete_item/', 'cashier\CashierController@delete_item')->name('delete_item');
+    Route::get('/cashier/delete_cart/', 'cashier\CashierController@delete_cart')->name('delete_cart');
 
     // modal
     Route::post('/cashier/get_modal_data/', 'cashier\CashierController@get_modal_data')->name('get_modal_data');
     Route::post('/cashier/add_to_cart/', 'cashier\CashierController@add_to_cart')->name('add_to_cart');
-    Route::get('/cashier/delete_cart/', 'cashier\CashierController@delete_cart')->name('delete_cart');
 });

@@ -8,11 +8,14 @@ $("#modal-default").on("shown.bs.modal", function () {
 $("#modal-pay").on("shown.bs.modal", function () {
     $("#cash-pay").focus();
 });
-
+$('#modal-default').on('hidden.bs.modal', function () {
+    $("#search-box").val("");
+    $("#search-box").focus();
+    searchBox('');
+})
 // modal press enter
 $("#modal-amount").on("keyup", function (e) {
     if (e.key === "Enter" || e.keyCode === 13) {
-        // Do something
         $("#modal-btn").click();
     }
 });
@@ -51,11 +54,11 @@ function allFunction() { //note
     payTransaction(); //pay button "tombol bayar"
     addToCart(); // add to this transaction cart "tombol tambahkan ke keranjang"
     callModal(); // call product modal
+    modalInput(); // modal input
     callPayModal(); // tombol bayar di keranjang
     filterCategory(); // filter by product category
     searchBox(); // search box
     cashPayInput(); //oninput ketika memasukkan jumlah uang
-    loadCart(); // load cart of this transaction
     deleteBtn(); // delete this item in cart "tombol delete item di cart"
     deleteCart(); // delete this transaction "tombol batal"
     closeTransaction(); // close tab "tombol 'x' di tab"
@@ -90,10 +93,21 @@ function searchBox(key) {
                 $('#product-name').html(product.product.name);
                 $('#product-price').html(product.product.price);
 
-                product_list += $('#hide-product-list').html()
+                product_list += $('#hide-product-list').html();
             });
-            console.log(data, 'key');
             $('#product-list').html(product_list);
+            $('#product-category').html("");
+
+            // if product-list is empty
+            if ($('#product-list').html() == '') {
+                $('#product-list').html("<h4 class='text-danger m-1'>. . . Pencarian Tidak Ditemukan!!</h4>");
+            }
+            // if barcode was detected
+            if (data[0].barcode) {
+                $('#product-item').click();
+            }
+
+
         }
     });
 }
@@ -127,7 +141,8 @@ function payTransaction() {
     var cash_pay = parseInt(numbersOnly($('#cash-pay').val()));
     var total_pay = parseInt(numbersOnly($('#total-pay').val()));
     if (cash_pay < total_pay) {
-        alert('uang kurang')
+        alert('uang kurang');
+        return false;
     } else {
         var selling_transaction_id = $('.trx-active > .trx > input').val();
         var transaction_number = $('#transaction-number').val();
@@ -161,6 +176,8 @@ function payTransaction() {
 
 // add to cart from modal data
 function addToCart() {
+    if ($("#modal-btn").html() == ("<b>Kembali</b>"))
+        return false;
     // get data
     var selling_transaction_id = $('.trx-active > .trx > input').val();
     var product_id = $("#modal-product-id").val();
@@ -199,7 +216,6 @@ function callPayModal() {
 
 // call modal when product clicked
 function callModal(selling_id, product_id) {
-
     $("#modal-id").val(selling_id);
     $("#modal-product-id").val(product_id);
     selling_transaction_id = $('.trx-active > .trx > input').val();
@@ -214,32 +230,63 @@ function callModal(selling_id, product_id) {
             '_token': $('input[name=_token]').val(),
         },
         success: function (data) {
-            console.log(data);
+            var in_stock = 0;
             if (data[0].already_in_cart) {
                 $("#modal-name").html(data[0].product['name']);
                 $("#modal-price").val(toNumberFormat(data[0].product['price']));
                 $("#modal-amount").val(data[0]['amount']);
+                in_stock = data[0]['amount'] + data[1].inventory['in_stock']; //calculate product stock in inventory and stock in cart
             } else {
                 $("#modal-name").html(data[0]['name']);
                 $("#modal-price").val(data[0]['price']);
                 $("#modal-amount").val(1);
+                in_stock = data[1].inventory['in_stock'];
             }
-            $("#modal-in-stock").html(data[1].inventory['in_stock']);
+            $("#modal-amount").removeAttr('disabled');
+            $("#modal-in-stock").html(in_stock);
             $("#modal-full-stock").html(data[1].inventory['full_stock']);
 
-            var progress_width = Math.floor(data[1].inventory['in_stock'] / data[1].inventory['full_stock'] * 100);
-            $("#modal-progress-bar").css('width', progress_width + '%');
             // set progress bar color
-            console.log(progress_width);
-            if (progress_width < 21)
+            var progress_width = Math.floor(in_stock / data[1].inventory['full_stock'] * 100);
+            $("#modal-progress-bar").css('width', progress_width + '%');
+            $("#modal-btn").removeClass("bg-gradient-secondary");
+            $("#modal-btn").html("<b>Masukkan Ke Keranjang</b>");
+
+            // set progress bar color
+            if (progress_width < 21) {
                 $("#modal-progress-bar").css('background-color', bs_color.danger);
-            else if (progress_width < 41)
+                $('#stock-tittle').html('Stock Hampir Habis :');
+                $('#stock-bar').css('color', bs_color.danger);
+            } else if (progress_width < 41) {
                 $("#modal-progress-bar").css('background-color', bs_color.warning);
-            else
+                $('#stock-tittle').html('Stock Menipis :');
+                $('#stock-bar').css('color', bs_color.warning);
+            } else {
                 $("#modal-progress-bar").css('background-color', bs_color.success);
+                $('#stock-tittle').html('Stock Aman :');
+                $('#stock-bar').css('color', bs_color.success);
+            }
+
+            // if stock kosong
+            if (data[1].inventory['in_stock'] < 1 && data[0]['amount'] == null) {
+                $("#modal-amount").val(0);
+                $("#modal-amount").attr('disabled', 'true');
+                $('#stock-tittle').html('Stock Habis :');
+                $("#modal-btn").addClass("bg-gradient-secondary");
+                $("#modal-btn").html("<b>Kembali</b>");
+            }
 
         }
     });
+}
+
+function modalInput(val) {
+    var max_input = parseInt($("#modal-in-stock").html());
+    if (val > max_input)
+        $("#modal-amount").val(max_input);
+    if (val < 1)
+        $("#modal-amount").val(1);
+    console.log(val);
 }
 
 // 
@@ -253,48 +300,7 @@ function cashPayInput() {
 }
 
 
-function loadCart() {
-    selling_transaction_id = $('.trx-active > .trx > input').val();
-    total_price = 0;
-    list = "";
-    // ---------------------------------------
-    $.ajax({
-        type: "POST",
-        url: "/cashier/load_cart",
-        data: {
-            'selling_transaction_id': selling_transaction_id,
-            '_token': $('input[name=_token]').val(),
-        },
-        success: function (data) {
-            if (data.length == 0) {
-                $("#cart-list").html("<p class='text-muted text-center'><b>Keranjang Kosong!!!</b></p>");
-                $("#total-price").html(0);
 
-                return 0;
-            }
-            data.forEach(function (selling, index) {
-                // passing new data to #cart-item
-                $("#set-name").html(selling.product.name);
-                $("#set-price").html(toNumberFormat(selling.product.price));
-                $("#set-amount").html(toNumberFormat(selling.amount));
-                $("#set-total").html(toNumberFormat(selling.product.price * selling.amount));
-
-                $("#close-btn").html('<button type="button" class="btn bg-gradient-danger btn-xs float-right mr-2" onclick="deleteBtn(' + selling.id + ',' + selling.amount + ')">&#10005;</button>');
-                $(".cart-hover")[0].setAttribute("onclick", ("callModal('" + selling.id + "','" + selling.product.id + "')"));
-
-                // set new list to .cart-list
-                list += $(".hide-list")[0].innerHTML;
-
-                // set value to .total
-                total_price = total_price + (selling.product.price * selling.amount);
-            });
-
-            $("#cart-list").html(list);
-            $("#total-price").html(toNumberFormat(total_price));
-        }
-    });
-
-}
 
 // 'x' button in cart
 function deleteBtn(selling_id, selling_amount) {
@@ -318,8 +324,7 @@ function deleteCart() {
 
     selling_transaction_id = $('.trx-active > .trx > input').val();
 
-    //cek if cart not empty
-    // if ($('.cart-list').html() != "")
+    //confirm delete
     var confirm_delete = confirm('anda yakin menghapus keranjang ini ??')
     if (!confirm_delete)
         return 0;
