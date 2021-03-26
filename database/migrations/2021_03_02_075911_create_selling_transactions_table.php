@@ -23,7 +23,7 @@ class CreateSellingTransactionsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->unsignedBigInteger('member_id');
+            $table->unsignedBigInteger('member_id')->default(1000001);
             $table->foreign("member_id")->references('id')->on("members");
 
             $table->unsignedBigInteger('pay_cost')->default(0);
