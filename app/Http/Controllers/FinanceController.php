@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\finance;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class FinanceController extends Controller
 {
@@ -13,8 +14,22 @@ class FinanceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $finances = finance::orderByDesc('transaction_date')->get();
+    {   
+        if($_GET){
+            $waktu["bulan"] = sprintf("%02d", $_GET["bulan"]);
+            $waktu["tahun"] = $_GET["tahun"];
+        } else {
+            $waktu["bulan"] = sprintf("%02d",Carbon::now()->month);
+            $waktu["tahun"] = Carbon::now()->year;
+        }
+
+        $dateFrom = $waktu["tahun"]."-".$waktu["bulan"]."-01";     
+        $dateTo = $waktu["tahun"]."-".$waktu["bulan"]."-31";     
+
+        // Query between
+        $finances = finance::whereBetween('transaction_date',[$dateFrom, $dateTo])
+                                ->orderByDesc('transaction_date')
+                                ->get();
         // dd($finances);
 
         $kas["debit"] = finance::where('jenis','debit')->sum('amount');
