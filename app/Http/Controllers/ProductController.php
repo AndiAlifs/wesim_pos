@@ -10,8 +10,8 @@ class ProductController extends Controller
     public function index()
     {
         $product = Product::get();
-        // dd($product);
-        return view('adminlte.product.product', compact('product'));
+        $warnaBg = ["primary", "secondary", "success", "danger", "warning", "info", "dark"];
+        return view('adminlte.product.product', compact('product','warnaBg'));
     }
 
     public function destroy($id)
@@ -22,7 +22,7 @@ class ProductController extends Controller
         return redirect()->route('product');
     }
 
-    public function create($request)
+    public function create($id)
     {
         $product = Product::find($id);
         $product->Category()->detach();

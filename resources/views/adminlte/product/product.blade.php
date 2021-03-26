@@ -70,8 +70,7 @@
                                                         {{ $row->name }}
                                                     </td>
                                                     <td>
-                                                        <button
-                                                            class="btn btn-outline-primary btn-block">{{ $row->category->first()->name }}</button>
+                                                        <div class="btn-sm btn btn-{{$warnaBg[$row->category->first()->id % 6]}} rounded-pill btn-block">{{ $row->category->first()->name }}</div>
                                                     </td>
                                                     <td>{{ $row->producer }}</td>
                                                     <td>Rp. {{ $row->purchase_price }}</td>
