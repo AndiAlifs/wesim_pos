@@ -69,9 +69,9 @@
                         @foreach ($product as $row)
                             <div class="col-sm-2">
                                 <a href="#">
-                                    <div type="button" class="btn card justify-content-center px-1 py-1 product-item"
-                                        data-toggle="modal" data-target="#modal-default"
-                                        onclick="callModal('','{{ $row->id }}')">
+                                    <div type="button" onclick="callModal('','{{ $row->id }}')"
+                                        class="btn card justify-content-center px-1 py-1 product-item"
+                                        data-toggle="modal" data-target="#modal-default" id="product-item">
                                         <img src="
                                     https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636"
                                             alt="" width="100%" height="100px">

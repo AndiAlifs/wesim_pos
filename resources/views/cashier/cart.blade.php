@@ -6,7 +6,7 @@
         <!-- /.card-header -->
         <div class="card-body cart">
             <div>
-                <div class="cart-list overflow-auto cart-scrollbar">
+                <div class="cart-list overflow-auto cart-scrollbar" id="cart-list">
                     {{-- list menu --}}
                 </div>
                 {{-- /.list menu --}}

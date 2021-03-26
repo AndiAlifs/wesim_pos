@@ -35,12 +35,25 @@
                             value="">
                     </div>
                     <div class="form-group text-center">
-                        <h3 id="modal-name">Judul</h3>
+                        <b>
+                            <h3 id="modal-name">Nama Produk</h3>
+                        </b>
+                        <div class="progress-group text-left small">
+                            Stock :
+                            <span class="float-right">
+                                <b id="modal-in-stock">310</b>/
+                                <span id="modal-full-stock">400</span>
+                            </span>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar" id="modal-progress-bar" style="width: 0%; transition: 0s;">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group row">
-                        <label for="input-harga" class="col-sm-3 col-form-label">Harga</label>
+                        <label for="input-harga" class="col-sm-3 col-form-label">Harga (Rp)</label>
                         <div class="col-sm-9">
-                            <input name="price" type="number" class="form-control" id="modal-price" placeholder="Harga"
+                            <input name="price" type="text" class="form-control" id="modal-price" placeholder="Harga"
                                 value="" disabled>
                         </div>
                     </div>

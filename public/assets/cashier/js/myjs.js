@@ -56,7 +56,6 @@ function allFunction() { //note
     searchBox(); // search box
     cashPayInput(); //oninput ketika memasukkan jumlah uang
     loadCart(); // load cart of this transaction
-    createList(); // load loop
     deleteBtn(); // delete this item in cart "tombol delete item di cart"
     deleteCart(); // delete this transaction "tombol batal"
     closeTransaction(); // close tab "tombol 'x' di tab"
@@ -76,32 +75,30 @@ function filterCategory(category_id) {
     });
 }
 
-var product_list = "";
-
 function searchBox(key) {
     $.ajax({
         type: "GET",
-        url: "/cashier/",
+        url: "/cashier/search_box",
         data: {
             'name': key,
             '_token': $('input[name=_token]').val(),
         },
         success: function (data) {
             product_list = "";
-            data.forEach(createProduct);
+            data.forEach(function (product, index) {
+                $('#product-item').attr('onclick', 'callModal("",' + product.product.id + ')');
+                $('#product-name').html(product.product.name);
+                $('#product-price').html(product.product.price);
+
+                product_list += $('#hide-product-list').html()
+            });
             console.log(data, 'key');
             $('#product-list').html(product_list);
         }
     });
 }
 
-function createProduct(product, index) {
-    $('#product-item').attr('onclick', 'callModal("",' + product.product.id + ')');
-    $('#product-name').html(product.product.name);
-    $('#product-price').html(product.product.price);
 
-    product_list += $('#hide-product-list').html()
-}
 
 // new transaction
 function addNewTransaction() {
@@ -123,7 +120,7 @@ function addNewTransaction() {
 function payTransaction() {
     // if keranjang kosong
     if ($('.cart-list').html() == '<p class="text-muted text-center"><b>Keranjang Kosong!!!</b></p>') {
-        alert('keranjang kosong')
+        alert('keranjang kosong');
         return 0;
     }
     // if uang bayar < total harga
@@ -200,7 +197,7 @@ function callPayModal() {
     $('#transaction-date').val(getNowTime());
 }
 
-// call mmodal when product clicked
+// call modal when product clicked
 function callModal(selling_id, product_id) {
 
     $("#modal-id").val(selling_id);
@@ -217,24 +214,33 @@ function callModal(selling_id, product_id) {
             '_token': $('input[name=_token]').val(),
         },
         success: function (data) {
-            if (data.already_in_cart) {
-                $("#modal-name").html(data.product['name']);
-                $("#modal-price").val(data.product['price']);
-                $("#modal-amount").val(data['amount']);
+            console.log(data);
+            if (data[0].already_in_cart) {
+                $("#modal-name").html(data[0].product['name']);
+                $("#modal-price").val(toNumberFormat(data[0].product['price']));
+                $("#modal-amount").val(data[0]['amount']);
             } else {
-                $("#modal-name").html(data['name']);
-                $("#modal-price").val(data['price']);
+                $("#modal-name").html(data[0]['name']);
+                $("#modal-price").val(data[0]['price']);
                 $("#modal-amount").val(1);
             }
-            // $("#modal-btn").attr("onclick", ("addToCart('" + $("#amount").val() + "')"));
+            $("#modal-in-stock").html(data[1].inventory['in_stock']);
+            $("#modal-full-stock").html(data[1].inventory['full_stock']);
+
+            var progress_width = Math.floor(data[1].inventory['in_stock'] / data[1].inventory['full_stock'] * 100);
+            $("#modal-progress-bar").css('width', progress_width + '%');
+            // set progress bar color
+            console.log(progress_width);
+            if (progress_width < 21)
+                $("#modal-progress-bar").css('background-color', bs_color.danger);
+            else if (progress_width < 41)
+                $("#modal-progress-bar").css('background-color', bs_color.warning);
+            else
+                $("#modal-progress-bar").css('background-color', bs_color.success);
+
         }
     });
 }
-
-
-
-
-
 
 // 
 function cashPayInput() {
@@ -246,9 +252,6 @@ function cashPayInput() {
     $('#return-cost').val(toNumberFormat(return_cash));
 }
 
-// load cart
-var total_price = 0;
-var list = "";
 
 function loadCart() {
     selling_transaction_id = $('.trx-active > .trx > input').val();
@@ -264,48 +267,46 @@ function loadCart() {
         },
         success: function (data) {
             if (data.length == 0) {
-                $(".cart-list")[0].innerHTML = "<p class='text-muted text-center'><b>Keranjang Kosong!!!</b></p>";
+                $("#cart-list").html("<p class='text-muted text-center'><b>Keranjang Kosong!!!</b></p>");
+                $("#total-price").html(0);
+
                 return 0;
             }
-            data.forEach(createList);
+            data.forEach(function (selling, index) {
+                // passing new data to #cart-item
+                $("#set-name").html(selling.product.name);
+                $("#set-price").html(toNumberFormat(selling.product.price));
+                $("#set-amount").html(toNumberFormat(selling.amount));
+                $("#set-total").html(toNumberFormat(selling.product.price * selling.amount));
 
-            $(".cart-list")[0].innerHTML = list;
-            $(".total-price")[0].innerHTML = toNumberFormat(total_price);
+                $("#close-btn").html('<button type="button" class="btn bg-gradient-danger btn-xs float-right mr-2" onclick="deleteBtn(' + selling.id + ',' + selling.amount + ')">&#10005;</button>');
+                $(".cart-hover")[0].setAttribute("onclick", ("callModal('" + selling.id + "','" + selling.product.id + "')"));
 
+                // set new list to .cart-list
+                list += $(".hide-list")[0].innerHTML;
+
+                // set value to .total
+                total_price = total_price + (selling.product.price * selling.amount);
+            });
+
+            $("#cart-list").html(list);
+            $("#total-price").html(toNumberFormat(total_price));
         }
     });
 
 }
-// create list selesai
-function createList(selling, index) {
-    // passing new data to #cart-item
-    $("#set-name").html(selling.product.name);
-    $("#set-price").html(toNumberFormat(selling.product.price));
-    $("#set-amount").html(toNumberFormat(selling.amount));
-    $("#set-total").html(toNumberFormat(selling.product.price * selling.amount));
-
-    $("#close-btn").html('<button type="button" class="btn bg-gradient-danger btn-xs float-right mr-2" onclick="deleteBtn(' + selling.id + ')">&#10005;</button>');
-    $(".cart-hover")[0].setAttribute("onclick", ("callModal('" + selling.id + "','" + selling.product.id + "')"));
-
-    // set new list to .cart-list
-    list += $(".hide-list")[0].innerHTML;
-
-    // set value to .total
-    total_price = total_price + (selling.product.price * selling.amount);
-}
 
 // 'x' button in cart
-function deleteBtn(selling_id) {
+function deleteBtn(selling_id, selling_amount) {
     $.ajax({
         type: "POST",
         url: "/cashier/delete_item",
         data: {
             'selling_id': selling_id,
+            'selling_amount': selling_amount,
             '_token': $('input[name=_token]').val(),
         },
-        success: function (data) {
-
-        }
+        success: function (data) {}
     })
     loadCart();
 }
