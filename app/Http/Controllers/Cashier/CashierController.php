@@ -12,12 +12,13 @@ use App\member;
 use App\Http\Controllers\Controller;
 use App\inventory;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 class CashierController extends Controller
 {
-    public function index(Request $request)
-    {
 
+    public static function index(Request $request)
+    {
         $category = Category::all();
         $product = ProductCategory::with('product')->get();
         $member = Member::all();
@@ -33,9 +34,23 @@ class CashierController extends Controller
         ]);
     }
 
-    public function search_box(Request $request)
+    public static function search_box(Request $request)
     {
         if (isset($request['name'])) {
+
+            // get product by id
+            $product = ProductCategory::with('product')
+                ->whereHas(
+                    'product',
+                    function ($query) use ($request) {
+                        return $query->where('product_code', $request['name']);
+                    }
+                )->get();
+            if ($product->count() > 0) {
+                $product[0]->barcode = true;
+                return $product;
+            }
+            // get product name
             $product = ProductCategory::with('product')
                 ->whereHas(
                     'product',
@@ -85,30 +100,19 @@ class CashierController extends Controller
 
     function delete_cart(Request $request)
     {
-        selling::where('selling_transaction_id', $request['selling_transaction_id'])->delete();
+        $selling = Selling::where('selling_transaction_id', $request['selling_transaction_id'])->get();
+
+        foreach ($selling as $row) {
+            $inventory = Inventory::where('product_id', $row['product_id'])->first();
+            $inventory->in_stock += $row['amount'];
+            $inventory->save();
+            $row->delete();
+        }
+        // selling::where('selling_transaction_id', $request['selling_transaction_id'])->delete();
         sellingTransaction::find($request['selling_transaction_id'])->delete();
     }
 
 
-    // selesai utk sementara
-    public function filter_category($id, Request $request)
-    {
-        $category = Category::all();
-        $product = ProductCategory::with('product')->with('category')
-            ->where('category_id', $id)
-            ->get();
-        $member = Member::all();
-        $selling = selling::all();
-        $sellingTransaction = SellingTransaction::where('status_id', '2')->get();
-
-        return view('cashier/master', [
-            'category' => $category,
-            'product' => $product,
-            'member' => $member,
-            'selling' => $selling,
-            'sellingTransaction' => $sellingTransaction
-        ]);
-    }
 
 
     // selesai
@@ -184,5 +188,25 @@ class CashierController extends Controller
         $inventory->save();
 
         Selling::find($request['selling_id'])->delete();
+    }
+
+    // selesai utk sementara
+    public function filter_category($id, Request $request)
+    {
+        $category = Category::all();
+        $product = ProductCategory::with('product')->with('category')
+            ->where('category_id', $id)
+            ->get();
+        $member = Member::all();
+        $selling = selling::all();
+        $sellingTransaction = SellingTransaction::where('status_id', '2')->get();
+
+        return view('cashier/master', [
+            'category' => $category,
+            'product' => $product,
+            'member' => $member,
+            'selling' => $selling,
+            'sellingTransaction' => $sellingTransaction
+        ]);
     }
 }

@@ -38,13 +38,13 @@
                         <b>
                             <h3 id="modal-name">Nama Produk</h3>
                         </b>
-                        <div class="progress-group text-left small">
-                            Stock :
+                        <div class="progress-group text-left" id="stock-bar">
+                            <span id="stock-tittle">Stock :</span>
                             <span class="float-right">
                                 <b id="modal-in-stock">310</b>/
                                 <span id="modal-full-stock">400</span>
                             </span>
-                            <div class="progress progress-sm">
+                            <div class="progress progress-sm stock-progress">
                                 <div class="progress-bar" id="modal-progress-bar" style="width: 0%; transition: 0s;">
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                         <label for="input-number" class="col-sm-3 col-form-label">Jumlah</label>
                         <div class="col-sm-9">
                             <input name="amount" type="number" class="form-control modal-amount" id="modal-amount"
-                                placeholder="Jumlah" value="1" min="1">
+                                placeholder="Jumlah" value="1" min="1" oninput="modalInput(this.value)">
                         </div>
                     </div>
                 </div>
