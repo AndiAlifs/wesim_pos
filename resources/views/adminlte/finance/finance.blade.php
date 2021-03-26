@@ -7,36 +7,61 @@
             <div class="card">
                 <div class="bg-info p-2 rounded card-title">
                     <h3 class="display-4 text-center text-uppercase">Informasi Keuangan</h3>
-                    <h4 class="text-center">Maret 2021</h4>
+                    <h4 class="text-center">{{$waktu["bulan_name_start"]." ".$waktu["tahun_start"]}} - {{$waktu["bulan_name_end"]." ".$waktu["tahun_end"]}}</h4>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <form action="" method="get">
-                        <div class="form-row">
-                                <div class="col-8">
-                                    <label for="bulan">Bulan</label>
-                                    <select name="bulan" id="bulan" class="form-control">
-                                        <option value="1">Januari</option>
-                                        <option value="2">Februari</option>
-                                        <option value="3">Maret</option>
-                                        <option value="4">April</option>
-                                        <option value="5">Mei</option>
-                                        <option value="6">Juni</option>
-                                        <option value="7">Juli</option>
-                                        <option value="8">Agustus</option>
-                                        <option value="9">September</option>
-                                        <option value="10">Oktober</option>
-                                        <option value="11">November</option>
-                                        <option value="12">Desember</option>
-                                    </select>
-                                </div>
-                                <div class="col-2">
-                                    <label for="tahun">Tahun</label>
-                                    <select name="tahun" id="tahun" class="form-control">
-                                        <option value="2020">2020</option>
-                                        <option value="2020">2021</option>
-                                    </select>
-                                </div>
+                        <div class="form-row mb-2">
+                                
+                                    <div class="col-3">
+                                        <label for="bulan_start">Dari</label>
+                                        <select name="bulan_start" id="bulan_start" class="form-control">
+                                            <option value="1" {{ $waktu["bulan_start"] == "01"? "selected" : ''}} >Januari</option>
+                                            <option value="2" {{ $waktu["bulan_start"] == "02"? "selected" : ''}} >Februari</option>
+                                            <option value="3" {{ $waktu["bulan_start"] == "03"? "selected" : ''}} >Maret</option>
+                                            <option value="4" {{ $waktu["bulan_start"] == "04"? "selected" : ''}} >April</option>
+                                            <option value="5" {{ $waktu["bulan_start"] == "05"? "selected" : ''}} >Mei</option>
+                                            <option value="6" {{ $waktu["bulan_start"] == "06"? "selected" : ''}} >Juni</option>
+                                            <option value="7" {{ $waktu["bulan_start"] == "07"? "selected" : ''}} >Juli</option>
+                                            <option value="8" {{ $waktu["bulan_start"] == "08"? "selected" : ''}} >Agustus</option>
+                                            <option value="9" {{ $waktu["bulan_start"] == "09"? "selected" : ''}} >September</option>
+                                            <option value="10" {{ $waktu["bulan_start"] == "10"? "selected" : ''}} >Oktober</option>
+                                            <option value="11" {{ $waktu["bulan_start"] == "11"? "selected" : ''}} >November</option>
+                                            <option value="12" {{ $waktu["bulan_start"] == "12"? "selected" : ''}} >Desember</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-2">
+                                        <label for="tahun_start"> .</label>
+                                        <select name="tahun_start" id="tahun_start" class="form-control">
+                                            <option value="2020" {{$waktu["tahun_start"] == "2020" ? "selected" : ''}}>2020</option>
+                                            <option value="2021" {{$waktu["tahun_start"] == "2021" ? "selected" : ''}}>2021</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <label for="bulan_end">Sampai</label>
+                                        <select name="bulan_end" id="bulan_end" class="form-control">
+                                            <option value="1" {{ $waktu["bulan_end"] == "01"? "selected" : ''}} >Januari</option>
+                                            <option value="2" {{ $waktu["bulan_end"] == "02"? "selected" : ''}} >Februari</option>
+                                            <option value="3" {{ $waktu["bulan_end"] == "03"? "selected" : ''}} >Maret</option>
+                                            <option value="4" {{ $waktu["bulan_end"] == "04"? "selected" : ''}} >April</option>
+                                            <option value="5" {{ $waktu["bulan_end"] == "05"? "selected" : ''}} >Mei</option>
+                                            <option value="6" {{ $waktu["bulan_end"] == "06"? "selected" : ''}} >Juni</option>
+                                            <option value="7" {{ $waktu["bulan_end"] == "07"? "selected" : ''}} >Juli</option>
+                                            <option value="8" {{ $waktu["bulan_end"] == "08"? "selected" : ''}} >Agustus</option>
+                                            <option value="9" {{ $waktu["bulan_end"] == "09"? "selected" : ''}} >September</option>
+                                            <option value="10" {{ $waktu["bulan_end"] == "10"? "selected" : ''}} >Oktober</option>
+                                            <option value="11" {{ $waktu["bulan_end"] == "11"? "selected" : ''}} >November</option>
+                                            <option value="12" {{ $waktu["bulan_end"] == "12"? "selected" : ''}} >Desember</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-2">
+                                        <label for="tahun_end">.</label>
+                                        <select name="tahun_end" id="tahun_end" class="form-control">
+                                            <option value="2020" {{$waktu["tahun_end"] == "2020" ? "selected" : ''}}>2020</option>
+                                            <option value="2021" {{$waktu["tahun_end"] == "2021" ? "selected" : ''}}>2021</option>
+                                        </select>
+                                    </div>
                                 <div class="col-2">
                                     <label for="submit"> Cari </label>
                                     <button type="submit" class="btn btn-primary btn-block form-control">Cari</button>
@@ -66,10 +91,10 @@
                                     <tbody>
                                         @foreach($finances as $row)
                                         <tr role="row">
-                                            <td>TRX-0321-{{ $row->id }}</td>
+                                            <td>TRX-{{substr($row->transaction_date,5,2)}}21-{{ $row->id }}</td>
                                             <td>{{ $row->transaction_name }}</td>
                                             {{-- <td>{{ $row->amount }}</td> --}}
-                                            <td class="sorting_1" >{{ $row->transaction_date }}</td>
+                                            <td>{{ $row->transaction_date }}</td>
                                             @if ($row->jenis == "debit")
                                                 <td>Rp. {{ $row->amount }}</td>
                                                 <td></td>

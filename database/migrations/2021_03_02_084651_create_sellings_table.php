@@ -25,6 +25,7 @@ class CreateSellingsTable extends Migration
             $table->unsignedBigInteger('amount');
             $table->unsignedBigInteger('price')->default(0);
 
+            $table->date('date');
             $table->timestamps();
         });
     }
