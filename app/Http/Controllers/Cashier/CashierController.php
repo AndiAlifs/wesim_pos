@@ -7,7 +7,7 @@ use App\category;
 use App\productCategory;
 use App\sellingTransaction;
 use App\selling;
-use App\cart;
+use App\member;
 
 use App\Http\Controllers\Controller;
 use App\SellingTransaction as AppSellingTransaction;
@@ -19,16 +19,29 @@ use SellingTransactionSeeder;
 
 class CashierController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if (isset($request['name'])) {
+            $product = ProductCategory::with('product')
+                ->whereHas(
+                    'product',
+                    function ($query) use ($request) {
+                        return $query->where('name', 'like', '%' . $request['name'] . '%');
+                    }
+                )->get();
+            return $product;
+        } else
+            $product = ProductCategory::with('product')->get();
+
         $category = Category::all();
-        $product = ProductCategory::with('product')->get();
+        $member = Member::all();
         $selling = Selling::all();
         $sellingTransaction = SellingTransaction::where('status_id', '2')->get();
 
         return view('cashier/master', [
             'category' => $category,
             'product' => $product,
+            'member' => $member,
             'selling' => $selling,
             'sellingTransaction' => $sellingTransaction
         ]);
@@ -47,6 +60,29 @@ class CashierController extends Controller
         $selling_tansaction_id = SellingTransaction::where('transaction_number', $transaction_number)->get();
         return $selling_tansaction_id[0]->id;
     }
+
+    public function pay_transaction(Request $request)
+    {
+        $selling_transaction_id = $request['selling_transaction_id'];
+        $transaction_number = $request['transaction_number'];
+        $member_id = $request['member_id'];
+        $pay_cost = $request['pay_cost'];
+        $total_price = $request['total_price'];
+        $transaction_date = $request['transaction_date'];
+
+        $member_id = Member::where('member_id', $member_id)->get();
+        echo $member_id[0]->id;
+
+        $selling_transaction = sellingTransaction::find($selling_transaction_id);
+        $selling_transaction->transaction_number = $transaction_number;
+        $selling_transaction->status_id = 1;
+        $selling_transaction->member_id = $member_id[0]->id;
+        $selling_transaction->pay_cost = $pay_cost;
+        $selling_transaction->total_price = $total_price;
+        $selling_transaction->transaction_date = $transaction_date;
+        $selling_transaction->save();
+    }
+
     function delete_cart(Request $request)
     {
         selling::where('selling_transaction_id', $request['selling_transaction_id'])->delete();
@@ -61,12 +97,14 @@ class CashierController extends Controller
         $product = ProductCategory::with('product')->with('category')
             ->where('category_id', $id)
             ->get();
+        $member = Member::all();
         $selling = selling::all();
         $sellingTransaction = SellingTransaction::where('status_id', '2')->get();
 
         return view('cashier/master', [
             'category' => $category,
             'product' => $product,
+            'member' => $member,
             'selling' => $selling,
             'sellingTransaction' => $sellingTransaction
         ]);
@@ -77,6 +115,7 @@ class CashierController extends Controller
     {
         $category = Category::all();
         $selling = Selling::all();
+        $member = Member::all();
         $sellingTransaction = SellingTransaction::where('status_id', '2')->get();
 
         $key = $request->key;
@@ -86,6 +125,7 @@ class CashierController extends Controller
         return view('cashier/master', [
             'category' => $category,
             'product' => $product,
+            'member' => $member,
             'selling' => $selling,
             'sellingTransaction' => $sellingTransaction,
         ]);
@@ -121,12 +161,12 @@ class CashierController extends Controller
     {
         $selling = Selling::where('selling_transaction_id', $request['selling_transaction_id'])
             ->where('product_id', $request['product_id']);
+
         $product = Product::find($request['product_id']);
+
         $cek = $selling->count();
         if ($cek) {
-
             $get = $selling->get();
-            echo $get[0]->id;
             $data = Selling::find($get[0]->id);
             $data->amount = $request['product_amount'];
             $data->price = ($product->price * $request['product_amount']);

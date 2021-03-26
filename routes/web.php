@@ -59,7 +59,6 @@ Route::middleware('role:admin_owner')->group(function () {
     Route::get('/report', 'ReportController@index')->name('report');
     Route::get('/report/visitor', 'ReportController@indexVisitor')->name('report_visitor');
     Route::get('/report/finance', 'ReportController@indexfinance')->name('report_finance');
-
 });
 
 // Only for admin
@@ -86,13 +85,19 @@ Route::middleware('role:owner')->group(function () {
 
 Route::middleware('role:cashier')->group(function () {
 
+
+
     // cashier route
     Route::get('/cashier', 'cashier\CashierController@index')->name('cashier');
+
+    // transaction
+    Route::post('/cashier/pay_transaction/', 'cashier\CashierController@pay_transaction')->name('pay_transaction');
 
     // hold
     Route::post('/cashier/add_new_transaction/', 'cashier\CashierController@add_new_transaction')->name('add_new_transaction');
 
     // menu
+    Route::get('/cashier/load_product/', 'cashier\CashierController@load_product')->name('load_product');
     Route::get('/cashier/filter_category/{id}', 'cashier\CashierController@filter_category')->name('filter_category');
     Route::get('/cashier/search_box/', 'cashier\CashierController@search_box')->name('search_box');
 

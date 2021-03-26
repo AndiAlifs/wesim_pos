@@ -12,20 +12,6 @@
                 {{-- /.list menu --}}
 
                 {{-- sub total --}}
-                <div class="row">
-                    <div class="col-7 text-muted">
-                        <span>Sub Total </span> <br>
-                        <span>Pb (5%) </span>
-                    </div>
-                    <div class="col-1 text-muted text-right">
-                        <span>: </span> <br>
-                        <span>: </span>
-                    </div>
-                    <div class="col-4">
-                        Rp. <span class="total-harga">0</span> <br>
-                        <span> Rp. 0</span>
-                    </div>
-                </div>
                 <hr>
                 <div class="row">
                     <div class="col-5 text-muted">
@@ -35,7 +21,7 @@
                         <span>: </span> <br>
                     </div>
                     <div class="col-5">
-                        <h4>Rp. <b><span class="total-price">0</span></b></h4>
+                        <h4>Rp. <b><span class="total-price" id="total-price">0</span></b></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -44,7 +30,7 @@
                     <button type="button" class="btn col-3 bg-gradient-warning btn-lg ml-1 mr-1"
                         onclick="addNewTransaction()">Hold</button>
                     <button type="button" class="btn col-5 bg-gradient-primary btn-lg ml-1 mr-1" data-toggle="modal"
-                        data-target="#modal-pay">Bayar</button>
+                        data-target="#modal-pay" onclick="callPayModal()">Bayar</button>
                 </div>
                 {{-- /.sub total --}}
 

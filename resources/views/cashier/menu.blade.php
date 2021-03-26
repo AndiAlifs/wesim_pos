@@ -11,7 +11,7 @@
 
                             <div class="input-group">
                                 <input type="text" class="form-control search-box" value="" id="search-box" autofocus
-                                    placeholder="Cari Produk disini" name="key">
+                                    placeholder="Cari Produk disini" name="key" oninput="searchBox(this.value)">
                                 <div class="input-group-append">
                                     <button class="input-group-text" type="submit"><i
                                             class="fas fa-search"></i></button>
@@ -65,7 +65,7 @@
                     </h3>
                 </div>
                 <div>
-                    <div class="row">
+                    <div class="row" id="product-list">
                         @foreach ($product as $row)
                             <div class="col-sm-2">
                                 <a href="#">

@@ -1,3 +1,23 @@
+{{-- product --}}
+<div class="row" id="hide-product-list" style="display: none">
+    {{-- @foreach ($product as $row) --}}
+    <div class="col-sm-2">
+        <a href="#">
+            <div type="button" class="btn card justify-content-center px-1 py-1 product-item" id="product-item"
+                data-toggle="modal" data-target="#modal-default" onclick="callModal('','{{ '$row->id' }}')">
+                <img src="
+                https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636"
+                    alt="" width="100%" height="100px">
+                <div>
+                    <b class="text-dark" id="product-name">{{ '$row->product->name' }}</b><br>
+                    <small class="text-dark" id="product-price"> Rp.{{ '$row->product->price' }}</small>
+                </div>
+            </div>
+        </a>
+    </div>
+    {{-- @endforeach --}}
+</div>
+
 <!-- -------------------------------product modal------------------------------------- -->
 <div class="modal fade modal-class" id="modal-default">
     <div class="modal-dialog">
@@ -107,88 +127,102 @@
                 <div class="modal-body">
                     <div class="form-group pay-row row">
                         <div class="col form-group">
-                            <small><label for="inputEmail3" class="col col-form-label text-muted small">Nomor
+                            <small><label for="transaction-number" class="col col-form-label text-muted small">Nomor
                                     Transaksi</label></small>
                             <div class="col-sm">
-                                <input type="email" class="form-control pay-input" id="inputEmail3" placeholder="Email">
+                                <input type="text" class="form-control pay-input" id="transaction-number"
+                                    placeholder="Nomor Transaksi" disabled>
                             </div>
                         </div>
                         <div class="col form-group">
                             <small><label for="inputEmail3"
                                     class="col col-form-label text-muted">Tanggal</label></small>
                             <div class="col-sm">
-                                <input type="email" class="form-control pay-input" id="inputEmail3" placeholder="Email">
+                                <input type="datetime-local" class="form-control pay-input" id="transaction-date"
+                                    placeholder="Tanggal" value="" disabled>
                             </div>
+
                         </div>
                     </div>
                     <div class="form-group pay-row row">
                         <div class="col form-group">
-                            <small><label for="inputEmail3"
-                                    class="col col-form-label text-muted small">Pelanggan</label></small>
+                            <small><label for="member-id"
+                                    class="col col-form-label text-muted small">Pelanggann</label></small>
                             <div class="col-sm">
-                                <input type="email" class="form-control pay-input" id="inputEmail3" placeholder="Email">
+                                <input name="member-id" list="member-id" class="form-control" id="member-input"
+                                    placeholder="--Pilih Pelanggann--" value="UMUM (1000001)" onfocus="this.value = ''">
+                                <datalist id="member-id">
+                                    @foreach ($member as $row)
+                                        <option value="{{ $row->name . ' (' . $row->member_id . ')' }}">
+                                    @endforeach
+                                </datalist>
                             </div>
                         </div>
                         <div class="col form-group">
-                            <small><label for="inputEmail3" class="col col-form-label text-muted">Kasir</label></small>
+                            <small><label for="cashier-id" class="col col-form-label text-muted">Kasir</label></small>
                             <div class="col-sm">
-                                <input type="email" class="form-control pay-input" id="inputEmail3" placeholder="Email">
+                                <input name="cashier-id" type="text" class="form-control pay-input" id="cashier-id"
+                                    placeholder="Cashier" value="{{ Auth::user()->name }}"
+                                    data-user-id="{{ Auth::user()->id }}" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="form-group pay-row row">
                         <div class="form-group col">
-                            <label for="inputEmail3" class="col col-form-label text-muted">Total Belanja (Rp)</label>
+                            <label for="total-pay" class="col col-form-label text-muted">Total Belanja (Rp)</label>
                             <div class="col-sm">
-                                <input type="text" class="form-control pay-input-total" id="inputEmail3"
-                                    placeholder="Email" value="Rp. 200.000,-">
+                                <input type="text" class="form-control pay-input-total" id="total-pay"
+                                    placeholder="Total Belanja" value="0" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="form-group pay-row row">
                         <div class="col-5 form-group">
-                            <small><label for="inputEmail3" class="col col-form-label text-muted small">Bayar Tunai (Rp)
+                            <small><label for="cash-pay" class="col col-form-label text-muted small">Bayar Tunai (Rp)
                                 </label></small>
                             <div class="col-sm">
-                                <input type="email" class="form-control pay-input" id="inputEmail3" placeholder="Email">
+                                <input type="text" class="form-control pay-input number-input" id="cash-pay"
+                                    placeholder="Jumlah Uang Bayar" oninput="cashPayInput()">
                             </div>
                         </div>
                         <div class="col-7 form-group">
-                            <small><label for="inputEmail3" class="col col-form-label text-muted">Bayar
+                            <small><label for="non-cash-pay" class="col col-form-label text-muted">Bayar
                                     Non-Tunai (Rp)</label></small>
                             <div class="col row">
-                                <input list="bank" class="form-control pay-input col-4 mx-2"
+                                <input list="pay-bank" class="form-control pay-input col-4 mx-2"
                                     placeholder="--Pilih Bank--">
-                                <datalist id="bank">
+                                <datalist id="pay-bank">
                                     <option value="BNI">
                                     <option value="BRI">
                                     <option value="BTN">
                                     <option value="MANDIRI">
                                     <option value="Bank Sultra">
                                 </datalist>
-                                <input type="email" class="form-control pay-input col-7 mx-2" id="inputEmail3"
-                                    placeholder="Email">
+                                <input type="text" class="form-control pay-input col-7 mx-2" id="non-cash-pay-cost"
+                                    placeholder="Jumlah Bayar" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="form-group pay-row row">
                         <div class="col-5"></div>
                         <div class="col-7 form-group">
-                            <small><label for="inputEmail3" class="col col-form-label text-muted">Total
+                            <small><label for="paid_cost" class="col col-form-label text-muted">Total
                                     Bayar
                                     (Rp)</label></small>
                             <div class="col-sm">
-                                <input type="email" class="form-control pay-input" id="inputEmail3" placeholder="Email">
+                                <input type="text" class="form-control pay-input" id="paid-cost"
+                                    placeholder="Total Bayar" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="form-group pay-row row">
                         <div class="col-5"></div>
                         <div class="col-7 form-group">
-                            <small><label for="inputEmail3" class="col col-form-label text-muted">Kembalian
+                            <small><label for="return-cost" class="col col-form-label text-muted">Kembalian
                                     (Rp)</label></small>
                             <div class="col-sm">
-                                <input type="email" class="form-control pay-input" id="inputEmail3" placeholder="Email">
+                                <input type="text" class="form-control pay-input" id="return-cost"
+                                    placeholder="Kembalian" disabled>
                             </div>
                         </div>
                     </div>
@@ -204,7 +238,7 @@
                 <div>
                     <button data-dismiss="modal" type="button"
                         class="btn btn-block btn-modal bg-gradient-primary text-center modal-btn" id="modal-btn"
-                        onclick="addToCart()">
+                        onclick="payTransaction()">
                         <b>Bayar</b>
                     </button>
                 </div>

@@ -47,8 +47,6 @@
     max-width: 25px;
 }
 
-
-
 /* menu css */
 .menu::-webkit-scrollbar {
     width: 12px;
@@ -89,7 +87,7 @@
 }
 
 .cart-list {
-    height: 45vh;
+    height: 50vh;
 }
 
 .product-item:hover,
