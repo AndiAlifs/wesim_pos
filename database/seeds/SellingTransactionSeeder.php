@@ -19,7 +19,7 @@ class SellingTransactionSeeder extends Seeder
             "member_id" => rand(1, 10), //
         ]);
         SellingTransaction::create([
-            "transaction_number" => ('TRX' . time() . '0002'),
+            "transaction_number" => ('Cart ' . time() . '0002'),
             "status_id" => 2,
             "user_id" => 3, //kasir
             "member_id" => rand(1, 10), //

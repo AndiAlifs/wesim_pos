@@ -26,6 +26,10 @@ class CreateSellingTransactionsTable extends Migration
             $table->unsignedBigInteger('member_id');
             $table->foreign("member_id")->references('id')->on("members");
 
+            $table->unsignedBigInteger('pay_cost')->default(0);
+            $table->unsignedBigInteger('total_price')->default(0);
+            $table->string('transaction_date')->default('');
+
             $table->timestamps();
         });
     }
