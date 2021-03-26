@@ -12,21 +12,28 @@ class MemberSeeder extends Seeder
      */
     public function run()
     {
- 
+
+        DB::table('members')->insert([
+            'name' => 'UMUM',
+            'member_id' => 1000001,
+            'phone' => '',
+            'email' => '',
+            'address' => '',
+            'point' => 0,
+        ]);
+
         $faker = Faker::create('id_ID');
-    
-        for($i = 1; $i <= 10; $i++){
-    
+        for ($i = 1; $i <= 10; $i++) {
+
             // insert data ke table pegawai menggunakan Faker
             DB::table('members')->insert([
                 'name' => $faker->name,
-                'member_id' => $faker->numberBetween(1000000,9999999),
+                'member_id' => $faker->numberBetween(1000002, 9999999),
                 'phone' => $faker->phoneNumber,
                 'email' => $faker->unique()->safeEmail,
                 'address' => $faker->address,
-                'point' => $faker->numberBetween(25,40),
+                'point' => $faker->numberBetween(25, 40),
             ]);
         }
- 
     }
 }
