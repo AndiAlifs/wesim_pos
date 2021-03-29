@@ -1,7 +1,7 @@
 <div class="col-md-4">
     <div class="card">
         <div class="card-header">
-            <h3 class="">Keranjang Belanja</h3>
+            <h5 class=""><b>Keranjang Belanja</b></h5>
         </div>
         <!-- /.card-header -->
         <div class="card-body cart">
@@ -25,11 +25,11 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button type="button" class="btn col-3 bg-gradient-danger btn-lg ml-1 mr-1"
+                    <button type="button" class="btn col-3 bg-gradient-danger ml-1 mr-1"
                         onclick="deleteCart()">Batal</button>
-                    <button type="button" class="btn col-3 bg-gradient-warning btn-lg ml-1 mr-1"
+                    <button type="button" class="btn col-3 bg-gradient-warning ml-1 mr-1"
                         onclick="addNewTransaction()">Hold</button>
-                    <button type="button" class="btn col-5 bg-gradient-primary btn-lg ml-1 mr-1" data-toggle="modal"
+                    <button type="button" class="btn col-5 bg-gradient-primary ml-1 mr-1" data-toggle="modal"
                         data-target="#modal-pay" onclick="callPayModal()">Bayar</button>
                 </div>
                 {{-- /.sub total --}}

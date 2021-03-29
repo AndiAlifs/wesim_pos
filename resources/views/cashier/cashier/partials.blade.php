@@ -250,7 +250,7 @@
                 </div>
                 <div>
                     <button data-dismiss="modal" type="button"
-                        class="btn btn-block btn-modal bg-gradient-primary text-center modal-btn" id="modal-btn"
+                        class="btn btn-block btn-modal bg-gradient-primary text-center modal-btn"
                         onclick="payTransaction()">
                         <b>Bayar</b>
                     </button>

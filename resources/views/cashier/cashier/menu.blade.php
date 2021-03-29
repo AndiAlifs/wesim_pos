@@ -3,22 +3,19 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-8">
-                    <h3 class="daftar">Daftar Menu</h3>
+                    <h5 class=""><b>Daftar Menu</b></h5>
                 </div>
                 <div class="col-4">
-                    <div class="float-left">
-                        <form method="GET" action="{{ route('search_box') }}">
-
-                            <div class="input-group">
-                                <input type="text" class="form-control search-box" value="" id="search-box" autofocus
-                                    placeholder="Cari Produk disini" name="key" oninput="searchBox(this.value)">
-                                <div class="input-group-append">
-                                    <button class="input-group-text" type="submit"><i
-                                            class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </form>
+                    <div class="input-group input-group-sm">
+                        <input type="search" class="form-control search-box" value="" id="search-box" autofocus
+                            placeholder="Cari Produk disini" name="key" oninput="searchBox(this.value)"
+                            aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="input-group-text" onclick="searchBox($('#search-box').val())"><i
+                                    class="fas fa-search"></i></button>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
