@@ -8,9 +8,9 @@ use App\productCategory;
 use App\sellingTransaction;
 use App\selling;
 use App\member;
+use App\inventory;
 
 use App\Http\Controllers\Controller;
-use App\inventory;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
@@ -25,20 +25,23 @@ class CashierController extends Controller
         $selling = Selling::all();
         $sellingTransaction = SellingTransaction::where('status_id', '2')->get();
 
-        return view('cashier/master', [
-            'category' => $category,
-            'product' => $product,
-            'member' => $member,
-            'selling' => $selling,
-            'sellingTransaction' => $sellingTransaction
-        ]);
+        return view(
+            'cashier/cashier/cashier',
+            compact(
+                'category',
+                'product',
+                'member',
+                'selling',
+                'sellingTransaction'
+            )
+        );
     }
 
     public static function search_box(Request $request)
     {
         if (isset($request['name'])) {
 
-            // get product by id
+            // get product by barcode
             $product = ProductCategory::with('product')
                 ->whereHas(
                     'product',
@@ -47,10 +50,11 @@ class CashierController extends Controller
                     }
                 )->get();
             if ($product->count() > 0) {
-                $product[0]->barcode = true;
-                return $product;
+                $barcode = true;
+                return compact('product', 'barcode');
             }
-            // get product name
+
+            // get product by name
             $product = ProductCategory::with('product')
                 ->whereHas(
                     'product',
@@ -58,7 +62,8 @@ class CashierController extends Controller
                         return $query->where('name', 'like', '%' . $request['name'] . '%');
                     }
                 )->get();
-            return $product;
+            $barcode = false;
+            return compact('product', 'barcode');
         }
     }
 
@@ -165,6 +170,7 @@ class CashierController extends Controller
             //update cart in selling 
             $data->amount = $request['product_amount'];
             $data->price = ($product->price * $request['product_amount']);
+            $data->date = date('Y-m-d');
             $data->save();
         } else {
             Selling::create([
@@ -172,6 +178,7 @@ class CashierController extends Controller
                 'product_id' => $request['product_id'],
                 'amount' => $request['product_amount'],
                 'price' => ($product->price * $request['product_amount']),
+                'date' => '1999-12-12',
             ]);
             $inventory->in_stock = ($inventory->in_stock - $request['product_amount']);
             $inventory->save();
@@ -201,12 +208,15 @@ class CashierController extends Controller
         $selling = selling::all();
         $sellingTransaction = SellingTransaction::where('status_id', '2')->get();
 
-        return view('cashier/master', [
-            'category' => $category,
-            'product' => $product,
-            'member' => $member,
-            'selling' => $selling,
-            'sellingTransaction' => $sellingTransaction
-        ]);
+        return view(
+            'cashier/cashier/cashier',
+            compact(
+                'category',
+                'product',
+                'member',
+                'selling',
+                'sellingTransaction'
+            )
+        );
     }
 }

@@ -88,7 +88,7 @@ function searchBox(key) {
         },
         success: function (data) {
             product_list = "";
-            data.forEach(function (product, index) {
+            data.product.forEach(function (product, index) {
                 $('#product-item').attr('onclick', 'callModal("",' + product.product.id + ')');
                 $('#product-name').html(product.product.name);
                 $('#product-price').html(product.product.price);
@@ -98,16 +98,14 @@ function searchBox(key) {
             $('#product-list').html(product_list);
             $('#product-category').html("");
 
-            // if product-list is empty
-            if ($('#product-list').html() == '') {
+            // if product is empty
+            if (!data.product.length) {
                 $('#product-list').html("<h4 class='text-danger m-1'>. . . Pencarian Tidak Ditemukan!!</h4>");
             }
-            // if barcode was detected
-            if (data[0].barcode) {
+            // if barcode was true
+            if (data.barcode) {
                 $('#product-item').click();
             }
-
-
         }
     });
 }

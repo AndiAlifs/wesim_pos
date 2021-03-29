@@ -70,10 +70,6 @@ Route::middleware('role:admin')->group(function () {
     Route::get('/discount/destroy/{id}', 'DiscountController@destroy')->name('discount_destroy');
 });
 
-Route::middleware('role:cashier')->group(function () {
-    // Only for owner
-});
-
 Route::middleware('role:owner')->group(function () {
 
     // User Route
@@ -85,11 +81,10 @@ Route::middleware('role:owner')->group(function () {
 
 Route::middleware('role:cashier')->group(function () {
 
-
-
     // cashier route
     Route::get('/cashier', 'cashier\CashierController@index')->name('cashier');
 
+    // ----------------- cashier ---------------
     // transaction
     Route::post('/cashier/pay_transaction/', 'cashier\CashierController@pay_transaction')->name('pay_transaction');
 
@@ -109,4 +104,12 @@ Route::middleware('role:cashier')->group(function () {
     // modal
     Route::post('/cashier/get_modal_data/', 'cashier\CashierController@get_modal_data')->name('get_modal_data');
     Route::post('/cashier/add_to_cart/', 'cashier\CashierController@add_to_cart')->name('add_to_cart');
+    // ----------------- end cashier --------------
+
+
+    // ----------------- transactions ------------
+    Route::get('/cashier/transaction_today', 'cashier\TransactionController@index')->name('transaction_today');
+    Route::get('/cashier/detail_transaction', 'cashier\TransactionController@detail_transaction')->name('detail_transaction');
+    // ----------------- end transactions --------
+
 });

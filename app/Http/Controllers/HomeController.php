@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect()->route('report');    
+        return redirect()->route('report');
     }
 
     public function cashier()

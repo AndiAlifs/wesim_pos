@@ -1,0 +1,32 @@
+.transaction-height {
+    max-height: 62vh;
+    height: 62vh;
+}
+
+.transaction-height-detail {
+    max-height: 51vh;
+    height: 51vh;
+}
+
+
+.transaction-height::-webkit-scrollbar {
+    width: 12px;
+}
+
+.transaction-height::-webkit-scrollbar-track {
+    background: white;
+}
+
+.transaction-height::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.055);
+    border-radius: 20px;
+    border: 3px solid white;
+}
+
+.list-hover:hover {
+    background-color: rgb(218, 240, 255);
+}
+
+.list-active {
+    background-color: rgb(194, 230, 253);
+}

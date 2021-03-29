@@ -21,6 +21,8 @@
     <!-- Mycss -->
     <link rel="stylesheet" href="{{ asset('assets/cashier/css/mystyle.css') }}">
 
+    @yield('style')
+
     @stack('scripts-header')
 </head>
 
@@ -31,18 +33,6 @@
         @include('cashier.partials.navbar')
         <div class="row justify-content-center px-5">
 
-            {{-- include hold window --}}
-            @include('cashier.hold')
-
-            {{-- include chart --}}
-            @include('cashier.partials.partials')
-
-            {{-- include menu --}}
-            @include('cashier.menu')
-
-            {{-- include chart --}}
-            @include('cashier.cart')
-
             {{-- content --}}
             @yield('content')
 
@@ -52,6 +42,10 @@
 
     <!-- jQuery -->
     <script src="{{ asset('/adminlte/plugins/jquery/jquery.min.js') }}"></script>
+
+    {{-- script --}}
+    @yield('script')
+
     <!-- Bootstrap 4 -->
     <script src="{{ asset('/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
@@ -64,9 +58,6 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('/adminlte/dist/js/demo.js') }}"></script>
 
-    <!-- My Script -->
-    <script src="{{ asset('/assets/cashier/js/helper.js') }}"></script>
-    <script src="{{ asset('/assets/cashier/js/myjs.js') }}"></script>
 
     <!-- page script -->
     <script>

@@ -23,9 +23,13 @@ class CreateSellingsTable extends Migration
             $table->foreign("product_id")->references('id')->on("products");
 
             $table->unsignedBigInteger('amount');
+
+            $table->unsignedBigInteger('discount_percent')->default(0); //potongan harga persen
+            $table->unsignedBigInteger('discount_price')->default(0); //potongan harga rupiah
+
             $table->unsignedBigInteger('price')->default(0);
 
-            $table->date('date');
+            $table->date('date')->default(date('Y-m-d'));
             $table->timestamps();
         });
     }

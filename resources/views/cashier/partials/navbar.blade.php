@@ -13,18 +13,25 @@
                 <b class="nav-link">Your Guest</b>
             </li>
         @else
+
             <li class="nav-item">
-                <a href="#" class="nav-link" id="reputasi"><i class="nav-icon fas fa-calculator"></i></a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link" id="reputasi"><i class="nav-icon fas fa-cart-arrow-down"></i></a>
+                <a href="{{ route('cashier') }}" class="nav-link {{ Route::is('cashier') ? 'text-primary' : '' }}">
+                    <i class="nav-icon fas fa-cart-plus"></i>
+                </a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link" id="reputasi"><i class="nav-icon fas fa-balance-scale"></i></a>
             </li>
-            <li class="nav-item mr-2">
+            <li class="nav-item">
+                <a href="{{ route('transaction_today') }}"
+                    class="nav-link {{ Route::is('transaction_today') ? 'text-primary' : '' }}">
+                    <i class="nav-icon fas fa-history"></i>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="#" class="nav-link" id="reputasi"></a>
             </li>
+
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false" v-pre>

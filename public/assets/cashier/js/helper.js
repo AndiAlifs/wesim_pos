@@ -25,9 +25,9 @@ $('[data-toggle=modal]').on('click', function (e) {
 });
 // -----------------------------------------------------------
 
-// if tab is emprty > make a new transaction
+// if tab is empty > make a new transaction
 function tabEmpty() {
-    if ($('.tab-parent').html() == null)
+    if (!$('.tab-parent')[0]) //if .tab-parent doesnt exists
         addNewTransaction();
 }
 
