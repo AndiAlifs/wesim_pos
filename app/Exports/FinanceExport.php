@@ -56,7 +56,7 @@ class FinanceExport implements FromView, WithStyles, ShouldAutoSize
         
         $this->jumlah += $finances->count();
 
-        return view('report/finance/finance', compact('finances','kas'));
+        return view('report/finance/finance', compact('finances','kas','waktu'));
     }
 
     public function styles(Worksheet $sheet)
