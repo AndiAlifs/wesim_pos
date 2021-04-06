@@ -18,10 +18,9 @@ function detailTransaction(id) {
             $('#dtl-trx').html(data.sellingTransaction.transaction_number);
             $('#dtl-date').html(data.sellingTransaction.updated_at);
             $('#dtl-member').html(data.sellingTransaction.member.name + '(' + data.sellingTransaction.member.member_id + ')');
-            var row = '';
-            var trx_total_price = 0;
+            var selling_list = '';
             data.selling.forEach(function (selling, index) {
-                row += '<tr>' +
+                selling_list += '<tr>' +
                     '<td>' + (index + 1) + '</td>' +
                     '<td>' + selling.product.name + '</td>' +
                     '<td>' + toNumberFormat(selling.amount) + '</td>' +
@@ -30,8 +29,15 @@ function detailTransaction(id) {
                     '<td>Rp. ' + toNumberFormat(selling.price) + '</td>' +
                     '</tr>';
             });
-            $('#table-detail-transaction tbody').html(row);
+            $('#table-detail-transaction tbody').html(selling_list);
             $('#total-price').html(toNumberFormat(data.sellingTransaction.total_price));
         }
     });
+}
+
+function printArea(element) {
+    var originalContents = document.body.innerHTML;
+    document.body.innerHTML = element.html();
+    window.print();
+    document.body.innerHTML = originalContents;
 }

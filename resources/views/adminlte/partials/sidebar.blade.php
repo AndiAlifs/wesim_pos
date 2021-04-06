@@ -11,6 +11,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
                 <li class="nav-header">Dashboard</li>
                 <li class="nav-item">
                     <a href="{{ route('home') }}" class="nav-link {{ Route::is('report') ? 'active' : '' }}">
@@ -34,13 +35,45 @@
                 @endif
 
 
-                <li class="nav-item">
-                    <a href="{{ __('finance') }}" class="nav-link {{ Route::is('finance') ? 'active' : '' }}">
-                        <i class="nav-icon fa fa-file"></i>
+                <li class="nav-item has-treeview">
+                    <a href="#"
+                        class="nav-link {{ Route::is('finance', 'purchase_report', 'selling_report') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-table"></i>
                         <p>
-                            Informasi Keuangan
+                            Laporan
+                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview"
+                        style="display:  {{ Route::is('finance', 'purchase_report', 'selling_report') ? 'block' : '' }}">
+                        <li class="nav-item">
+                            <a href="{{ __('purchase_report') }}"
+                                class="nav-link {{ Route::is('purchase_report') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-file-pdf"></i>
+                                <p>
+                                    Pembelian
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ __('selling_report') }}"
+                                class="nav-link {{ Route::is('selling_report') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-file-pdf"></i>
+                                <p>
+                                    Penjualan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ __('finance') }}"
+                                class="nav-link {{ Route::is('finance') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-file-pdf"></i>
+                                <p>
+                                    Informasi Keuangan
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="nav-item">
@@ -55,14 +88,14 @@
 
                 <li class="nav-item">
                     <a href="/supplier" class="nav-link {{ Route::is('supplier') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-cart-arrow-down"></i>
+                        <i class="nav-icon fas fa-handshake"></i>
                         <p>
                             Pemasok
                         </p>
                     </a>
                 </li>
 
-
+                <li class="nav-header">Produk</li>
                 <li class="nav-item">
                     <a href="{{ route('product') }}" class="nav-link {{ Route::is('product') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-archive"></i>
@@ -77,7 +110,7 @@
                     <li class="nav-item">
                         <a href="{{ route('discount') }}"
                             class="nav-link {{ Route::is('discount') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-archive"></i>
+                            <i class="nav-icon fas fa-percent"></i>
                             <p>
                                 Manajemen Diskon
                             </p>
@@ -89,7 +122,7 @@
                 <li class="nav-item">
                     <a href="{{ route('category') }}"
                         class="nav-link {{ Route::is('category') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-archive"></i>
+                        <i class="nav-icon fas fa-shopping-basket"></i>
                         <p>
                             Kategori Produk
                         </p>
@@ -105,6 +138,18 @@
                         </p>
                     </a>
                 </li>
+
+
+                <li class="nav-header">Pembelian</li>
+                <li class="nav-item">
+                    <a href="{{ __('purchase') }}" class="nav-link {{ Route::is('purchase') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-cart-arrow-down"></i>
+                        <p>
+                            Pre Order (PO)
+                        </p>
+                    </a>
+                </li>
+
 
 
                 {{-- <li class="nav-item">

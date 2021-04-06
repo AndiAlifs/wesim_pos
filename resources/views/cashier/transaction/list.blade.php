@@ -7,7 +7,7 @@
         <div class="card-body transaction-body p-0">
             <div>
                 {{-- list transaction --}}
-                <div class="transaction-height overflow-auto cart-scrollbar" id="">
+                <div class="transaction-height overflow-auto cart-scrollbar" id="today-transaction">
                     {{-- <div class="row border">
                         <div class="col p-2 pl-4"><b>#Nomor Transaksi</b></div>
                         <div class="col p-2 pl-4"><b>#Total Belanja</b></div>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="row mb-3 mr-3">
                     <button type="button" class="btn col-6 bg-gradient-primary ml-1 mr-1 ml-auto"
-                        onclick="printTransactionsToday()">
+                        onclick="printArea($('#today-transaction'))">
                         <i class="nav-icon fas fa-print mr-2"></i>
                         Print
                     </button>

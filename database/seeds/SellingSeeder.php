@@ -12,49 +12,23 @@ class SellingSeeder extends Seeder
      */
     public function run()
     {
-        $transaction_number = [1, 2, 3];
-        for ($i = 0; $i <= rand(90,200); $i++) {
+        $transaction_number_done = [1, 2, 3, 4, 5];
+        for ($i = 0; $i <= rand(50, 100); $i++) {
             Selling::create([
-                "selling_transaction_id" => $transaction_number[rand(0, 2)],
+                "selling_transaction_id" => $transaction_number_done[rand(0, 4)],
                 "product_id" => rand(1, 50),
                 "date" => Carbon\Carbon::now()->toDateString(),
-                "amount" => rand(1, 10), //kasir
+                "amount" => rand(1, 10),
                 "price" => 0,
             ]);
         }
-        for ($i = 0; $i <= rand(90,200); $i++) {
+        $transaction_number_holded = [6];
+        for ($i = 0; $i <= rand(5, 10); $i++) {
             Selling::create([
-                "selling_transaction_id" => $transaction_number[rand(0, 2)],
+                "selling_transaction_id" => $transaction_number_holded[rand(0, 0)],
                 "product_id" => rand(1, 50),
                 "date" => Carbon\Carbon::now()->yesterday()->toDateString(),
-                "amount" => rand(1, 10), //kasir
-                "price" => 0,
-            ]);
-        }
-        for ($i = 0; $i <= rand(90,200); $i++) {
-            Selling::create([
-                "selling_transaction_id" => $transaction_number[rand(0, 2)],
-                "product_id" => rand(1, 50),
-                "date" => Carbon\Carbon::now()->yesterday()->yesterday()->toDateString(),
-                "amount" => rand(1, 10), //kasir
-                "price" => 0,
-            ]);
-        }
-        for ($i = 0; $i <= rand(90,200); $i++) {
-            Selling::create([
-                "selling_transaction_id" => $transaction_number[rand(0, 2)],
-                "product_id" => rand(1, 50),
-                "date" => Carbon\Carbon::now()->yesterday()->yesterday()->yesterday()->toDateString(),
-                "amount" => rand(1, 10), //kasir
-                "price" => 0,
-            ]);
-        }
-        for ($i = 0; $i <= rand(90,200); $i++) {
-            Selling::create([
-                "selling_transaction_id" => $transaction_number[rand(0, 2)],
-                "product_id" => rand(1, 50),
-                "date" => Carbon\Carbon::now()->yesterday()->yesterday()->yesterday()->yesterday()->toDateString(),
-                "amount" => rand(1, 10), //kasir
+                "amount" => rand(1, 10),
                 "price" => 0,
             ]);
         }

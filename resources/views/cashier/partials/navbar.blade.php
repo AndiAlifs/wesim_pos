@@ -19,9 +19,9 @@
                     <i class="nav-icon fas fa-cart-plus"></i>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="#" class="nav-link" id="reputasi"><i class="nav-icon fas fa-balance-scale"></i></a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a href="{{ route('transaction_today') }}"
                     class="nav-link {{ Route::is('transaction_today') ? 'text-primary' : '' }}">

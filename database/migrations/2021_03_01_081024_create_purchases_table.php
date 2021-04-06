@@ -23,8 +23,9 @@ class CreatePurchasesTable extends Migration
             $table->foreign("product_id")->references('id')->on("products");
 
             $table->unsignedBigInteger('amount');
-            $table->unsignedBigInteger('price');
+            $table->unsignedBigInteger('price')->default(0);
 
+            $table->date('date')->default(date('Y-m-d'));
             $table->timestamps();
         });
     }

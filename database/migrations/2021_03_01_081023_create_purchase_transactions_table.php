@@ -15,20 +15,22 @@ class CreatePurchaseTransactionsTable extends Migration
     {
         Schema::create('purchase_transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('status', ["Succesfully", "Holded", "PO"])->nullable();
-            $table->integer('transaction_number');
+            $table->string('transaction_number');
+
+            $table->unsignedBigInteger('status_id');
+            $table->foreign('status_id')->references('id')->on('transaction_statuses');
 
             $table->unsignedBigInteger('user_id');
             $table->foreign("user_id")->references('id')->on("users");
 
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->unsignedBigInteger('supplier_id')->default(1);
+            $table->foreign("supplier_id")->references('id')->on("suppliers");
 
-            $table->unsignedBigInteger('supplier_id');
-            $table->foreign('supplier_id')->references('id')->on('suppliers');
+            $table->unsignedBigInteger('pay_cost')->default(0);
+            $table->unsignedBigInteger('total_price')->default(0);
+            $table->string('transaction_date')->default('');
 
             $table->timestamps();
-
         });
     }
 

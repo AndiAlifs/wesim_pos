@@ -6,7 +6,7 @@
         <!-- /.card-header -->
         <div class="card-body transaction-body p-0">
             {{-- detail --}}
-            <div class="transaction-height overflow-auto cart-scrollbar">
+            <div class="transaction-height overflow-auto cart-scrollbar" id="detail-transaction">
                 <div class="row pl-4 p-3">
                     <div class="col"><small class="text-muted">Nomor Transaksi: </small>
                         <h5 class="m-0"><b id="dtl-trx">-</b></h5>
@@ -60,7 +60,7 @@
             </div>
             <div class="row mb-3 mr-3">
                 <button type="button" class="btn col-3 bg-gradient-primary ml-1 mr-1 ml-auto" data-toggle="modal"
-                    data-target="#modal-pay" onclick="printDetailTransaction()">
+                    data-target="#modal-pay" onclick="printArea($('#detail-transaction'))">
                     <i class="nav-icon fas fa-print mr-2"></i>
                     Print
                 </button>

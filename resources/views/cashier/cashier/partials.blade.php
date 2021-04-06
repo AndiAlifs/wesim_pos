@@ -5,9 +5,7 @@
         <a href="#">
             <div type="button" class="btn card justify-content-center px-1 py-1 product-item" id="product-item"
                 data-toggle="modal" data-target="#modal-default" onclick="callModal('','{{ '$row->id' }}')">
-                <img src="
-                https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636"
-                    alt="" width="100%" height="100px">
+                <img src="" alt="" width="100%" height="100px" id="product-image">
                 <div>
                     <b class="text-dark" id="product-name">{{ '$row->product->name' }}</b><br>
                     <small class="text-dark" id="product-price"> Rp.{{ '$row->product->price' }}</small>
@@ -22,7 +20,7 @@
 <div class="modal fade modal-class" id="modal-default">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header modal-head modal-product-head">
+            <div class="modal-header modal-head modal-product-head" id="#modal-image">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -92,8 +90,7 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="p-1">
-                            <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636"
-                                alt="" width="60px" height="60x">
+                            <img src="" alt="" width="60px" height="60x" id="set-image">
                             {{-- <b> {{ $row->name }}</b> --}}
                         </div>
                     </div>
@@ -195,7 +192,7 @@
                                 </label></small>
                             <div class="col-sm">
                                 <input type="text" class="form-control pay-input number-input" id="cash-pay"
-                                    placeholder="Jumlah Uang Bayar" oninput="cashPayInput()">
+                                    placeholder="Jumlah Uang Bayar" oninput="cashPayInput()" value="0">
                             </div>
                         </div>
                         <div class="col-7 form-group">

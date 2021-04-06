@@ -1,4 +1,5 @@
 // global variabel -------------------
+var base_url = 'http://localhost:8000/';
 var bs_color = {
     primary: '#007bff',
     success: '#28a745',
@@ -77,6 +78,7 @@ function loadCart() {
             }
             data.forEach(function (selling, index) {
                 // passing new data to #cart-item
+                $("#set-image").attr('src', base_url + selling.product.image);
                 $("#set-name").html(selling.product.name);
                 $("#set-price").html(toNumberFormat(selling.product.price));
                 $("#set-amount").html(toNumberFormat(selling.amount));

@@ -32,8 +32,8 @@
                         <div class="col-2 text-center btn">
                             <a href="{{ route('cashier') }}">
                                 <div class="card justify-content-center px-1 py-1 category-item">
-                                    <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636"
-                                        alt="" width="100%" height="100px">
+                                    <img src="{{ asset('image/category/Dan-Dan-Noodles-11.jpg') }}" alt=""
+                                        width="100%" height="100px">
                                     <b class="text-dark"> Semua Kategori</b>
                                 </div>
                             </a>
@@ -42,8 +42,8 @@
                             <div class="col-2 text-center btn">
                                 <a href="{{ route('filter_category', $row->id) }}">
                                     <div class="card justify-content-center px-1 py-1 category-item">
-                                        <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636"
-                                            alt="" width="100%" height="100px">
+                                        <img src="{{ asset('image/category/Dan-Dan-Noodles-11.jpg') }}" alt=""
+                                            width="100%" height="100px">
                                         <b class="text-dark"> {{ $row->name }}</b>
                                     </div>
                                 </a>
@@ -72,12 +72,12 @@
                                     <div type="button" onclick="callModal('','{{ $row->id }}')"
                                         class="btn card justify-content-center px-1 py-1 product-item"
                                         data-toggle="modal" data-target="#modal-default" id="product-item">
-                                        <img src="
-                                    https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636"
-                                            alt="" width="100%" height="100px">
+                                        <img src="{{ asset($row->product->image) }}" alt="" width="100%"
+                                            height="100px">
                                         <div>
                                             <b class="text-dark">{{ $row->product->name }}</b><br>
-                                            <small class="text-dark"> Rp.{{ $row->product->price }}</small>
+                                            <small class="text-dark">
+                                                Rp.{{ number_format($row->product->price, 0, ',', '.') }}</small>
                                         </div>
                                     </div>
                                 </a>

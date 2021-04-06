@@ -91,7 +91,8 @@ function searchBox(key) {
             data.product.forEach(function (product, index) {
                 $('#product-item').attr('onclick', 'callModal("",' + product.product.id + ')');
                 $('#product-name').html(product.product.name);
-                $('#product-price').html(product.product.price);
+                $('#product-price').html(toNumberFormat(product.product.price));
+                $("#product-image").attr('src', base_url + product.product.image);
 
                 product_list += $('#hide-product-list').html();
             });
@@ -234,10 +235,13 @@ function callModal(selling_id, product_id) {
                 $("#modal-price").val(toNumberFormat(data[0].product['price']));
                 $("#modal-amount").val(data[0]['amount']);
                 in_stock = data[0]['amount'] + data[1].inventory['in_stock']; //calculate product stock in inventory and stock in cart
+                $("#modal-image").attr('src', base_url + data[0].product['image']);
             } else {
                 $("#modal-name").html(data[0]['name']);
-                $("#modal-price").val(data[0]['price']);
+                $("#modal-price").val(toNumberFormat(data[0]['price']));
                 $("#modal-amount").val(1);
+                console.log(data[0]['image']);
+                $(".modal-product-head").css('background-image', 'url(' + base_url + data[0]['image'] + ')');
                 in_stock = data[1].inventory['in_stock'];
             }
             $("#modal-amount").removeAttr('disabled');
@@ -289,15 +293,17 @@ function modalInput(val) {
 
 // 
 function cashPayInput() {
-    var paid_cost = numbersOnly($('#cash-pay').val());
-    $('#cash-pay').val(toNumberFormat(paid_cost));
-
-    var return_cash = numbersOnly($('#cash-pay').val()) - numbersOnly($('#total-pay').val());
-    $('#paid-cost').val(toNumberFormat(paid_cost));
+    if ($('#cash-pay').val() == '')
+        $('#cash-pay').val(0);
+    var cash_pay = numbersOnly($('#cash-pay').val());
+    var total_pay = numbersOnly($('#total-pay').val());
+    $('#cash-pay').val(toNumberFormat(cash_pay));
+    var return_cash = cash_pay - total_pay;
+    if (return_cash == '')
+        return_cash = 0;
+    $('#paid-cost').val(toNumberFormat(cash_pay));
     $('#return-cost').val(toNumberFormat(return_cash));
 }
-
-
 
 
 // 'x' button in cart

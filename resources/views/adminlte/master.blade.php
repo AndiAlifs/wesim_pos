@@ -19,6 +19,8 @@
     <!-- CSS Datatable -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
 
+    @yield('style')
+
     @stack('scripts-header')
 </head>
 
@@ -65,6 +67,8 @@
     <script src="{{ asset('/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('/adminlte/dist/js/demo.js') }}"></script>
+
+    @yield('script')
 
     <!-- page script -->
     <script>
