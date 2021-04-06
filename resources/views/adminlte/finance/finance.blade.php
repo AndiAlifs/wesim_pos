@@ -68,10 +68,14 @@
                                     </div>
                                 <div class="col-2">
                                     <label for="submit"> Cari </label>
-                                    <button type="submit" class="btn btn-primary btn-block form-control">Cari</button>
+                                    <button type="submit" class="btn btn-primary btn-block form-control"> <i class="fas fa-search"></i></button>
                                 </div>
                             </div>
                     </form>
+
+
+                    <a href="/report/finance?bulan_start={{(int)$waktu["bulan_start"]}}&tahun_start={{$waktu["tahun_start"]}}&bulan_end={{(int)$waktu["bulan_end"]}}&tahun_end={{$waktu["tahun_end"]}}" class="btn btn-success btn-block my-2"><i class="fa file-excel-o" aria-hidden="false"></i> Export to Excel</a>
+
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
