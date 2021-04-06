@@ -7,7 +7,11 @@
             <div class="card">
                 <div class="bg-info p-2 rounded card-title">
                     <h3 class="display-4 text-center text-uppercase">Informasi Keuangan</h3>
-                    <h4 class="text-center">{{$waktu["bulan_name_start"]." ".$waktu["tahun_start"]}} - {{$waktu["bulan_name_end"]." ".$waktu["tahun_end"]}}</h4>
+                    @if (($waktu["bulan_name_start"] == $waktu["bulan_name_end"]) && ($waktu["tahun_start"] == $waktu["tahun_end"]))
+                        <h4 class="text-center">{{$waktu["bulan_name_start"]." ".$waktu["tahun_start"]}}</h4>
+                    @else
+                        <h4 class="text-center">{{$waktu["bulan_name_start"]." ".$waktu["tahun_start"]}} - {{$waktu["bulan_name_end"]." ".$waktu["tahun_end"]}}</h4>
+                    @endif
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -15,7 +19,7 @@
                         <div class="form-row mb-2">
                                 
                                     <div class="col-3">
-                                        <label for="bulan_start">Dari</label>
+                                        <label for="bulan_start"><i class="fas fa-calendar"></i> Dari</label>
                                         <select name="bulan_start" id="bulan_start" class="form-control">
                                             <option value="1" {{ $waktu["bulan_start"] == "01"? "selected" : ''}} >Januari</option>
                                             <option value="2" {{ $waktu["bulan_start"] == "02"? "selected" : ''}} >Februari</option>
@@ -39,7 +43,7 @@
                                         </select>
                                     </div>
                                     <div class="col-3">
-                                        <label for="bulan_end">Sampai</label>
+                                        <label for="bulan_end"><i class="fas fa-calendar"></i> Sampai</label>
                                         <select name="bulan_end" id="bulan_end" class="form-control">
                                             <option value="1" {{ $waktu["bulan_end"] == "01"? "selected" : ''}} >Januari</option>
                                             <option value="2" {{ $waktu["bulan_end"] == "02"? "selected" : ''}} >Februari</option>
@@ -64,10 +68,14 @@
                                     </div>
                                 <div class="col-2">
                                     <label for="submit"> Cari </label>
-                                    <button type="submit" class="btn btn-primary btn-block form-control">Cari</button>
+                                    <button type="submit" class="btn btn-primary btn-block form-control"> <i class="fas fa-search"></i></button>
                                 </div>
                             </div>
                     </form>
+
+
+                    <a href="/report/finance?bulan_start={{(int)$waktu["bulan_start"]}}&tahun_start={{$waktu["tahun_start"]}}&bulan_end={{(int)$waktu["bulan_end"]}}&tahun_end={{$waktu["tahun_end"]}}" class="btn btn-success btn-block my-2"><i class="fa file-excel-o" aria-hidden="false"></i> Export to Excel</a>
+
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}

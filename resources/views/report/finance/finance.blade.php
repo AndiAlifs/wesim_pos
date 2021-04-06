@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 
-<head>
-    <style>
-        table,
-        td,
-        th {
-            border: 1px solid black;
-        }
-
-        table {
-            /* width: 100%; */
-            border-collapse: collapse;
-        }
-    </style>
-</head>
-
 <body>
-    <h3 style="text-align: center" >Laporan Keuangan</h3>
-    <h4 style="text-align: center" >Maret 2021</h4>        
+    <table>
+        <tr>
+            <td colspan="5">
+                {{ strtoupper('Laporan Keuangan')}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                @if (($waktu["bulan_name_start"] == $waktu["bulan_name_end"]) && ($waktu["tahun_start"] == $waktu["tahun_end"]))
+                        {{ strtoupper($waktu["bulan_name_start"]." ".$waktu["tahun_start"]) }}
+                @else
+                        {{ strtoupper($waktu["bulan_name_start"]." ".$waktu["tahun_start"]." - ".$waktu["bulan_name_end"]." ".$waktu["tahun_end"]) }}
+                @endif
+            </td>
+        </tr>
+    </table>
     <table>
         <thead>
             <tr >
@@ -31,7 +30,7 @@
         <tbody>
             @foreach($finances as $row)
                 <tr role="row">
-                    <td>TRX-0321-{{ $row->id }}</td>
+                    <td>TRX-{{substr($row->transaction_date,5,2)}}21-{{ $row->id }}</td>
                     <td>{{ $row->transaction_name }}</td>
                     <td>{{ $row->transaction_date }}</td>
                     @if ($row->jenis == "debit")
