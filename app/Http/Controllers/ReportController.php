@@ -50,7 +50,16 @@ class ReportController extends Controller
     }
 
     public function indexFinance()
-    {
-        return Excel::download(new FinanceExport, 'finances.xlsx');
+    {   
+
+        $bulan_name = [".","Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        
+        if($_GET){
+            $fileName = 'LaporanKeuangan_'.$bulan_name[$_GET["bulan_start"]].$_GET["tahun_start"]."_".$bulan_name[$_GET["bulan_end"]].$_GET["tahun_end"];
+        } else {
+            $fileName = 'LaporanKeuangan_'.$bulan_name[Carbon::now()->month].Carbon::now()->year;
+        }
+
+        return Excel::download(new FinanceExport, $fileName.'.xlsx');
     }
 }
