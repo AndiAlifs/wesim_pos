@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Member;
 use App\Finance;
+use App\PurchaseTransaction;
 use App\Product;
 use App\Exports\VisitorExport;
 use App\Exports\FinanceExport;
 use App\Selling;
+use App\Inventory;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -41,7 +43,10 @@ class ReportController extends Controller
         // transcation sales
         $sellingToday =  Selling::where('date', Carbon::now()->toDateString())->count();
 
-        return view('adminlte/report/report', compact('jumlahMember', 'topProduk', 'sellingToday'));
+        // produk shipping
+        $onShipping = PurchaseTransaction::where('status_id',3)->get()->count();
+
+        return view('adminlte/report/report', compact('jumlahMember', 'topProduk', 'sellingToday','onShipping'));
     }
 
     public function indexVisitor()
