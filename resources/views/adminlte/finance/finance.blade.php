@@ -19,7 +19,7 @@
                         <div class="form-row mb-2">
                                 
                                     <div class="col-3">
-                                        <label for="bulan_start">Dari</label>
+                                        <label for="bulan_start"><i class="fas fa-calendar"></i> Dari</label>
                                         <select name="bulan_start" id="bulan_start" class="form-control">
                                             <option value="1" {{ $waktu["bulan_start"] == "01"? "selected" : ''}} >Januari</option>
                                             <option value="2" {{ $waktu["bulan_start"] == "02"? "selected" : ''}} >Februari</option>
@@ -43,7 +43,7 @@
                                         </select>
                                     </div>
                                     <div class="col-3">
-                                        <label for="bulan_end">Sampai</label>
+                                        <label for="bulan_end"><i class="fas fa-calendar"></i> Sampai</label>
                                         <select name="bulan_end" id="bulan_end" class="form-control">
                                             <option value="1" {{ $waktu["bulan_end"] == "01"? "selected" : ''}} >Januari</option>
                                             <option value="2" {{ $waktu["bulan_end"] == "02"? "selected" : ''}} >Februari</option>
