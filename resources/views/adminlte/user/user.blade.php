@@ -58,7 +58,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($user as $row)
-                                                <p>{{ $row }}</p>
+                                                {{-- <p>{{ $row }}</p> --}}
                                                 <tr role="row" class="odd">
                                                     <td tabindex="0" class="sorting_1">{{ $loop->iteration }}</td>
                                                     <td>{{ $row->name }}</td>

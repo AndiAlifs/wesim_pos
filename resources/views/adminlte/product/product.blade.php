@@ -48,8 +48,8 @@
                                                     colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">Profit
                                                 </th>
-                                                <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                    aria-label="">Deskripsi</th>
+                                                {{-- <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                                    aria-label="">Deskripsi</th> --}}
                                                 <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                     aria-label="">Aksi</th>
                                             </tr>
@@ -79,7 +79,7 @@
                                                     </td>
                                                     <td class="text-success font-weight-bold">Rp.
                                                         {{ $row->price - $row->purchase_price }}</td>
-                                                    <td>{{ $row->description }}</td>
+                                                    {{-- <td>{{ $row->description }}</td> --}}
                                                     <td>
                                                         <!-- <button type="button" class="btn-sm btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
                                                                 <i class="nav-icon fas fa-edit"></i>
@@ -102,7 +102,7 @@
                                                 <th>Harga Beli</th>
                                                 <th>Harga Jual</th>
                                                 <th>Profit</th>
-                                                <th>Deskripsi</th>
+                                                {{-- <th>Deskripsi</th> --}}
                                                 <th>Aksi</th>
                                             </tr>
                                         </tfoot>

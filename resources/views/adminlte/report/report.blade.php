@@ -49,14 +49,14 @@
             <!-- small box -->
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>65</h3>
+                    <h3>{{$onShipping}}</h3>
     
-                    <p>Unique Visitors</p>
+                    <p>On Shipping</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
+                    <i class="ion ion-android-boat"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{route('purchase')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -358,7 +358,7 @@
             var $visitorsChart = $('#visitors-chart')
             var visitorsChart  = new Chart($visitorsChart, {
                 data   : {
-                labels  : ['18th', '20th', '22nd', '24th', '26th', '28th', '30th'],
+                labels  : ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
                 datasets: [{
                     type                : 'line',
                     data                : [100, 120, 170, 167, 180, 177, {{$sellingToday}}],
