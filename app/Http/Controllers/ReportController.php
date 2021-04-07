@@ -10,10 +10,11 @@ use App\Product;
 use App\Selling;
 use App\SellingTransaction;
 use App\Purchase;
+use App\PurchaseTransaction;
+use App\Inventory;
 
 use App\Exports\VisitorExport;
 use App\Exports\FinanceExport;
-use App\Inventory;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
