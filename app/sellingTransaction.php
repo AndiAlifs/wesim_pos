@@ -14,4 +14,12 @@ class SellingTransaction extends Model
     {
         return $this->belongsTo('App\member');
     }
+    public function transactionStatus()
+    {
+        return $this->belongsTo('App\TransactionStatus');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

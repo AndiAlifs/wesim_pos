@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\selling;
+use App\sellingTransaction;
 use Illuminate\Http\Request;
 
 class SellingController extends Controller
@@ -14,7 +15,15 @@ class SellingController extends Controller
      */
     public function index()
     {
-        //
+        $sellingTransaction =
+            sellingTransaction::with("transactionStatus", "user", "member")
+            ->where("status_id", 1)->get();
+
+        foreach ($sellingTransaction as $index => $row) {
+            $sellingTransaction[$index]->product_count = Selling::where('selling_transaction_id', $row->id)->count();
+        }
+
+        return view('adminlte/selling/selling', compact('sellingTransaction'));
     }
 
     /**
