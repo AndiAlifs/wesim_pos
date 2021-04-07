@@ -11,14 +11,18 @@ class SellingTransactionSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        for ($i = 1; $i <= 5; $i++) {
-            SellingTransaction::create([
-                "transaction_number" => ('TRXS' . time() . '000' . $i),
-                "status_id" => 1, //successfully
-                "user_id" => 3, //kasir
-                "member_id" => rand(1, 10), //
-            ]);
+    {   
+        for ($j=14; $j >= 0; $j--) { 
+            $tanggal = Carbon\Carbon::now()->subDays($j)->toDateString();
+            for ($i = 1; $i <= rand(20,80); $i++) {
+                SellingTransaction::create([
+                    "transaction_number" => ('TRXS' . time() . '000' . $i),
+                    "status_id" => 1, //successfully
+                    "user_id" => 3, //kasir
+                    "member_id" => rand(1, 10), //
+                    'transaction_date' => $tanggal
+                ]);
+            }
         }
         SellingTransaction::create([
             "transaction_number" => ('Cart-' . time() . '0006'),
