@@ -59,10 +59,19 @@ Route::middleware('role:admin_owner')->group(function () {
     Route::get('/report', 'ReportController@index')->name('report');
     Route::get('/report/visitor', 'ReportController@indexVisitor')->name('report_visitor');
     Route::get('/report/finance', 'ReportController@indexfinance')->name('report_finance');
+    Route::get('/report/selling', 'ReportController@indexselling')->name('report_selling');
+    
+    //purchase route
+    Route::get('/purchase', 'purchaseController@index')->name('purchase');
+    
+    //selling route
+    Route::get('/selling', 'sellingController@index')->name('selling');
 
-    //report route
-    Route::get('/purchase', 'PurchaseController@index')->name('purchase');
-    Route::get('/purchase_cashier', 'PurchaseController@purchase_cashier')->name('purchase_cashier');
+    //preorder route
+    Route::get('/preorder', 'PreorderController@index')->name('preorder');
+    Route::get('/preorder_cashier', 'preorderController@preorder_cashier')->name('preorder_cashier');
+    
+    //selling route
 });
 
 // Only for admin

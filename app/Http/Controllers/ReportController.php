@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Member;
 use App\Finance;
 use App\Product;
+use App\Selling;
+use App\SellingTransaction;
+use App\Purchase;
+use App\PurchaseTransaction;
+
 use App\Exports\VisitorExport;
 use App\Exports\FinanceExport;
-use App\Selling;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -62,4 +67,5 @@ class ReportController extends Controller
 
         return Excel::download(new FinanceExport, $fileName.'.xlsx');
     }
+    
 }

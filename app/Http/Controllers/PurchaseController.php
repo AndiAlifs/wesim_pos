@@ -19,19 +19,13 @@ class PurchaseController extends Controller
     {
         $purchaseTransaction =
             PurchaseTransaction::with("transactionStatus", "user", "supplier")
-            ->where("status_id", 3)->get();
+            ->where("status_id", 1)->get();
 
         foreach ($purchaseTransaction as $index => $row) {
             $purchaseTransaction[$index]->product_count = Purchase::where('purchase_transaction_id', $row->id)->count();
         }
 
         return view('adminlte/purchase/purchase', compact('purchaseTransaction'));
-    }
-
-    public function purchase_cashier()
-    {
-        $product = Product::all();
-        return view('adminlte/purchase/purchase_master', compact('product'));
     }
 
 
