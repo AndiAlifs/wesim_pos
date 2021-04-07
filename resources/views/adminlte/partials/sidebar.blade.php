@@ -3,7 +3,7 @@
     <a href="{{ route('home') }}" class="brand-link">
         <img src="{{ asset('/adminlte/dist/img/67Dev.jpg') }}" alt="67 Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">{{ env('APP_NAME') }}WESIM | GUYS</span>
+        <span class="brand-text font-weight-light">{{ env('APP_NAME') }}</span>
     </a>
 
     <!-- Sidebar -->
@@ -36,8 +36,7 @@
 
 
                 <li class="nav-item has-treeview">
-                    <a href="#"
-                        class="nav-link {{ Route::is('finance', 'purchase_report', 'selling_report') ? 'active' : '' }}">
+                    <a href="#" class="nav-link {{ Route::is('finance', 'purchase', 'selling') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
                             Laporan
@@ -45,10 +44,10 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview"
-                        style="display:  {{ Route::is('finance', 'purchase_report', 'selling_report') ? 'block' : '' }}">
+                        style="display:  {{ Route::is('finance', 'purchase', 'selling') ? 'block' : '' }}">
                         <li class="nav-item">
-                            <a href="{{ __('purchase_report') }}"
-                                class="nav-link {{ Route::is('purchase_report') ? 'active' : '' }}">
+                            <a href="{{ __('purchase') }}"
+                                class="nav-link {{ Route::is('purchase') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-file-pdf"></i>
                                 <p>
                                     Pembelian
@@ -56,8 +55,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ __('selling_report') }}"
-                                class="nav-link {{ Route::is('selling_report') ? 'active' : '' }}">
+                            <a href="{{ __('selling') }}"
+                                class="nav-link {{ Route::is('selling') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-file-pdf"></i>
                                 <p>
                                     Penjualan
@@ -142,7 +141,7 @@
 
                 <li class="nav-header">Pembelian</li>
                 <li class="nav-item">
-                    <a href="{{ __('purchase') }}" class="nav-link {{ Route::is('purchase') ? 'active' : '' }}">
+                    <a href="{{ __('preorder') }}" class="nav-link {{ Route::is('preorder') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-cart-arrow-down"></i>
                         <p>
                             Pre Order (PO)
