@@ -45,7 +45,7 @@
                     </a>
                     <ul class="nav nav-treeview"
                         style="display:  {{ Route::is('finance', 'purchase', 'selling') ? 'block' : '' }}">
-                        <li class="nav-item">
+                        <li class="nav-item pl-3">
                             <a href="{{ __('purchase') }}"
                                 class="nav-link {{ Route::is('purchase') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-file-pdf"></i>
@@ -54,7 +54,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item pl-3">
                             <a href="{{ __('selling') }}"
                                 class="nav-link {{ Route::is('selling') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-file-pdf"></i>
@@ -63,7 +63,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item pl-3">
                             <a href="{{ __('finance') }}"
                                 class="nav-link {{ Route::is('finance') ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-file-pdf"></i>
@@ -97,7 +97,7 @@
                 <li class="nav-header">Produk</li>
                 <li class="nav-item">
                     <a href="{{ route('product') }}" class="nav-link {{ Route::is('product') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-archive"></i>
+                        <i class="nav-icon fas fa-shopping-basket"></i>
                         <p>
                             Produk
                         </p>
@@ -105,23 +105,10 @@
                 </li>
 
 
-                @if (auth()->user()->role_id == 1)
-                    <li class="nav-item">
-                        <a href="{{ route('discount') }}"
-                            class="nav-link {{ Route::is('discount') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-percent"></i>
-                            <p>
-                                Manajemen Diskon
-                            </p>
-                        </a>
-                    </li>
-                @endif
-
-
                 <li class="nav-item">
                     <a href="{{ route('category') }}"
                         class="nav-link {{ Route::is('category') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-shopping-basket"></i>
+                        <i class="nav-icon fas fa-archive"></i>
                         <p>
                             Kategori Produk
                         </p>
@@ -138,10 +125,22 @@
                     </a>
                 </li>
 
+                @if (auth()->user()->role_id == 1)
+                    <li class="nav-item">
+                        <a href="{{ route('discount') }}"
+                            class="nav-link {{ Route::is('discount') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-percent"></i>
+                            <p>
+                                Manajemen Diskon
+                            </p>
+                        </a>
+                    </li>
+                @endif
 
                 <li class="nav-header">Pembelian</li>
                 <li class="nav-item">
-                    <a href="{{ __('preorder') }}" class="nav-link {{ Route::is('preorder') ? 'active' : '' }}">
+                    <a href="{{ __('preorder') }}"
+                        class="nav-link {{ Route::is('preorder', 'preorder_cashier') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-cart-arrow-down"></i>
                         <p>
                             Pre Order (PO)
