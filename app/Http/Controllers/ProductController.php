@@ -14,6 +14,13 @@ class ProductController extends Controller
         return view('adminlte.product.product', compact('product','warnaBg'));
     }
 
+    public function index_price()
+    {
+        $product = Product::get();
+        $warnaBg = ["primary", "secondary", "success", "danger", "warning", "info", "dark"];
+        return view('adminlte.product.price', compact('product','warnaBg'));
+    }
+
     public function destroy($id)
     {
         $product = Product::find($id);

@@ -71,7 +71,8 @@ Route::middleware('role:admin_owner')->group(function () {
     Route::get('/preorder', 'PreorderController@index')->name('preorder');
     Route::get('/preorder_cashier', 'preorderController@preorder_cashier')->name('preorder_cashier');
     
-    //selling route
+    //procut price
+    Route::get('/price', 'ProductController@index_price')->name('price');
 });
 
 // Only for admin

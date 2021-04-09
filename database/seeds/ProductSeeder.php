@@ -14,9 +14,6 @@ class ProductSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-
-        $purchase_price = [20000,10000,15000];
-        $price = [28000,15000,20000];
         for ($i=0; $i <= 49; $i++) { 
             $new_product = new Product;
 
@@ -26,8 +23,6 @@ class ProductSeeder extends Seeder
             $new_product->product_code = $faker->isbn13();
             $new_product->producer = $faker->lastName();
             $new_product->description = $faker->sentence(5);
-            $new_product->purchase_price = $purchase_price[$temp_angka];
-            $new_product->price = $price[$temp_angka];
             $new_product->save();
 
             $new_product->Category()->attach(rand(1,3));
