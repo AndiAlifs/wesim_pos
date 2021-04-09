@@ -84,7 +84,7 @@
                 <div class="card-body">
                     <div class="d-flex">
                         <p class="d-flex flex-column">
-                            <span class="text-bold text-lg">{{ $sellingToday * 5 }}</span>
+                            <span class="text-bold text-lg">{{ $sellingThisWeek }}</span>
                             <span>Sales This Week</span>
                         </p>
                         <p class="ml-auto d-flex flex-column text-right">
@@ -361,7 +361,7 @@
                 labels  : ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
                 datasets: [{
                     type                : 'line',
-                    data                : [100, 120, 170, 167, 180, 177, {{$sellingToday}}],
+                    data                : Object.values(@json($jumlahSellingThisWeek)),
                     backgroundColor     : 'transparent',
                     borderColor         : '#007bff',
                     pointBorderColor    : '#007bff',
@@ -372,7 +372,7 @@
                 },
                     {
                     type                : 'line',
-                    data                : [60, 80, 70, 67, 80, 77, 120],
+                    data                : Object.values(@json($jumlahSellingLastWeek)),
                     backgroundColor     : 'tansparent',
                     borderColor         : '#ced4da',
                     pointBorderColor    : '#ced4da',
@@ -406,7 +406,7 @@
                     },
                     ticks    : $.extend({
                         beginAtZero : true,
-                        suggestedMax: 200
+                        suggestedMax: 100
                     }, ticksStyle)
                     }],
                     xAxes: [{

@@ -45,12 +45,24 @@ class ReportController extends Controller
         }
 
         // transcation sales
-        $sellingToday =  Selling::where('date', Carbon::now()->toDateString())->count();
+        $sellingToday =  SellingTransaction::where('transaction_date', Carbon::now()->toDateString())->count();
 
         // produk shipping
         $onShipping = PurchaseTransaction::where('status_id',3)->get()->count();
 
-        return view('adminlte/report/report', compact('jumlahMember', 'topProduk', 'sellingToday','onShipping'));
+        //selling
+        $akhirPekan = Carbon::now()->endOfWeek()->subDays(14);
+        $sellingThisWeek = SellingTransaction::whereBetween('transaction_date',[Carbon::now()->startOfWeek()->toDateString(),Carbon::now()->endOfWeek()->toDateString()])->get()->count();
+        for ($i=0; $i <= 6; $i++) { 
+            $hariCari = $akhirPekan->addDays(1);
+            $jumlahSellingLastWeek[$i] = SellingTransaction::where('transaction_date',$hariCari->toDateString())->get()->count();
+        }
+        for ($i=6; $i <= 13; $i++) { 
+            $hariCari = $akhirPekan->addDays(1);
+            $jumlahSellingThisWeek[6-$i] = SellingTransaction::where('transaction_date',$hariCari->toDateString())->get()->count();
+        }
+
+        return view('adminlte/report/report', compact('jumlahMember', 'topProduk', 'sellingToday','onShipping','jumlahSellingLastWeek','jumlahSellingThisWeek','sellingThisWeek'));
     }
 
     public function indexVisitor()
