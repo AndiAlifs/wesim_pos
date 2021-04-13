@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Purchase;
 use App\PurchaseTransaction;
 use App\Product;
+use App\Supplier;
 
 class PreorderController extends Controller
 {
@@ -21,11 +22,28 @@ class PreorderController extends Controller
 
         return view('adminlte/preorder/preorder', compact('purchaseTransaction'));
     }
-    
+
 
     public function preorder_cashier()
     {
         $product = Product::all();
-        return view('adminlte/preorder/preorder_master', compact('product'));
+        $supplier = Supplier::all();
+        $purchaseTransaction = purchaseTransaction::where('status_id', '4')->first();
+        if (!$purchaseTransaction) {
+            $purchaseTransaction = new \stdClass();
+            $purchaseTransaction->transaction_number = 0;
+        }
+        return view('adminlte/preorder/po_master', compact('product', 'supplier', 'purchaseTransaction'));
+    }
+
+    public function add_new_po_cart(Request $request)
+    {
+        $index = PurchaseTransaction::count();
+        PurchaseTransaction::create([
+            "transaction_number" => ('PO' . time() . '000' . $index),
+            "status_id" => 4, //successfully
+            "user_id" => $request['user_id'], //admin
+            "supplier_id" => 1, //
+        ]);
     }
 }

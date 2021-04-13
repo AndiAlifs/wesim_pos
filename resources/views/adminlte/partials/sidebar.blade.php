@@ -86,7 +86,8 @@
 
 
                 <li class="nav-item">
-                    <a href="/supplier" class="nav-link {{ Route::is('supplier') ? 'active' : '' }}">
+                    <a href="{{ route('supplier') }}"
+                        class="nav-link {{ Route::is('supplier') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-handshake"></i>
                         <p>
                             Pemasok

@@ -70,6 +70,7 @@ Route::middleware('role:admin_owner')->group(function () {
     //preorder route
     Route::get('/preorder', 'PreorderController@index')->name('preorder');
     Route::get('/preorder_cashier', 'preorderController@preorder_cashier')->name('preorder_cashier');
+    Route::post('/preorder/add_new_po_cart/', 'preorderController@add_new_po_cart')->name('add_new_po_cart');
     
     //selling route
 });

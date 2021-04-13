@@ -21,5 +21,8 @@ class TransactionStatusSeeder extends Seeder
         TransactionStatus::create([
             'status' => 'PO',
         ]);
+        TransactionStatus::create([
+            'status' => 'PO-cart',
+        ]);
     }
 }

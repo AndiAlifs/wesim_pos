@@ -23,7 +23,7 @@ class MemberSeeder extends Seeder
         ]);
 
         $faker = Faker::create('id_ID');
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 100; $i++) {
 
             // insert data ke table pegawai menggunakan Faker
             DB::table('members')->insert([
