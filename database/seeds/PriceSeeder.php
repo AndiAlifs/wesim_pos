@@ -27,7 +27,7 @@ class PriceSeeder extends Seeder
             $new_price->profit = rand(1,3)*0.05;
             $new_price->harga_jual = $new_price->harga_beli * $new_price->profit;
             $new_price->harga_jual += $new_price->harga_beli;
-            $new_price->last_update = Carbon::now()->toDateString();
+            $new_price->last_update = Carbon::now();
             $new_price->save();
         }
     }

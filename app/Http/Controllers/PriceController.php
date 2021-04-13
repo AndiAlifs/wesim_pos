@@ -22,7 +22,7 @@ class PriceController extends Controller
         if ($now->harga_beli != $request->harga_beli || $now->harga_jual != $request->harga_jual || $now->profit != $request->profit) {
             $newPrice = new Price;
             $newPrice->product_id = $request->product_id;
-            $newPrice->last_update = Carbon::now()->toDateString();
+            $newPrice->last_update = Carbon::now();
             if ($now->harga_jual != $request->harga_jual) {
                 $newPrice->harga_beli = $request->harga_beli;
                 $newPrice->harga_jual = $request->harga_jual;

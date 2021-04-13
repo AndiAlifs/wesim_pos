@@ -20,7 +20,7 @@ class CreatePricesTable extends Migration
             $table->bigInteger('harga_beli');
             $table->bigInteger('harga_jual');
             $table->float('profit');
-            $table->date('last_update')->nullable();
+            $table->dateTime('last_update')->nullable();
         });
     }
 
