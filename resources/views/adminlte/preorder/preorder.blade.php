@@ -103,16 +103,33 @@
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
-                                                            <form method="post" action="/user/update/{{ $row->id }}">
+                                                            <form method="post" action="/product/update/{{ $row->id }}">
                                                                 <div class="modal-body">
                                                                     {{ csrf_field() }}
 
                                                                     @foreach ($row->purchases as $item)
                                                                         <div class="form-group">
-                                                                            <label>{{$item->product_id}}</label>
+                                                                            <img src="{{ $item->product->image }}" width="100em">
+                                                                            <span class="ml-3 text-uppercase">{{ $item->product->name }}</span>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label>Jumlah produk diterima</label>
                                                                             <input type="text" name="name" class="form-control"
-                                                                                placeholder="Masukan Nama"
-                                                                                value="{{ $row->id }}">
+                                                                                placeholder="Masukan jumlah"
+                                                                                >
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label>Harga Satuan</label>
+                                                                            <div class="row">
+                                                                                <div class="col-1">Rp. </div>
+                                                                                <div class="col-11">
+                                                                                    <input type="text" name="name" class="form-control"
+                                                                                        placeholder="Masukan harga persatuan"
+                                                                                        value="{{ $item->product->prices->last()->harga_beli }}">
+
+                                                                                </div>
+
+                                                                            </div>
                                                                         </div>
                                                                         <hr>
                                                                         
@@ -120,7 +137,7 @@
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <div class="form-group">
-                                                                        <button class="bg-success" type="submit">Submit</button>
+                                                                        <button class="btn bg-success" type="submit">Submit</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
