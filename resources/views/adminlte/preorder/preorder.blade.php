@@ -83,15 +83,54 @@
                                                     <td>{{ $row->created_at }}</td>
                                                     <td>{{ $row->created_at }}</td>
                                                     <td width="10%">
-                                                        <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                            data-target="#modal-default">
-                                                            <abbr title="edit"><i class="nav-icon fas fa-edit"></i>
+                                                        <button type="button" class="btn btn-success my-2" data-toggle="modal"
+                                                            data-target="#modal-default{{ $row->id }}">
+                                                            <i class="nav-icon fas fa-edit"></i>Confirm Ship
                                                         </button>
                                                         <a onclick="return confirm('Are you sure?')" href=""
-                                                            class="btn btn-danger"><abbr title="Hapus"><i
-                                                                    class="nav-icon fas fa-trash"></i></a>
+                                                            class="btn btn-danger"><i
+                                                                    class="nav-icon fas fa-trash"></i>Delete</a>
                                                     </td>
                                                 </tr>
+
+                                                <div class="modal fade" id="modal-default{{ $row->id }}">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Confirm Ship</h4>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <form method="post" action="/user/update/{{ $row->id }}">
+                                                                <div class="modal-body">
+                                                                    {{ csrf_field() }}
+
+                                                                    @foreach ($row->purchases as $item)
+                                                                        <div class="form-group">
+                                                                            <label>{{$item->product_id}}</label>
+                                                                            <input type="text" name="name" class="form-control"
+                                                                                placeholder="Masukan Nama"
+                                                                                value="{{ $row->id }}">
+                                                                        </div>
+                                                                        <hr>
+                                                                        
+                                                                    @endforeach
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <div class="form-group">
+                                                                        <button class="bg-success" type="submit">Submit</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
+
                                             @endforeach
                                         </tbody>
                                         <tfoot>
