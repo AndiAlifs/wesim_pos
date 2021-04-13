@@ -23,19 +23,12 @@
                                         aria-describedby="example1_info">
                                         <thead>
                                             <tr role="row">
-                                                {{-- <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th> --}}
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1" aria-label="Browser: activate to sort column ascending">ID
                                                     Produk</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1" aria-label="CSS grade: activate to sort column ascending">
                                                     Nama Produk</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1" aria-label="CSS grade: activate to sort column ascending">
-                                                    Kategori Produk</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending">
-                                                    Produser Produk</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">Harga
@@ -48,38 +41,33 @@
                                                     colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">Profit
                                                 </th>
-                                                {{-- <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                    aria-label="">Deskripsi</th> --}}
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                    colspan="1"
+                                                    aria-label="Engine version: activate to sort column ascending">Update
+                                                </th>
                                                 <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                     aria-label="">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($product as $row)
+                                            @foreach ($prices as $row)
                                                 <tr role="row" class="odd">
-                                                    {{-- <td tabindex="0" class="sorting_1">PRD-2021-{{ $row->id }}</td> --}}
                                                     <td>
                                                         <img src="https://bwipjs-api.metafloor.com/?bcid=ean13&text={{ $row->product_code }}"
                                                             alt="{{ $row->product_code }}" height="60em">
-                                                        {{ $row->product_code }}
+                                                        {{ $row->product->product_code }}
                                                     </td>
                                                     <td>
                                                         <img src="{{ asset('image/product/gambarIndomie' . rand(1, 3) . '.JPG') }}"
                                                             alt="" height="60em">
                                                         <br>
-                                                        {{ $row->name }}
+                                                        {{ $row->product->name }}
                                                     </td>
-                                                    <td>
-                                                        <div class="btn-sm btn btn-{{$warnaBg[$row->category->first()->id % 6]}} rounded-pill btn-block">{{ $row->category->first()->name }}</div>
-                                                    </td>
-                                                    <td>{{ $row->producer }}</td>
-                                                    <td>Rp. {{ $row->purchase_price }}</td>
+                                                    <td>Rp. {{ $row->harga_beli }}</td>
                                                     <td>Rp.
-                                                        {{ $row->price - ($row->price * $row->discount_amount) / 100 }}
-                                                    </td>
-                                                    <td class="text-success font-weight-bold">Rp.
-                                                        {{ $row->price - $row->purchase_price }}</td>
-                                                    {{-- <td>{{ $row->description }}</td> --}}
+                                                        {{ $row->harga_jual }}</td>
+                                                    <td class="font-weight-bolder text-success">{{ $row->profit*100 }}%</td>
+                                                    <td>{{ $row->last_update }}</td>
                                                     <td>
                                                         <!-- <button type="button" class="btn-sm btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
                                                                 <i class="nav-icon fas fa-edit"></i>
@@ -93,19 +81,6 @@
                                                 </tr>
                                             @endforeach
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>ID Produk</th>
-                                                <th>Nama Produk</th>
-                                                <th>Kategori Produk</th>
-                                                <th>Produser Produk</th>
-                                                <th>Harga Beli</th>
-                                                <th>Harga Jual</th>
-                                                <th>Profit</th>
-                                                {{-- <th>Deskripsi</th> --}}
-                                                <th>Aksi</th>
-                                            </tr>
-                                        </tfoot>
                                     </table>
                                     <div class="float-right pt-3">
                                         <a class="btn btn-primary" href="" data-toggle="modal" data-target="#modal-store"><i

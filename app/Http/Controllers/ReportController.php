@@ -22,7 +22,7 @@ use Carbon\Carbon;
 class ReportController extends Controller
 {
     public function index()
-    {
+    {   
         // jumlah member
         $jumlahMember = Member::get()->count();
 
@@ -39,7 +39,7 @@ class ReportController extends Controller
             $topProduk[] = [
                 "nama" => $theProduct->name,
                 "image" => $theProduct->image,
-                "harga" => $theProduct->price,
+                "harga" => $theProduct->prices->last()->harga_jual,
                 "jumlah_penjualan" => $pro->total_penjualan
             ];
         }

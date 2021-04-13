@@ -19,6 +19,7 @@ class CreatePricesTable extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->bigInteger('harga_beli');
             $table->bigInteger('harga_jual');
+            $table->float('profit');
             $table->date('last_update')->nullable();
         });
     }
