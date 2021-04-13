@@ -69,15 +69,90 @@
                                                     <td class="font-weight-bolder text-success">{{ $row->profit*100 }}%</td>
                                                     <td>{{ $row->last_update }}</td>
                                                     <td>
-                                                        <!-- <button type="button" class="btn-sm btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
-                                                                <i class="nav-icon fas fa-edit"></i>
-                                                            </button> -->
-                                                        <!-- <a class="btn-sm btn-warning> <i class="nav-icon fas fa-edit"></i></a> -->
+                                                        <button type="button" class="btn btn-sm btn-warning m-1"
+                                                            data-toggle="modal"
+                                                            data-target="#modal-edit-{{ $row->id }}">
+                                                        <i class="nav-icon fas fa-edit"></i>
+                                                        </button>
                                                         <a onclick="return confirm('Are you sure?')"
-                                                            href="/product/destroy/{{ $row->id }}"
-                                                            class="btn-sm btn-danger"><i
-                                                                class="nav-icon fas fa-trash"></i></a>
+                                                            href="/user/destroy/{{ $row->id }}"
+                                                            class="btn btn-sm btn-danger m-1"><i
+                                                            class="nav-icon fas fa-trash"></i></a>
                                                     </td>
+
+
+                                                    <div class="modal fade" id="modal-edit-{{ $row->id }}">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Edit Harga Produk</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+            
+                                                                <form method="post" action="/price/update/{{ $row->id }}">
+                                                                    <div class="modal-body">
+                                                                        {{ csrf_field() }}
+                                                                        {{ method_field('PUT') }}
+                                                                        
+                                                                        <div class="form-group row">
+                                                                            <div class="col-2">
+                                                                                <img src="{{ $row->product->image }}" width="100em">
+                                                                            </div>
+                                                                            <div class="col-9 p-3 pl-5">
+                                                                                <span class="text-uppercase">{{ $row->product->name }}</span><br>
+                                                                                <span>{{ $row->product->product_code }} </span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <label>Harga Beli</label>
+                                                                            <div class="row">
+                                                                                <div class="col-1 pt-1">Rp. </div>
+                                                                                <div class="col-11">
+                                                                                    <input type="number" name="harga_beli" class="form-control"
+                                                                                        placeholder="Masukan harga persatuan"
+                                                                                        value="{{ $row->harga_beli }}">
+
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <label>Harga Jual</label>
+                                                                            <div class="row">
+                                                                                <div class="col-1 pt-1">Rp. </div>
+                                                                                <div class="col-11">
+                                                                                    <input type="number" name="harga_jual" class="form-control"
+                                                                                        placeholder="Masukan harga persatuan"
+                                                                                        value="{{ $row->harga_jual }}">
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <label>Profit</label></label>
+                                                                            <div class="row">
+                                                                                <input type="number" name="profit" class="form-control"
+                                                                                    placeholder="Masukan harga persatuan"
+                                                                                    value="{{ $row->profit }}">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer justify-content-between">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                        <input type="submit" class="btn btn-success" value="Simpan">
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.modal-dialog -->
+                                                    </div>
+                                                    <!-- /.modal -->
                                                 </tr>
                                             @endforeach
                                         </tbody>
