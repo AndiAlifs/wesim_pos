@@ -31,4 +31,9 @@ class Product extends Model
     {
         return $this->belongsToMany('App\productCategory');
     }
+
+    public function prices()
+    {
+        return $this->hasMany('App\Price');
+    }
 }

@@ -36,7 +36,7 @@
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1" aria-label="Platform(s): activate to sort column ascending">
                                                     Produser Produk</th>
-                                                {{-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">Harga
                                                     Beli</th>
@@ -47,7 +47,7 @@
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">Profit
-                                                </th> --}}
+                                                </th>
                                                 {{-- <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                     aria-label="">Deskripsi</th> --}}
                                                 <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
@@ -73,12 +73,12 @@
                                                         <div class="btn-sm btn btn-{{$warnaBg[$row->category->first()->id % 6]}} rounded-pill btn-block">{{ $row->category->first()->name }}</div>
                                                     </td>
                                                     <td>{{ $row->producer }}</td>
-                                                    {{-- <td>Rp. {{ $row->purchase_price }}</td> --}}
-                                                    {{-- <td>Rp.
+                                                    <td>Rp. {{ $row->purchase_price }}</td>
+                                                    <td>Rp.
                                                         {{ $row->price - ($row->price * $row->discount_amount) / 100 }}
-                                                    </td> --}}
-                                                    {{-- <td class="text-success font-weight-bold">Rp.
-                                                        {{ $row->price - $row->purchase_price }}</td> --}}
+                                                    </td>
+                                                    <td class="text-success font-weight-bold">Rp.
+                                                        {{ $row->price - $row->purchase_price }}</td>
                                                     {{-- <td>{{ $row->description }}</td> --}}
                                                     <td>
                                                         <!-- <button type="button" class="btn-sm btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
@@ -99,9 +99,9 @@
                                                 <th>Nama Produk</th>
                                                 <th>Kategori Produk</th>
                                                 <th>Produser Produk</th>
-                                                {{-- <th>Harga Beli</th>
+                                                <th>Harga Beli</th>
                                                 <th>Harga Jual</th>
-                                                <th>Profit</th> --}}
+                                                <th>Profit</th>
                                                 {{-- <th>Deskripsi</th> --}}
                                                 <th>Aksi</th>
                                             </tr>
