@@ -74,6 +74,7 @@ Route::middleware('role:admin_owner')->group(function () {
     
     //procut price
     Route::get('/price', 'PriceController@index_price')->name('price');
+    Route::put('/price/update', 'PriceController@update')->name('price_update');
 });
 
 // Only for admin

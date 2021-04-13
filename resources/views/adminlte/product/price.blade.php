@@ -20,28 +20,29 @@
                                 <div class="col-sm-12">
                                     <table id="datatable_pagination"
                                         class="table table-bordered table-striped dataTable dtr-inline" role="grid"
-                                        aria-describedby="example1_info">
+                                        aria-describedby="example1_info"
+                                        data-ordering = "false">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                <th tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1" aria-label="Browser: activate to sort column ascending">ID
                                                     Produk</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                <th tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1" aria-label="CSS grade: activate to sort column ascending">
                                                     Nama Produk</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                <th tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">Harga
                                                     Beli</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                <th tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">Harga
                                                     Jual</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                <th tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">Profit
                                                 </th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                <th tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">Update
                                                 </th>
@@ -91,7 +92,7 @@
                                                                     </button>
                                                                 </div>
             
-                                                                <form method="post" action="/price/update/{{ $row->id }}">
+                                                                <form method="post" action="{{ route('price_update') }}">
                                                                     <div class="modal-body">
                                                                         {{ csrf_field() }}
                                                                         {{ method_field('PUT') }}
@@ -104,6 +105,10 @@
                                                                                 <span class="text-uppercase">{{ $row->product->name }}</span><br>
                                                                                 <span>{{ $row->product->product_code }} </span>
                                                                             </div>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <input type="text" id="product_id" name="product_id" hidden value="{{ $row->product_id }}">
                                                                         </div>
 
                                                                         <div class="form-group">
@@ -138,7 +143,7 @@
                                                                             <div class="row">
                                                                                 <input type="number" name="profit" class="form-control"
                                                                                     placeholder="Masukan harga persatuan"
-                                                                                    value="{{ $row->profit }}">
+                                                                                    value="{{ $row->profit }}" step="0.01">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -221,3 +226,11 @@
     <!-- /.modal -->
 
 @endsection
+
+@push('script-footer')
+    <script>
+        $('#datatable_pagination').DataTable({
+            "ordering": false
+        });
+    </script>    
+@endpush
