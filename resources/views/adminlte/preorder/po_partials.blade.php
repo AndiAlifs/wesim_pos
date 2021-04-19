@@ -1,17 +1,29 @@
 {{-- product --}}
 <div class="row" id="hide-product-list" style="display: none">
     {{-- @foreach ($product as $row) --}}
-    <div class="col-sm-2">
-        <a href="#">
-            <div type="button" class="btn card justify-content-center px-1 py-1 product-item" id="product-item"
-                data-toggle="modal" data-target="#modal-default" onclick="callModal('','{{ '$row->id' }}')">
-                <img src="" alt="" width="100%" height="100px" id="product-image">
+    <div class="col-3">
+        <div id="product-item" type="button" onclick=""
+            class="btn justify-content-center product-item card p-0 div-hover" data-toggle="modal"
+            data-target="#modal-default" id="product-item">
+            <div class="card-body p-0">
                 <div>
-                    <b class="text-dark" id="product-name">{{ '$row->product->name' }}</b><br>
-                    <small class="text-dark" id="product-price"> Rp.{{ '$row->product->price' }}</small>
+                    <b class="text-dark" id="product-name">NAME</b><br>
+                    <small class="text-dark" id="product-price">PRICE</small>
                 </div>
             </div>
-        </a>
+            <div class="card-footer m-0 p-0 progress-group text-left">
+                <span class="progress progress-md stock-progress rounded-bottom">
+                    <span class="progress-bar rounded-bottom-left" id="product-progress-bar"
+                        style="width: 10%; transition: 0s;">
+                    </span>
+                    <small style="position: absolute; left: 25%;">
+                        stok:
+                        <b id="product-in-stock">1</b>/
+                        <span id="product-full-stock">100</span>
+                    </small>
+                </span>
+            </div>
+        </div>
     </div>
     {{-- @endforeach --}}
 </div>
@@ -66,7 +78,7 @@
                 <div>
                     <button data-dismiss="modal" type="button"
                         class="btn btn-block btn-modal bg-gradient-primary text-center modal-btn" id="modal-btn"
-                        onclick="addToCart()">
+                        onclick="addToPoCart()">
                         <b>Masukkan ke Keranjang</b>
                     </button>
                 </div>
@@ -83,40 +95,28 @@
 
 {{-- ------------------------cart item--------------------------- --}}
 <div class="hide-list" id="hide-list" style="display: none">
-    <div class="card cart-item border" id="cart-item" type="button">
-        <div class="row">
-            <div class="col-8 border-right border-secondary cart-hover" data-toggle="modal"
-                data-target="#modal-default">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="p-1">
-                            <img src="" alt="" width="60px" height="60x" id="set-image">
-                            {{-- <b> {{ $row->name }}</b> --}}
-                        </div>
-                    </div>
-                    <div class="col-sm-6 mt-2 overflow-hidden">
-                        <div>
-                            <b class="overflow-hidden no-wrap" id="set-name">Lorem, ipsum dolor.</b>
-                            <p class="small text-muted">Rp. <span id="set-price">xx.xxx</span> </p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="vertical-center">
-                            <div class="text-muted">
-                                <span>&#10005;</span><span id="set-amount">xxx</span>
+    <div class="cart-item list-hover border-bottom text-dark list-item row" id="list-item">
+        <div class="col-10 div-hover" type="button" onclick="" data-toggle="modal" data-target="#modal-default">
+            <div class="row">
+                <div class="col-7 pl-4">
+                    <div class="row">
+                        <div class="col mt-2 overflow-hidden">
+                            <div>
+                                <b class="overflow-hidden no-wrap" id="set-name">lorem lorem loerem</b>
+                                <br>
+                                <span class="text-muted">Rp. <span id="set-price">10.000</span>
                             </div>
                         </div>
+                        <div class="col-3 m-0 pt-2"><small>x<span id="set-amount">1.200</span></small></div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="vertical-center">
-                    Rp. <span id="set-total">xx.xxx</span>
-                    <span id="close-btn">
-                        {{-- <button type="button" class="btn bg-gradient-danger btn-xs float-right mr-2" onclick="deleteCart()">&#10005;</button> --}}
-                    </span>
+                <div class="col pt-2">
+                    <b>Rp. <span id="set-total">10.000.000</span></b>
                 </div>
             </div>
+        </div>
+        <div class="col-2 pt-3 pr-3" id="close-btn">
+            <button type="button" class="btn bg-gradient-danger btn-xs float-right" onclick=""> &#10005; </button>
         </div>
     </div>
 </div>
@@ -188,7 +188,8 @@
                     </div>
                     <div class="form-group pay-row row">
                         <div class="col-5 form-group">
-                            <small><label for="cash-pay" class="col col-form-label text-muted small">Bayar Tunai (Rp)
+                            <small><label for="cash-pay" class="col col-form-label text-muted small">Bayar Tunai
+                                    (Rp)
                                 </label></small>
                             <div class="col-sm">
                                 <input type="text" class="form-control pay-input number-input" id="cash-pay"

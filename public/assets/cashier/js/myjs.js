@@ -129,6 +129,7 @@ function addNewTransaction() {
         }
     });
 }
+
 // Pay transaction
 function payTransaction() {
     // if keranjang kosong
@@ -234,8 +235,8 @@ function callModal(selling_id, product_id) {
                 $("#modal-name").html(data[0].product['name']);
                 $("#modal-price").val(toNumberFormat(data[0].product['price']));
                 $("#modal-amount").val(data[0]['amount']);
+                $(".modal-product-head").css('background-image', 'url(' + base_url + data[0].product['image'] + ')');
                 in_stock = data[0]['amount'] + data[1].inventory['in_stock']; //calculate product stock in inventory and stock in cart
-                $("#modal-image").attr('src', base_url + data[0].product['image']);
             } else {
                 $("#modal-name").html(data[0]['name']);
                 $("#modal-price").val(toNumberFormat(data[0]['price']));

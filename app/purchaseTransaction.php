@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class PurchaseTransaction extends Model
 {
+    protected $table = "purchase_Transactions";
+    protected $fillable = ['transaction_number', 'status_id', 'user_id', 'supplier_id', 'pay_cost', 'total_price', 'transaction_date'];
+
+
     public function transactionStatus()
     {
         return $this->belongsTo('App\TransactionStatus');

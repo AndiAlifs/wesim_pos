@@ -1,10 +1,11 @@
 <div class="card p-3">
     <div class="row">
-        <div class="col-7 border-right">
+        <div class="col-8 border-right">
             <div class="row">
                 <div class="col">
                     <small class="text-muted">Nomor Preorder:</small>
-                    <h5 class="m-0"><b id="dtl-trx">{{ $purchaseTransaction }}</b></h5>
+                    <h5 class="m-0"><b id="dtl-trx">{{ $purchaseTransaction->transaction_number }}</b></h5>
+                    <input type="hidden" id="purchase-transaction-id" value="{{ $purchaseTransaction->id }}">
                 </div>
                 <div class="col">
                     <small class="text-muted">User: </small>
@@ -42,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-5">
+        <div class="col-4">
             <div class="row pt-3">
                 <div class="col-3">Total </div>
                 <div class="col-1 text-right">:</div>

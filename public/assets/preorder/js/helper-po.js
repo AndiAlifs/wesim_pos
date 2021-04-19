@@ -57,41 +57,39 @@ function getNowTime() {
     return nowTime;
 }
 
-function loadCart() {
-    selling_transaction_id = $('.trx-active > .trx > input').val();
-    total_price = 0;
-    list = "";
+function loadPoCart() {
+    var purchase_transaction_id = $('#purchase-transaction-id').val();
+    var total_price = 0;
+    var list = "";
     // ---------------------------------------
     $.ajax({
         type: "POST",
-        url: "/cashier/load_cart",
+        url: "/preorder/load_cart_po",
         data: {
-            'selling_transaction_id': selling_transaction_id,
+            'purchase_transaction_id': purchase_transaction_id,
             '_token': $('input[name=_token]').val(),
         },
         success: function (data) {
             if (data.length == 0) {
                 $("#cart-list").html("<p class='text-muted text-center'><b>Keranjang Kosong!!!</b></p>");
                 $("#total-price").html(0);
-
                 return 0;
             }
-            data.forEach(function (selling, index) {
+            data.forEach(function (purchase, index) {
                 // passing new data to #cart-item
-                $("#set-image").attr('src', base_url + selling.product.image);
-                $("#set-name").html(selling.product.name);
-                $("#set-price").html(toNumberFormat(selling.product.price));
-                $("#set-amount").html(toNumberFormat(selling.amount));
-                $("#set-total").html(toNumberFormat(selling.product.price * selling.amount));
+                $("#set-name").html(purchase.product.name);
+                $("#set-price").html(toNumberFormat(purchase.product.price));
+                $("#set-amount").html(toNumberFormat(purchase.amount));
+                $("#set-total").html(toNumberFormat(purchase.product.price * purchase.amount));
 
-                $("#close-btn").html('<button type="button" class="btn bg-gradient-danger btn-xs float-right mr-2" onclick="deleteBtn(' + selling.id + ',' + selling.amount + ')">&#10005;</button>');
-                $(".cart-hover")[0].setAttribute("onclick", ("callModal('" + selling.id + "','" + selling.product.id + "')"));
+                $("#close-btn").html('<button type="button" class="btn bg-gradient-danger btn-xs float-right mr-2 px-2" onclick="deleteBtn(' + purchase.id + ')"><i class="nav-icon fas fa-trash"></i></button>');
+                $("#list-item")[0].setAttribute("onclick", ("callModal('" + purchase.id + "','" + purchase.product.id + "')"));
 
                 // set new list to .cart-list
                 list += $(".hide-list")[0].innerHTML;
 
                 // set value to .total
-                total_price = total_price + (selling.product.price * selling.amount);
+                total_price = total_price + (purchase.product.price * purchase.amount);
             });
 
             $("#cart-list").html(list);

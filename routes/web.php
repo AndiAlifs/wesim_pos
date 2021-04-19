@@ -60,18 +60,23 @@ Route::middleware('role:admin_owner')->group(function () {
     Route::get('/report/visitor', 'ReportController@indexVisitor')->name('report_visitor');
     Route::get('/report/finance', 'ReportController@indexfinance')->name('report_finance');
     Route::get('/report/selling', 'ReportController@indexselling')->name('report_selling');
-    
+
     //purchase route
     Route::get('/purchase', 'purchaseController@index')->name('purchase');
-    
+
     //selling route
     Route::get('/selling', 'sellingController@index')->name('selling');
 
     //preorder route
     Route::get('/preorder', 'PreorderController@index')->name('preorder');
     Route::get('/preorder_cashier', 'preorderController@preorder_cashier')->name('preorder_cashier');
-    Route::post('/preorder/add_new_po_cart/', 'preorderController@add_new_po_cart')->name('add_new_po_cart');
-    
+    Route::post('/preorder/add_new_po/', 'preorderController@add_new_po')->name('add_new_po');
+    Route::post('/preorder/get_modal_data_po/', 'preorderController@get_modal_data_po')->name('get_modal_data_po_po');
+    Route::post('/preorder/add_to_cart_po/', 'preorderController@add_to_cart_po')->name('add_to_cart_po');
+    Route::post('/preorder/load_cart_po/', 'preorderController@load_cart_po')->name('load_cart_po');
+    Route::post('/preorder/delete_item_po/', 'preorderController@delete_item_po')->name('delete_item_po');
+    Route::get('/preorder/search_box_po', 'preorderController@search_box_po')->name('search_box_po');
+
     //procut price
     Route::get('/price', 'ProductController@index_price')->name('price');
 });

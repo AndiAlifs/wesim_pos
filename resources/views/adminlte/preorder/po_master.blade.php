@@ -17,7 +17,7 @@
 @endsection
 
 @section('style')
-
+    <link rel="stylesheet" href="{{ asset('assets/preorder/css/mystyle-po.css') }}">
 @endsection
 
 @section('script')

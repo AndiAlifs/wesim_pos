@@ -32,6 +32,16 @@ function tabEmpty() {
         addNewTransaction();
 }
 
+// function localstorage.tab_index undefined
+createTabIndex();
+
+function createTabIndex() {
+    // if localstorage.tab_index is undefined
+    if (typeof localStorage.tab_index === 'undefined') {
+        localStorage.tab_index = 0;
+    }
+}
+
 // number format
 function toNumberFormat(val) {
     return new Intl.NumberFormat("id-ID").format(val)

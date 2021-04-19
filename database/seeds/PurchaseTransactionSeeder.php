@@ -22,7 +22,7 @@ class PurchaseTransactionSeeder extends Seeder
         }
         for ($i = 6; $i <= 8; $i++) {
             PurchaseTransaction::create([
-                "transaction_number" => ('PO- ' . time() . '000' . $i),
+                "transaction_number" => ('PO-' . time() . '000' . $i),
                 "status_id" => 3, //Pre Order
                 "user_id" => 1, //admin
                 "supplier_id" => rand(1, 3),

@@ -15,4 +15,8 @@ class productCategory extends Model
     {
         return $this->belongsTo('App\Category');
     }
+    public function inventory()
+    {
+        return $this->hasOne('App\inventory');
+    }
 }
