@@ -78,7 +78,8 @@ Route::middleware('role:admin_owner')->group(function () {
     Route::get('/preorder/search_box_po', 'preorderController@search_box_po')->name('search_box_po');
 
     //procut price
-    Route::get('/price', 'ProductController@index_price')->name('price');
+    Route::get('/price', 'PriceController@index_price')->name('price');
+    Route::put('/price/update', 'PriceController@update')->name('price_update');
 });
 
 // Only for admin

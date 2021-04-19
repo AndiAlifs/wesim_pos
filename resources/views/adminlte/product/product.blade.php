@@ -27,6 +27,8 @@
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1" aria-label="Browser: activate to sort column ascending">ID
                                                     Produk</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                    colspan="1" aria-label="Browser: activate to sort column ascending">Barcode</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1" aria-label="CSS grade: activate to sort column ascending">
                                                     Nama Produk</th>
@@ -59,9 +61,11 @@
                                                 <tr role="row" class="odd">
                                                     {{-- <td tabindex="0" class="sorting_1">PRD-2021-{{ $row->id }}</td> --}}
                                                     <td>
+                                                        {{ $row->product_code }}
+                                                    </td>
+                                                    <td>
                                                         <img src="https://bwipjs-api.metafloor.com/?bcid=ean13&text={{ $row->product_code }}"
                                                             alt="{{ $row->product_code }}" height="60em">
-                                                        {{ $row->product_code }}
                                                     </td>
                                                     <td>
                                                         <img src="{{ asset('image/product/gambarIndomie' . rand(1, 3) . '.JPG') }}"
@@ -93,7 +97,7 @@
                                                 </tr>
                                             @endforeach
                                         </tbody>
-                                        <tfoot>
+                                        {{-- <tfoot>
                                             <tr>
                                                 <th>ID Produk</th>
                                                 <th>Nama Produk</th>
@@ -103,9 +107,9 @@
                                                 <th>Harga Jual</th>
                                                 <th>Profit</th> --}}
                                                 {{-- <th>Deskripsi</th> --}}
-                                                <th>Aksi</th>
+                                                {{-- <th>Aksi</th>
                                             </tr>
-                                        </tfoot>
+                                        </tfoot> --}}
                                     </table>
                                     <div class="float-right pt-3">
                                         <a class="btn btn-primary" href="" data-toggle="modal" data-target="#modal-store"><i

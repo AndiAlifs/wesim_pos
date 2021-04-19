@@ -36,4 +36,14 @@ class Product extends Model
     {
         return $this->hasMany('App\Price');
     }
+
+    /**
+     * Get all of the purchase for the product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function purchase()
+    {
+        return $this->hasMany(Purchase::class, 'product_id', 'id');
+    }
 }

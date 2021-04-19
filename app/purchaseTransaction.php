@@ -22,4 +22,9 @@ class PurchaseTransaction extends Model
     {
         return $this->belongsTo('App\Supplier');
     }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class,'purchase_transaction_id');
+    }
 }

@@ -8,7 +8,7 @@
                 <img src="" alt="" width="100%" height="100px" id="product-image">
                 <div>
                     <b class="text-dark" id="product-name">{{ '$row->product->name' }}</b><br>
-                    <small class="text-dark" id="product-price"> Rp.{{ '$row->product->price' }}</small>
+                    <small class="text-dark" id="product-price"> Rp.{{ '$row->product->prices->last()->harga_jual' }}</small>
                 </div>
             </div>
         </a>

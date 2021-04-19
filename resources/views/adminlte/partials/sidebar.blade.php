@@ -105,6 +105,14 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('price') }}" class="nav-link {{ Route::is('price') ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-print"></i>
+                        <p>
+                            Riwayat Harga
+                        </p>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a href="{{ route('category') }}"
