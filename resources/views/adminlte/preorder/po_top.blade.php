@@ -19,12 +19,12 @@
                     <div class="row">
                         <div class="input-group input-group-sm col-9">
                             <input name="supplier-id" list="supplier-id" class="form-control" id="supplier-input"
-                                placeholder="---Pilih Supplier---" value="UMUM (0000001)" onfocus="this.value = ''"
+                                placeholder="---Pilih Supplier---" value="UMUM (1)" onfocus="this.value = ''"
                                 onchange="addSupplier(this.value)">
                             <datalist id="supplier-id">
                                 <option value="--- Tambah Supplier ---">
                                     @foreach ($supplier as $row)
-                                <option value="{{ $row->name . ' (000000' . $row->id . ')' }}">
+                                <option value="{{ $row->name . ' (' . $row->id . ')' }}">
                                     @endforeach
                             </datalist>
                             {{-- <div class="input-group-append">
@@ -48,7 +48,7 @@
                 <div class="col-3">Total </div>
                 <div class="col-1 text-right">:</div>
                 <div class="col-8">
-                    <h4>Rp. <b><span class="total-price" id="total-price">1.200.000</span></b></h4>
+                    <h4>Rp. <b><span class="total-price" id="total-price">0</span></b></h4>
                 </div>
             </div>
             <div class="row">
@@ -56,7 +56,8 @@
                     <button type="button" class="btn btn-block bg-gradient-danger ml-auto" onclick="">Batal</button>
                 </div>
                 <div class="col-8">
-                    <button type="button" class="btn btn-block bg-gradient-primary ml-auto" onclick="">Order</button>
+                    <button type="button" class="btn btn-block bg-gradient-primary ml-auto"
+                        onclick="order()">Order</button>
                 </div>
             </div>
         </div>

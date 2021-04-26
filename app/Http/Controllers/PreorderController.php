@@ -9,6 +9,7 @@ use App\Product;
 use App\ProductCategory;
 use App\Supplier;
 use App\Inventory;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 
 class PreorderController extends Controller
 {
@@ -28,12 +29,13 @@ class PreorderController extends Controller
 
     public function preorder_cashier()
     {
-        $product = Product::with('inventory')->get();
+        $product = Product::with('inventory')->with('prices')->get();
         $supplier = Supplier::all();
         $purchaseTransaction = purchaseTransaction::where('status_id', '4')->first();
         if (!$purchaseTransaction) {
             $purchaseTransaction = new \stdClass();
             $purchaseTransaction->transaction_number = 0;
+            $purchaseTransaction->id = 0;
         }
         return view('adminlte/preorder/po_master', compact('product', 'supplier', 'purchaseTransaction'));
     }
@@ -55,27 +57,24 @@ class PreorderController extends Controller
             ->where('product_id', $request['product_id']); //cek if product already in cart
         $cek = $purchase->count(); //cek if product already in cart
 
-        $stock = product::with('inventory')->find($request['product_id']);
         if ($cek) { // if product already in cart
-            $get = $purchase->get(); // get row in purchase
-            $data[0] = purchase::with('product')->find($get[0]->id);
-            $data[0]->already_in_cart = true;
-            $data[1] = $stock;
+            $get = $purchase->first(); // get row in purchase
+            $data = purchase::with('product.prices')->with('product.inventory')
+                ->find($get->id);
+            $data->already_in_cart = true;
             return $data;
         } else {
-            $data[0] = Product::find($request['product_id']);
-            $data[0]->already_in_cart = false;
-            $data[1] = $stock;
+            $data = product::with('inventory')->with('prices')->find($request['product_id']);
+            $data->already_in_cart = false;
             return $data;
         }
     }
-
     public function add_to_cart_po(Request $request)
     {
         $purchase = purchase::where('purchase_transaction_id', $request['purchase_transaction_id'])
             ->where('product_id', $request['product_id']);
 
-        $product = Product::find($request['product_id']);
+        $product = Product::with('prices')->find($request['product_id']);
 
         $cek = $purchase->count();
 
@@ -84,7 +83,7 @@ class PreorderController extends Controller
 
             //update cart in purchase 
             $data->amount = $request['product_amount'];
-            $data->price = ($product->purchase_price * $request['product_amount']);
+            $data->price = ($product->prices[count($product->prices) - 1]->harga_beli * $request['product_amount']);
             $data->date = date('Y-m-d');
             $data->save();
         } else {
@@ -92,7 +91,7 @@ class PreorderController extends Controller
                 'purchase_transaction_id' => $request['purchase_transaction_id'],
                 'product_id' => $request['product_id'],
                 'amount' => $request['product_amount'],
-                'price' => ($product->purchase_price * $request['product_amount']),
+                'price' => ($product->prices[count($product->prices) - 1]->harga_beli * $request['product_amount']),
                 'date' => '1999-12-12',
             ]);
         }
@@ -101,7 +100,7 @@ class PreorderController extends Controller
     // selesai
     public function load_cart_po(Request $request)
     {
-        $purchase = purchase::with('product')
+        $purchase = purchase::with('product.prices')
             ->where('purchase_transaction_id', $request['purchase_transaction_id'])
             ->get();
         return $purchase;
@@ -112,40 +111,12 @@ class PreorderController extends Controller
         purchase::find($request['purchase_id'])->delete();
     }
 
-    public static function search_box_po_2(Request $request) //nda dipakai
-    {
-        if (isset($request['name'])) {
 
-            // get product by barcode
-            $product = ProductCategory::with('product')
-                ->whereHas(
-                    'product',
-                    function ($query) use ($request) {
-                        return $query->where('product_code', $request['name']);
-                    }
-                )->get();
-            if ($product->count() > 0) {
-                $barcode = true;
-                return compact('product', 'barcode');
-            }
-
-            // get product by name
-            $product = ProductCategory::with('product')
-                ->whereHas(
-                    'product',
-                    function ($query) use ($request) {
-                        return $query->where('name', 'like', '%' . $request['name'] . '%');
-                    }
-                )->get();
-            $barcode = false;
-            return compact('product', 'barcode');
-        }
-    }
     public static function search_box_po(Request $request)
     {
         if (isset($request['name'])) {
 
-            $product = product::with('inventory')->where('product_code', $request['name'])->get();
+            $product = product::with('inventory')->with('prices')->where('product_code', $request['name'])->get();
             // get product by barcode
             if ($product->count() > 0) {
                 $barcode = true;
@@ -153,9 +124,17 @@ class PreorderController extends Controller
             }
 
             // get product by name
-            $product = product::with('inventory')->where('name', 'like', '%' . $request['name'] . '%')->get();
+            $product = product::with('inventory')->with('prices')->where('name', 'like', '%' . $request['name'] . '%')->get();
             $barcode = false;
             return compact('product', 'barcode');
         }
+    }
+    public static function order(Request $request)
+    {
+        $PurchaseTransaction = PurchaseTransaction::find($request['purchase_transaction_id']);
+        $PurchaseTransaction->status_id = 3;
+        $PurchaseTransaction->supplier_id = $request['supplier_id'];
+        $PurchaseTransaction->total_price = $request['total_price'];
+        $PurchaseTransaction->save();
     }
 }

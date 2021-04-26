@@ -63,25 +63,30 @@ function callModal(purchase_id, product_id) {
             '_token': $('input[name=_token]').val(),
         },
         success: function (data) {
-            var in_stock = 0;
-            if (data[0].already_in_cart) {
-                $("#modal-name").html(data[0].product['name']);
-                $("#modal-price").val(toNumberFormat(data[0].product['purchase_price']));
-                $(".modal-product-head").css('background-image', 'url(' + base_url + data[0].product['image'] + ')');
-                $("#modal-amount").val(data[0]['amount']);
+            console.log(data);
+            // return 0;
+            var in_stock, full_stock;
+            if (data.already_in_cart) {
+                $("#modal-name").html(data.product['name']);
+                $("#modal-price").val(toNumberFormat(data.product.prices[data.product.prices.length - 1].harga_beli));
+                $(".modal-product-head").css('background-image', 'url(' + base_url + data.product['image'] + ')');
+                $("#modal-amount").val(data['amount']);
+                in_stock = data.product.inventory['in_stock'];
+                full_stock = data.product.inventory['full_stock'];
             } else {
-                $("#modal-name").html(data[0]['name']);
-                $("#modal-price").val(toNumberFormat(data[0]['purchase_price']));
-                $(".modal-product-head").css('background-image', 'url(' + base_url + data[0]['image'] + ')');
+                $("#modal-name").html(data['name']);
+                $("#modal-price").val(toNumberFormat(data.prices[data.prices.length - 1].harga_beli));
+                $(".modal-product-head").css('background-image', 'url(' + base_url + data['image'] + ')');
                 $("#modal-amount").val(1);
+                in_stock = data.inventory['in_stock'];
+                full_stock = data.inventory['full_stock'];
             }
-            in_stock = data[1].inventory['in_stock'];
             $("#modal-amount").removeAttr('disabled');
             $("#modal-in-stock").html(in_stock);
-            $("#modal-full-stock").html(data[1].inventory['full_stock']);
+            $("#modal-full-stock").html(full_stock);
 
             // set progress bar color
-            var progress_width = Math.floor(in_stock / data[1].inventory['full_stock'] * 100);
+            var progress_width = Math.floor(in_stock / full_stock * 100);
             $("#modal-progress-bar").css('width', progress_width + '%');
             $("#modal-btn").removeClass("bg-gradient-secondary");
             $("#modal-btn").html("<b>Masukkan Ke Keranjang</b>");
@@ -100,16 +105,6 @@ function callModal(purchase_id, product_id) {
                 $('#stock-tittle').html('Stock Aman :');
                 $('#stock-bar').css('color', bs_color.success);
             }
-
-            // if stock kosong
-            if (data[1].inventory['in_stock'] < 1 && data[0]['amount'] == null) {
-                $("#modal-amount").val(0);
-                $("#modal-amount").attr('disabled', 'true');
-                $('#stock-tittle').html('Stock Habis :');
-                $("#modal-btn").addClass("bg-gradient-secondary");
-                $("#modal-btn").html("<b>Kembali</b>");
-            }
-
         }
     });
 }
@@ -183,7 +178,7 @@ function searchBox(key) {
                 data.product.forEach(function (product, index) {
                     $('#product-item').attr('onclick', 'callModal("",' + product.id + ')');
                     $('#product-name').html(product.name);
-                    $('#product-price').html('Rp. ' + toNumberFormat(product.purchase_price));
+                    $('#product-price').html('Rp. ' + toNumberFormat(product.prices[product.prices.length - 1].harga_beli));
                     $('#product-in-stock').html(toNumberFormat(product.inventory['in_stock']));
                     $('#product-full-stock').html(toNumberFormat(product.inventory['full_stock']));
 
@@ -214,4 +209,40 @@ function searchBox(key) {
             }
         }
     });
+}
+
+function order() {
+    //if cart is empty
+    if ($('#cart-list').html() == '<p class="text-muted text-center"><b>Keranjang Kosong!!!</b></p>') {
+        alert('Keranjang Kosong');
+        return 0;
+    }
+    //confirm delete
+    var confirm_order = confirm('Order Sekarang ??');
+    if (!confirm_order)
+        return 0;
+
+    var purchase_transaction_id = $('#purchase-transaction-id').val();
+    var total_price = numbersOnly($('#total-price').html());
+
+    var supplier_id = $('#supplier-input').val();
+    supplier_id = supplier_id.split('('); //supplier_id = ['UMUM ', '1000001)']
+    supplier_id = supplier_id[1].slice(0, -1); //supplier_id = '1000001'
+
+    $.ajax({
+        type: "POST",
+        url: "/preorder/order",
+        data: {
+            'purchase_transaction_id': purchase_transaction_id,
+            'supplier_id': supplier_id,
+            'total_price': total_price,
+            '_token': $('input[name=_token]').val(),
+        },
+        success: function (data) {}
+    });
+    $('body').html('<div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>' + $('body').html());
+    setTimeout(function () {
+        window.location.href = "preorder";
+    }, 3000);
+
 }

@@ -75,6 +75,7 @@ Route::middleware('role:admin_owner')->group(function () {
     Route::post('/preorder/add_to_cart_po/', 'preorderController@add_to_cart_po')->name('add_to_cart_po');
     Route::post('/preorder/load_cart_po/', 'preorderController@load_cart_po')->name('load_cart_po');
     Route::post('/preorder/delete_item_po/', 'preorderController@delete_item_po')->name('delete_item_po');
+    Route::post('/preorder/order/', 'preorderController@order')->name('order');
     Route::get('/preorder/search_box_po', 'preorderController@search_box_po')->name('search_box_po');
 
     //procut price

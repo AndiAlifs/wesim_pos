@@ -24,7 +24,7 @@ function detailTransaction(id) {
                     '<td>' + (index + 1) + '</td>' +
                     '<td>' + selling.product.name + '</td>' +
                     '<td>' + toNumberFormat(selling.amount) + '</td>' +
-                    '<td>Rp. ' + toNumberFormat(selling.product.price) + '</td>' +
+                    '<td>Rp. ' + toNumberFormat(selling.product.prices[selling.product.prices.length - 1].harga_jual) + '</td>' +
                     '<td>' + selling.discount_percent + '</td>' +
                     '<td>Rp. ' + toNumberFormat(selling.price) + '</td>' +
                     '</tr>';

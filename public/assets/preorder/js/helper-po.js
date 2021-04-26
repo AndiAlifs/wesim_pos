@@ -77,10 +77,11 @@ function loadPoCart() {
             }
             data.forEach(function (purchase, index) {
                 // passing new data to #cart-item
+                console.log(purchase);
                 $("#set-name").html(purchase.product.name);
-                $("#set-price").html(toNumberFormat(purchase.product.price));
+                $("#set-price").html(toNumberFormat(purchase.product.prices[purchase.product.prices.length - 1].harga_beli));
                 $("#set-amount").html(toNumberFormat(purchase.amount));
-                $("#set-total").html(toNumberFormat(purchase.product.price * purchase.amount));
+                $("#set-total").html(toNumberFormat(purchase.product.prices[purchase.product.prices.length - 1].harga_beli * purchase.amount));
 
                 $("#close-btn").html('<button type="button" class="btn bg-gradient-danger btn-xs float-right mr-2 px-2" onclick="deleteBtn(' + purchase.id + ')"><i class="nav-icon fas fa-trash"></i></button>');
                 $("#list-item")[0].setAttribute("onclick", ("callModal('" + purchase.id + "','" + purchase.product.id + "')"));
@@ -89,7 +90,7 @@ function loadPoCart() {
                 list += $(".hide-list")[0].innerHTML;
 
                 // set value to .total
-                total_price = total_price + (purchase.product.price * purchase.amount);
+                total_price = total_price + (purchase.product.prices[purchase.product.prices.length - 1].harga_beli * purchase.amount);
             });
 
             $("#cart-list").html(list);

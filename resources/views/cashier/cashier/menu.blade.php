@@ -77,7 +77,8 @@
                                         <div>
                                             <b class="text-dark">{{ $row->product->name }}</b><br>
                                             <small class="text-dark">
-                                                Rp.{{ number_format($row->product->price, 0, ',', '.') }}</small>
+                                                Rp.
+                                                {{ number_format($row->product->prices->last()->harga_jual, 0, ',', '.') }}</small>
                                         </div>
                                     </div>
                                 </a>

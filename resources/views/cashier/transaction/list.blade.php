@@ -1,7 +1,7 @@
 <div class="col-md-4">
     <div class="card">
         <div class="card-header">
-            <h5 class=""><b>Transaksi Hari Ini</b></h5>
+            <h5 class=""><b>{{ count($sellingTransaction) }} Transaksi Hari Ini</b></h5>
         </div>
         <!-- /.card-header -->
         <div class="card-body transaction-body p-0">
@@ -63,8 +63,6 @@
                     </button>
                 </div>
                 {{-- /.sub total --}}
-
-
             </div>
         </div>
         <!-- /.card-body -->

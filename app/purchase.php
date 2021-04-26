@@ -8,7 +8,7 @@ class Purchase extends Model
 {
     protected $fillable = ['purchase_transaction_id', 'product_id', 'amount', 'price'];
     //
-    public function product_()
+    public function product()
     {
         return $this->belongsTo('App\product');
         /**
@@ -27,7 +27,7 @@ class Purchase extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function product()
+    public function product_()
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }

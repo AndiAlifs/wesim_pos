@@ -34,7 +34,7 @@
                                         <div>
                                             <b class="text-dark">{{ $row->name }}</b><br>
                                             <small class="text-dark">
-                                                Rp.{{ number_format($row->purchase_price, 0, ',', '.') }}
+                                                Rp.{{ number_format($row->prices->last()->harga_beli, 0, ',', '.') }}
                                             </small>
                                         </div>
                                     </div>

@@ -66,7 +66,6 @@
                 </button>
             </div>
             {{-- /.sub total --}}
-
         </div>
         <!-- /.card-body -->
     </div>

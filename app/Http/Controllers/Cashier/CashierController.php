@@ -20,7 +20,7 @@ class CashierController extends Controller
     public static function index(Request $request)
     {
         $category = Category::all();
-        $product = ProductCategory::with('product')->get();
+        $product = ProductCategory::with('product.prices')->get();
         $member = Member::all();
         $selling = Selling::all();
         $sellingTransaction = SellingTransaction::where('status_id', '2')->get();
@@ -42,9 +42,9 @@ class CashierController extends Controller
         if (isset($request['name'])) {
 
             // get product by barcode
-            $product = ProductCategory::with('product')
+            $product = ProductCategory::with('product.prices')
                 ->whereHas(
-                    'product',
+                    'product.prices',
                     function ($query) use ($request) {
                         return $query->where('product_code', $request['name']);
                     }
@@ -55,9 +55,9 @@ class CashierController extends Controller
             }
 
             // get product by name
-            $product = ProductCategory::with('product')
+            $product = ProductCategory::with('product.prices')
                 ->whereHas(
-                    'product',
+                    'product.prices',
                     function ($query) use ($request) {
                         return $query->where('name', 'like', '%' . $request['name'] . '%');
                     }
@@ -91,7 +91,6 @@ class CashierController extends Controller
         $transaction_date = $request['transaction_date'];
 
         $member_id = Member::where('member_id', $member_id)->get();
-        echo $member_id[0]->id;
 
         $selling_transaction = sellingTransaction::find($selling_transaction_id);
         $selling_transaction->transaction_number = $transaction_number;
@@ -100,6 +99,7 @@ class CashierController extends Controller
         $selling_transaction->pay_cost = $pay_cost;
         $selling_transaction->total_price = $total_price;
         $selling_transaction->transaction_date = $transaction_date;
+        echo ($total_price);
         $selling_transaction->save();
     }
 
@@ -123,7 +123,7 @@ class CashierController extends Controller
     // selesai
     public function load_cart(Request $request)
     {
-        $selling = Selling::with('product')
+        $selling = Selling::with('product.prices')
             ->where('selling_transaction_id', $request['selling_transaction_id'])
             ->get();
         return $selling;
@@ -135,17 +135,14 @@ class CashierController extends Controller
             ->where('product_id', $request['product_id']); //cek if product already in cart
         $cek = $selling->count(); //cek if product already in cart
 
-        $stock = product::with('inventory')->find($request['product_id']);
         if ($cek) { // if product already in cart
             $get = $selling->get(); // get row in selling
-            $data[0] = Selling::with('product')->find($get[0]->id);
-            $data[0]->already_in_cart = true;
-            $data[1] = $stock;
+            $data = Selling::with('product.prices')->with('product.inventory')->find($get[0]->id);
+            $data->already_in_cart = true;
             return $data;
         } else {
-            $data[0] = Product::find($request['product_id']);
-            $data[0]->already_in_cart = false;
-            $data[1] = $stock;
+            $data = Product::with('prices')->with('inventory')->find($request['product_id']);
+            $data->already_in_cart = false;
             return $data;
         }
     }
@@ -155,9 +152,10 @@ class CashierController extends Controller
         $selling = Selling::where('selling_transaction_id', $request['selling_transaction_id'])
             ->where('product_id', $request['product_id']);
 
-        $product = Product::find($request['product_id']);
-        $inventory = inventory::where('product_id', $request['product_id'])->first();
+        $product = Product::with('prices')->find($request['product_id']);
+        $product_price = $product->prices[count($product->prices) - 1]['harga_jual'];
 
+        $inventory = inventory::where('product_id', $request['product_id'])->first();
         $cek = $selling->count();
 
         if ($cek) {
@@ -169,7 +167,7 @@ class CashierController extends Controller
 
             //update cart in selling 
             $data->amount = $request['product_amount'];
-            $data->price = ($product->price * $request['product_amount']);
+            $data->price = ($product_price * $request['product_amount']);
             $data->date = date('Y-m-d');
             $data->save();
         } else {
@@ -177,7 +175,7 @@ class CashierController extends Controller
                 'selling_transaction_id' => $request['selling_transaction_id'],
                 'product_id' => $request['product_id'],
                 'amount' => $request['product_amount'],
-                'price' => ($product->price * $request['product_amount']),
+                'price' => ($product_price * $request['product_amount']),
                 'date' => '1999-12-12',
             ]);
             $inventory->in_stock = ($inventory->in_stock - $request['product_amount']);

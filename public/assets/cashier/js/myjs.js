@@ -91,7 +91,7 @@ function searchBox(key) {
             data.product.forEach(function (product, index) {
                 $('#product-item').attr('onclick', 'callModal("",' + product.product.id + ')');
                 $('#product-name').html(product.product.name);
-                $('#product-price').html(toNumberFormat(product.product.price));
+                $('#product-price').html('Rp. ' + toNumberFormat(product.product.prices[product.product.prices.length - 1].harga_jual));
                 $("#product-image").attr('src', base_url + product.product.image);
 
                 product_list += $('#hide-product-list').html();
@@ -153,7 +153,6 @@ function payTransaction() {
 
         var pay_cost = numbersOnly($('#paid-cost').val());
         var total_price = numbersOnly($('#total-pay').val());
-
         var transaction_date = $('#transaction-date').val();
         $.ajax({
             type: "POST",
@@ -168,7 +167,7 @@ function payTransaction() {
                 '_token': $('input[name=_token]').val(),
             },
             success: function (data) {
-                location.reload();
+                // location.reload();
             }
         });
     }
@@ -230,27 +229,30 @@ function callModal(selling_id, product_id) {
             '_token': $('input[name=_token]').val(),
         },
         success: function (data) {
-            var in_stock = 0;
-            if (data[0].already_in_cart) {
-                $("#modal-name").html(data[0].product['name']);
-                $("#modal-price").val(toNumberFormat(data[0].product['price']));
-                $("#modal-amount").val(data[0]['amount']);
-                $(".modal-product-head").css('background-image', 'url(' + base_url + data[0].product['image'] + ')');
-                in_stock = data[0]['amount'] + data[1].inventory['in_stock']; //calculate product stock in inventory and stock in cart
+            console.log(data);
+            // return 0;
+            var in_stock, full_stock;
+            if (data.already_in_cart) {
+                $("#modal-name").html(data.product['name']);
+                $("#modal-price").val(toNumberFormat(data.product.prices[data.product.prices.length - 1].harga_jual));
+                $(".modal-product-head").css('background-image', 'url(' + base_url + data.product['image'] + ')');
+                $("#modal-amount").val(data['amount']);
+                in_stock = data.product.inventory['in_stock'];
+                full_stock = data.product.inventory['full_stock'];
             } else {
-                $("#modal-name").html(data[0]['name']);
-                $("#modal-price").val(toNumberFormat(data[0]['price']));
+                $("#modal-name").html(data['name']);
+                $("#modal-price").val(toNumberFormat(data.prices[data.prices.length - 1].harga_jual));
+                $(".modal-product-head").css('background-image', 'url(' + base_url + data['image'] + ')');
                 $("#modal-amount").val(1);
-                console.log(data[0]['image']);
-                $(".modal-product-head").css('background-image', 'url(' + base_url + data[0]['image'] + ')');
-                in_stock = data[1].inventory['in_stock'];
+                in_stock = data.inventory['in_stock'];
+                full_stock = data.inventory['full_stock'];
             }
             $("#modal-amount").removeAttr('disabled');
             $("#modal-in-stock").html(in_stock);
-            $("#modal-full-stock").html(data[1].inventory['full_stock']);
+            $("#modal-full-stock").html(full_stock);
 
             // set progress bar color
-            var progress_width = Math.floor(in_stock / data[1].inventory['full_stock'] * 100);
+            var progress_width = Math.floor(in_stock / full_stock * 100);
             $("#modal-progress-bar").css('width', progress_width + '%');
             $("#modal-btn").removeClass("bg-gradient-secondary");
             $("#modal-btn").html("<b>Masukkan Ke Keranjang</b>");
@@ -271,7 +273,7 @@ function callModal(selling_id, product_id) {
             }
 
             // if stock kosong
-            if (data[1].inventory['in_stock'] < 1 && data[0]['amount'] == null) {
+            if (in_stock < 1 && data['amount'] == null) {
                 $("#modal-amount").val(0);
                 $("#modal-amount").attr('disabled', 'true');
                 $('#stock-tittle').html('Stock Habis :');

@@ -88,11 +88,12 @@ function loadCart() {
             }
             data.forEach(function (selling, index) {
                 // passing new data to #cart-item
+                var harga_jual = selling.product.prices[selling.product.prices.length - 1].harga_jual;
                 $("#set-image").attr('src', base_url + selling.product.image);
                 $("#set-name").html(selling.product.name);
-                $("#set-price").html(toNumberFormat(selling.product.price));
+                $("#set-price").html(toNumberFormat(harga_jual));
                 $("#set-amount").html(toNumberFormat(selling.amount));
-                $("#set-total").html(toNumberFormat(selling.product.price * selling.amount));
+                $("#set-total").html(toNumberFormat(harga_jual * selling.amount));
 
                 $("#close-btn").html('<button type="button" class="btn bg-gradient-danger btn-xs float-right mr-2" onclick="deleteBtn(' + selling.id + ',' + selling.amount + ')">&#10005;</button>');
                 $(".cart-hover")[0].setAttribute("onclick", ("callModal('" + selling.id + "','" + selling.product.id + "')"));
@@ -101,7 +102,7 @@ function loadCart() {
                 list += $(".hide-list")[0].innerHTML;
 
                 // set value to .total
-                total_price = total_price + (selling.product.price * selling.amount);
+                total_price = total_price + harga_jual * selling.amount;
             });
 
             $("#cart-list").html(list);

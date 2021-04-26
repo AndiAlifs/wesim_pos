@@ -27,6 +27,7 @@
 <body class="hold-transition sidebar-mini sidebar-closed">
     <!-- Site wrapper -->
     <div class="wrapper">
+
         <!-- Navbar -->
         @include('adminlte.partials.navbar')
         <!-- /.navbar -->
