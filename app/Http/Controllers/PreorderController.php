@@ -137,4 +137,14 @@ class PreorderController extends Controller
         $PurchaseTransaction->total_price = $request['total_price'];
         $PurchaseTransaction->save();
     }
+
+    public function destroy($id)
+    {
+        $purchase = purchase::where('purchase_transaction_id', $id)->get();
+        foreach ($purchase as $item) {
+            $item->delete();
+        }
+        PurchaseTransaction::find($id)->delete();
+        return redirect('/preorder');
+    }
 }

@@ -52,7 +52,7 @@
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">
-                                                    Total Harga
+                                                    Total Harga (Rp)
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
@@ -65,7 +65,7 @@
                                                     Perkiraan Sampai
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1"
+                                                    colspan="1" width="15%"
                                                     aria-label="Engine version: activate to sort column ascending">
                                                     Aksi
                                                 </th>
@@ -79,17 +79,19 @@
                                                     <td>{{ $row->user->name }}</td>
                                                     <td>{{ $row->supplier->name }}</td>
                                                     <td>{{ $row->product_count }}</td>
-                                                    <td>{{ $row->total_price }}</td>
+                                                    <td>{{ number_format($row->total_price, 0, ',', '.') }}</td>
                                                     <td>{{ $row->created_at }}</td>
                                                     <td>{{ $row->created_at }}</td>
                                                     <td width="10%">
-                                                        <button type="button" class="btn btn-success my-2" data-toggle="modal"
+                                                        <button type="button" class="btn btn-success my-2"
+                                                            data-toggle="modal"
                                                             data-target="#modal-default{{ $row->id }}">
                                                             <i class="nav-icon fas fa-edit"></i>Confirm Ship
                                                         </button>
-                                                        <a onclick="return confirm('Are you sure?')" href=""
+                                                        <a onclick="return confirm('Are you sure?')"
+                                                            href="{{ route('delete_po', $row->id) }}"
                                                             class="btn btn-danger"><i
-                                                                    class="nav-icon fas fa-trash"></i>Delete</a>
+                                                                class="nav-icon fas fa-trash"></i>Delete</a>
                                                     </td>
                                                 </tr>
 
@@ -103,41 +105,50 @@
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
-                                                            <form method="post" action="/product/update/{{ $row->id }}">
+                                                            <form method="post"
+                                                                action="/product/update/{{ $row->id }}">
                                                                 <div class="modal-body">
                                                                     {{ csrf_field() }}
 
                                                                     @foreach ($row->purchases as $item)
-                                                                        <div class="form-group">
-                                                                            <img src="{{ $item->product->image }}" width="100em">
-                                                                            <span class="ml-3 text-uppercase">{{ $item->product->name }}</span>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label>Jumlah produk diterima</label>
-                                                                            <input type="text" name="name" class="form-control"
-                                                                                placeholder="Masukan jumlah"
-                                                                                >
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label>Harga Satuan</label>
-                                                                            <div class="row">
-                                                                                <div class="col-1">Rp. </div>
-                                                                                <div class="col-11">
-                                                                                    <input type="text" name="name" class="form-control"
-                                                                                        placeholder="Masukan harga persatuan"
-                                                                                        value="{{ $item->product->prices->last()->harga_beli }}">
-
+                                                                        <div class="row border-bottom py-2">
+                                                                            <div class="form-group ml-3 col-4">
+                                                                                <b class="text-uppercase">
+                                                                                    {{ $item->product->name }}
+                                                                                </b><br>
+                                                                                <img src="{{ $item->product->image }}"
+                                                                                    width="100em">
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <div class="form-group col mb-1">
+                                                                                    <small><b>Jumlah produk
+                                                                                            diterima</b></small>
+                                                                                    <input type="number" name="name"
+                                                                                        class="form-control form-control-sm"
+                                                                                        placeholder="Masukan jumlah"
+                                                                                        value="{{ $item->amount }}">
                                                                                 </div>
-
+                                                                                <div class="form-group col">
+                                                                                    <small><b>Harga Satuan</b></small>
+                                                                                    <div class="row">
+                                                                                        <small class="ml-2">Rp. </small>
+                                                                                        <div class="col input-group">
+                                                                                            <input type="number" name="name"
+                                                                                                class="form-control form-control-sm"
+                                                                                                placeholder="Masukan harga persatuan"
+                                                                                                value="{{ $item->product->prices->last()->harga_beli }}">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                        <hr>
-                                                                        
+
                                                                     @endforeach
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <div class="form-group">
-                                                                        <button class="btn bg-success" type="submit">Submit</button>
+                                                                        <button class="btn bg-success"
+                                                                            type="submit">Submit</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
