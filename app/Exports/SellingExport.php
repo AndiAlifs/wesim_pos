@@ -46,7 +46,18 @@ class SellingExport implements FromView, ShouldAutoSize, WithStyles
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     ],
                 ]
-            ]
+            ],
+
+            '3'=> [
+                'font' => [
+                    'bold' => true,
+                    'color' => ['argb' => \PhpOffice\PhpSpreadsheet\Style\Color::COLOR_WHITE],
+                ],
+                'fill' => [
+                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_GRADIENT_LINEAR,
+                    'color' => ['argb' => \PhpOffice\PhpSpreadsheet\Style\Color::COLOR_DARKBLUE],
+                ]
+            ],
         ];
     }
 }
