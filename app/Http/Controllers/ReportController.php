@@ -15,6 +15,7 @@ use App\Inventory;
 
 use App\Exports\VisitorExport;
 use App\Exports\FinanceExport;
+use App\Exports\SellingExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -84,4 +85,16 @@ class ReportController extends Controller
         return Excel::download(new FinanceExport, $fileName.'.xlsx');
     }
     
+    public function indexSelling()
+    {   
+        // $sellingTransaction = sellingTransaction::with("transactionStatus", "user", "member")
+        //     ->where("status_id", 1)->get();
+
+        // foreach ($sellingTransaction as $index => $row) {
+        //     $sellingTransaction[$index]->product_count = Selling::where('selling_transaction_id', $row->id)->count();
+        // }
+
+        // return view('report/finance/selling',compact('sellingTransaction'));
+        return Excel::download(new SellingExport, 'laporanPenjualan.xlsx');
+    }
 }

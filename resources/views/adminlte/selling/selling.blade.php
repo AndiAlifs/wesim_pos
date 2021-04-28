@@ -105,8 +105,8 @@
                                     <div class="float-right pt-3">
                                         <a class="btn btn-primary" href=""><i class='fa fa-plus-circle'></i>
                                             Print</a>
-                                        <a class="btn btn-primary" href=""><i class='fa fa-plus-circle'></i>
-                                            Export</a>
+                                        <a class="btn btn-success" href="{{route('report_selling')}}"><i class='fa fa-plus-circle'></i>
+                                            Export To Excel</a>
                                     </div>
                                 </div>
                             </div>
