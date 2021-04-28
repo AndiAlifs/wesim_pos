@@ -60,6 +60,7 @@ Route::middleware('role:admin_owner')->group(function () {
     Route::get('/report/visitor', 'ReportController@indexVisitor')->name('report_visitor');
     Route::get('/report/finance', 'ReportController@indexfinance')->name('report_finance');
     Route::get('/report/selling', 'ReportController@indexselling')->name('report_selling');
+    Route::get('/report/purchase', 'ReportController@indexpurchase')->name('report_purchase');
 
     //purchase route
     Route::get('/purchase', 'purchaseController@index')->name('purchase');

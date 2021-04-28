@@ -87,14 +87,11 @@ class ReportController extends Controller
     
     public function indexSelling()
     {   
-        // $sellingTransaction = sellingTransaction::with("transactionStatus", "user", "member")
-        //     ->where("status_id", 1)->get();
-
-        // foreach ($sellingTransaction as $index => $row) {
-        //     $sellingTransaction[$index]->product_count = Selling::where('selling_transaction_id', $row->id)->count();
-        // }
-
-        // return view('report/finance/selling',compact('sellingTransaction'));
         return Excel::download(new SellingExport, 'laporanPenjualan.xlsx');
+    }
+
+    public function indexpurchase()
+    {   
+        // return Excel::download(new SellingExport, 'laporanPenjualan.xlsx');
     }
 }
