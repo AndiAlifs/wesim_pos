@@ -128,20 +128,25 @@
                                                                                         placeholder="Masukan jumlah"
                                                                                         value="{{ $item->amount }}">
                                                                                 </div>
+
+
                                                                                 <div class="form-group col mb-1">
                                                                                     <small><b>Harga Satuan</b></small>
-                                                                                    <div class="row">
-                                                                                        <small class="ml-2">Rp. </small>
-                                                                                        <div class="col input-group">
-                                                                                            <input type="number"
-                                                                                                name="harga_beli[]"
-                                                                                                class="form-control form-control-sm"
-                                                                                                placeholder="Masukan harga persatuan"
-                                                                                                value="{{ $item->product->prices->last()->harga_beli }}">
+                                                                                    <div class="input-group mb-1">
+                                                                                        <div class="input-group-prepend">
+                                                                                            <span
+                                                                                                class="input-group-text form-control-sm"><small>Rp</small></span>
                                                                                         </div>
+                                                                                        <input type="number"
+                                                                                            name="harga_beli[]"
+                                                                                            class="form-control form-control-sm"
+                                                                                            placeholder="harga"
+                                                                                            value="{{ $item->product->prices->last()->harga_beli }}">
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="form-check col ml-2 mt-0">
+
+
+                                                                                <div class="form-check col ml-2 my-2">
                                                                                     <input name="checkbox[]"
                                                                                         class="form-check-input"
                                                                                         type="checkbox">
