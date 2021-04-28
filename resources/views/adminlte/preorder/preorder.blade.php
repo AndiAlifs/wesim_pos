@@ -82,16 +82,16 @@
                                                     <td>{{ number_format($row->total_price, 0, ',', '.') }}</td>
                                                     <td>{{ $row->created_at }}</td>
                                                     <td>{{ $row->created_at }}</td>
-                                                    <td width="10%">
-                                                        <button type="button" class="btn btn-success my-2"
+                                                    <td class="p-1">
+                                                        <button type="button" class="btn btn-sm btn-success my-2"
                                                             data-toggle="modal"
                                                             data-target="#modal-default{{ $row->id }}">
-                                                            <i class="nav-icon fas fa-edit"></i>Confirm Ship
+                                                            <i class="nav-icon fas fa-edit"></i> Confirm
                                                         </button>
                                                         <a onclick="return confirm('Are you sure?')"
                                                             href="{{ route('delete_po', $row->id) }}"
-                                                            class="btn btn-danger"><i
-                                                                class="nav-icon fas fa-trash"></i>Delete</a>
+                                                            class="btn btn-sm btn-danger"><i
+                                                                class="nav-icon fas fa-trash"></i> Delete</a>
                                                     </td>
                                                 </tr>
 
@@ -105,13 +105,13 @@
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
-                                                            <form method="post"
-                                                                action="/product/update/{{ $row->id }}">
+                                                            <form method="post" action="/preoder/confirm_ship">
                                                                 <div class="modal-body">
                                                                     {{ csrf_field() }}
 
                                                                     @foreach ($row->purchases as $item)
                                                                         <div class="row border-bottom py-2">
+                                                                            <input type="hidden" value="purchase_id[]">
                                                                             <div class="form-group ml-3 col-4">
                                                                                 <b class="text-uppercase">
                                                                                     {{ $item->product->name }}
@@ -123,27 +123,35 @@
                                                                                 <div class="form-group col mb-1">
                                                                                     <small><b>Jumlah produk
                                                                                             diterima</b></small>
-                                                                                    <input type="number" name="name"
+                                                                                    <input type="number" name="name[]"
                                                                                         class="form-control form-control-sm"
                                                                                         placeholder="Masukan jumlah"
                                                                                         value="{{ $item->amount }}">
                                                                                 </div>
-                                                                                <div class="form-group col">
+                                                                                <div class="form-group col mb-1">
                                                                                     <small><b>Harga Satuan</b></small>
                                                                                     <div class="row">
                                                                                         <small class="ml-2">Rp. </small>
                                                                                         <div class="col input-group">
-                                                                                            <input type="number" name="name"
+                                                                                            <input type="number"
+                                                                                                name="harga_beli[]"
                                                                                                 class="form-control form-control-sm"
                                                                                                 placeholder="Masukan harga persatuan"
                                                                                                 value="{{ $item->product->prices->last()->harga_beli }}">
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
+                                                                                <div class="form-check col ml-2 mt-0">
+                                                                                    <input name="checkbox[]"
+                                                                                        class="form-check-input"
+                                                                                        type="checkbox">
+                                                                                    <label
+                                                                                        class="form-check-label"><b>Confirmed</b></label>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-
                                                                     @endforeach
+
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <div class="form-group">
