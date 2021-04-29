@@ -76,7 +76,7 @@
         $(function() {
             $("#datatable_pagination").DataTable({
                 "responsive": true,
-                "autoWidth": false,
+                "autoWidth": true,
             });
             $('#example2').DataTable({
                 "paging": true,
@@ -84,7 +84,7 @@
                 "searching": false,
                 "ordering": true,
                 "info": true,
-                "autoWidth": false,
+                "autoWidth": true,
                 "responsive": true,
             });
         });
