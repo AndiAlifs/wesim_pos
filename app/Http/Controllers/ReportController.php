@@ -16,6 +16,7 @@ use App\Inventory;
 use App\Exports\VisitorExport;
 use App\Exports\FinanceExport;
 use App\Exports\SellingExport;
+use App\Exports\PurchaseExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -92,6 +93,6 @@ class ReportController extends Controller
 
     public function indexpurchase()
     {   
-        // return Excel::download(new SellingExport, 'laporanPenjualan.xlsx');
+        return Excel::download(new PurchaseExport, 'laporanPembelian.xlsx');
     }
 }
