@@ -23,7 +23,7 @@
                     <div class="card-body">
                         <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 table-responsive">
                                     <table id="datatable_pagination"
                                         class="table table-bordered table-striped dataTable dtr-inline" role="grid"
                                         aria-describedby="example1_info">
@@ -105,8 +105,8 @@
                                     <div class="float-right pt-3">
                                         <a class="btn btn-primary" href=""><i class='fa fa-plus-circle'></i>
                                             Print</a>
-                                        <a class="btn btn-primary" href=""><i class='fa fa-plus-circle'></i>
-                                            Export</a>
+                                        <a class="btn btn-success" href="{{route('report_purchase')}}"><i class='fa fa-plus-circle'></i>
+                                            Export To Excel</a>
                                     </div>
                                 </div>
                             </div>

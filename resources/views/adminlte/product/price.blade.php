@@ -230,7 +230,7 @@
 @push('script-footer')
     <script>
         $('#datatable_pagination').DataTable({
-            "ordering": false
+            "ordering": true
         });
     </script>    
 @endpush
