@@ -25,8 +25,8 @@
                             <div class="row">
                                 <div class="col-sm-12 table-responsive">
                                     <table id="datatable_pagination"
-                                        class="table table-bordered table-striped dataTable dtr-inline" role="grid"
-                                        aria-describedby="example1_info">
+                                        class="table table-bordered table-striped dataTable dtr-inline table-responsive"
+                                        role="grid" aria-describedby="example1_info">
                                         <thead>
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
@@ -105,7 +105,8 @@
                                     <div class="float-right pt-3">
                                         <a class="btn btn-primary" href=""><i class='fa fa-plus-circle'></i>
                                             Print</a>
-                                        <a class="btn btn-success" href="{{route('report_selling')}}"><i class='fa fa-plus-circle'></i>
+                                        <a class="btn btn-success" href="{{ route('report_selling') }}"><i
+                                                class='fa fa-plus-circle'></i>
                                             Export To Excel</a>
                                     </div>
                                 </div>

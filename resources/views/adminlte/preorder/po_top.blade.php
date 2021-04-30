@@ -53,7 +53,10 @@
             </div>
             <div class="row">
                 <div class="col-4">
-                    <button type="button" class="btn btn-block bg-gradient-danger ml-auto" onclick="">Batal</button>
+                    <a href="{{ __('preorder') }}" id="preorder-link"
+                        class="btn btn-block bg-gradient-danger ml-auto">
+                        Batal
+                    </a>
                 </div>
                 <div class="col-8">
                     <button type="button" class="btn btn-block bg-gradient-primary ml-auto"

@@ -4,6 +4,13 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12">
+                <!-- Breadcrumbs-->
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#">Admin</a>
+                    </li>
+                    <li class="breadcrumb-item active">Riwayat Harga</li>
+                </ol>
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Daftar Product</h3>
@@ -19,31 +26,26 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <table id="datatable_pagination"
-                                        class="table table-bordered table-striped dataTable dtr-inline" role="grid"
-                                        aria-describedby="example1_info"
-                                        data-ordering = "false">
+                                        class="table table-bordered table-striped dataTable dtr-inline table-responsive"
+                                        role="grid" aria-describedby="example1_info" data-ordering="false">
                                         <thead>
                                             <tr role="row">
-                                                <th tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1" aria-label="Browser: activate to sort column ascending">ID
+                                                <th tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                                    aria-label="Browser: activate to sort column ascending">ID
                                                     Produk</th>
-                                                <th tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1" aria-label="CSS grade: activate to sort column ascending">
+                                                <th tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                                    aria-label="CSS grade: activate to sort column ascending">
                                                     Nama Produk</th>
-                                                <th tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1"
+                                                <th tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">Harga
                                                     Beli</th>
-                                                <th tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1"
+                                                <th tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">Harga
                                                     Jual</th>
-                                                <th tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1"
+                                                <th tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">Profit
                                                 </th>
-                                                <th tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1"
+                                                <th tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">Update
                                                 </th>
                                                 <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
@@ -67,18 +69,19 @@
                                                     <td>Rp. {{ $row->harga_beli }}</td>
                                                     <td>Rp.
                                                         {{ $row->harga_jual }}</td>
-                                                    <td class="font-weight-bolder text-success">{{ $row->profit*100 }}%</td>
+                                                    <td class="font-weight-bolder text-success">{{ $row->profit * 100 }}%
+                                                    </td>
                                                     <td>{{ $row->last_update }}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-sm btn-warning m-1"
                                                             data-toggle="modal"
                                                             data-target="#modal-edit-{{ $row->id }}">
-                                                        <i class="nav-icon fas fa-edit"></i>
+                                                            <i class="nav-icon fas fa-edit"></i>
                                                         </button>
                                                         <a onclick="return confirm('Are you sure?')"
                                                             href="/user/destroy/{{ $row->id }}"
                                                             class="btn btn-sm btn-danger m-1"><i
-                                                            class="nav-icon fas fa-trash"></i></a>
+                                                                class="nav-icon fas fa-trash"></i></a>
                                                     </td>
 
 
@@ -87,28 +90,34 @@
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h4 class="modal-title">Edit Harga Produk</h4>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
                                                                 </div>
-            
+
                                                                 <form method="post" action="{{ route('price_update') }}">
                                                                     <div class="modal-body">
                                                                         {{ csrf_field() }}
                                                                         {{ method_field('PUT') }}
-                                                                        
+
                                                                         <div class="form-group row">
                                                                             <div class="col-2">
-                                                                                <img src="{{ $row->product->image }}" width="100em">
+                                                                                <img src="{{ $row->product->image }}"
+                                                                                    width="100em">
                                                                             </div>
                                                                             <div class="col-9 p-3 pl-5">
-                                                                                <span class="text-uppercase">{{ $row->product->name }}</span><br>
-                                                                                <span>{{ $row->product->product_code }} </span>
+                                                                                <span
+                                                                                    class="text-uppercase">{{ $row->product->name }}</span><br>
+                                                                                <span>{{ $row->product->product_code }}
+                                                                                </span>
                                                                             </div>
                                                                         </div>
 
                                                                         <div>
-                                                                            <input type="text" id="product_id" name="product_id" hidden value="{{ $row->product_id }}">
+                                                                            <input type="text" id="product_id"
+                                                                                name="product_id" hidden
+                                                                                value="{{ $row->product_id }}">
                                                                         </div>
 
                                                                         <div class="form-group">
@@ -116,7 +125,8 @@
                                                                             <div class="row">
                                                                                 <div class="col-1 pt-1">Rp. </div>
                                                                                 <div class="col-11">
-                                                                                    <input type="number" name="harga_beli" class="form-control"
+                                                                                    <input type="number" name="harga_beli"
+                                                                                        class="form-control"
                                                                                         placeholder="Masukan harga persatuan"
                                                                                         value="{{ $row->harga_beli }}">
 
@@ -130,7 +140,8 @@
                                                                             <div class="row">
                                                                                 <div class="col-1 pt-1">Rp. </div>
                                                                                 <div class="col-11">
-                                                                                    <input type="number" name="harga_jual" class="form-control"
+                                                                                    <input type="number" name="harga_jual"
+                                                                                        class="form-control"
                                                                                         placeholder="Masukan harga persatuan"
                                                                                         value="{{ $row->harga_jual }}">
                                                                                 </div>
@@ -141,15 +152,19 @@
                                                                         <div class="form-group">
                                                                             <label>Profit</label></label>
                                                                             <div class="row">
-                                                                                <input type="number" name="profit" class="form-control"
+                                                                                <input type="number" name="profit"
+                                                                                    class="form-control"
                                                                                     placeholder="Masukan harga persatuan"
-                                                                                    value="{{ $row->profit }}" step="0.01">
+                                                                                    value="{{ $row->profit }}"
+                                                                                    step="0.01">
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer justify-content-between">
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                        <input type="submit" class="btn btn-success" value="Simpan">
+                                                                        <button type="button" class="btn btn-default"
+                                                                            data-dismiss="modal">Close</button>
+                                                                        <input type="submit" class="btn btn-success"
+                                                                            value="Simpan">
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -232,5 +247,6 @@
         $('#datatable_pagination').DataTable({
             "ordering": true
         });
-    </script>    
+
+    </script>
 @endpush

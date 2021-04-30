@@ -240,7 +240,6 @@ function order() {
         },
         success: function (data) {
             window.location.href = "preorder";
-            setTimeout(function () {}, 1000);
         }
     });
 
