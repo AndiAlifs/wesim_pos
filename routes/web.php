@@ -78,6 +78,7 @@ Route::middleware('role:admin_owner')->group(function () {
     Route::post('/preorder/order/', 'preorderController@order')->name('order');
     Route::get('/preorder/search_box_po', 'preorderController@search_box_po')->name('search_box_po');
     Route::get('/preorder/destroy/{id}', 'preorderController@destroy')->name('delete_po');
+    Route::post('/preorder/confirm_ship/', 'preorderController@confirm_ship')->name('confirm_ship');
 
     //procut price
     Route::get('/price', 'PriceController@index_price')->name('price');

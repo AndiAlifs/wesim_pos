@@ -24,8 +24,8 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <table id="datatable_pagination"
-                                        class="table table-bordered table-striped dataTable dtr-inline" role="grid"
-                                        aria-describedby="example1_info">
+                                        class="table table-bordered table-striped dataTable dtr-inline table-responsive"
+                                        role="grid" aria-describedby="example1_info">
                                         <thead>
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
@@ -73,6 +73,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($purchaseTransaction as $row)
+                                                @php $i = $loop->iteration; @endphp
                                                 <tr role="row" class="odd">
                                                     <td tabindex="0" class="sorting_1">{{ $loop->iteration }}</td>
                                                     <td>{{ $row->transaction_number }}</td>
@@ -105,57 +106,145 @@
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
-                                                            <form method="post" action="/preoder/confirm_ship">
-                                                                <div class="modal-body">
+                                                            <form method="post" action="/preorder/confirm_ship">
+                                                                <div class="modal-body modal-body{{ $row->id }}">
+                                                                    <input name="purchase_transaction_id" type="hidden"
+                                                                        value="{{ $row->id }}">
                                                                     {{ csrf_field() }}
 
+                                                                    @php $total_harga = 0; @endphp
                                                                     @foreach ($row->purchases as $item)
-                                                                        <div class="row border-bottom py-2">
-                                                                            <input type="hidden" value="purchase_id[]">
-                                                                            <div class="form-group ml-3 col-4">
+                                                                        @php
+                                                                            $j = $loop->iteration;
+                                                                            $total_harga += $item->product->prices->last()->harga_beli * $item->amount;
+                                                                        @endphp
+                                                                        <div class="row border-bottom border-success py-2">
+
+                                                                            <input name="purchase-id[]" type="hidden"
+                                                                                value="{{ $item->id }}">
+                                                                            <input name="product-id[]" type="hidden"
+                                                                                value="{{ $item->product_id }}">
+
+                                                                            <div class="form-group ml-3 mb-0 col-4">
                                                                                 <b class="text-uppercase">
                                                                                     {{ $item->product->name }}
                                                                                 </b><br>
                                                                                 <img src="{{ $item->product->image }}"
                                                                                     width="100em">
+                                                                                <div class="border-top mt-3 pl-2">
+                                                                                    <div>
+                                                                                        <small class="mt-1 row">
+                                                                                            Subtotal Harga:
+                                                                                        </small>
+                                                                                    </div>
+                                                                                    <h3 class="row">
+                                                                                        Rp.
+                                                                                        <span class="subtotal-harga"
+                                                                                            id="subtotal-harga{{ $i . $j }}">
+                                                                                            {{ number_format($item->product->prices->last()->harga_beli * $item->amount, 0, ',', '.') }}
+                                                                                        </span>
+                                                                                    </h3>
+                                                                                </div>
                                                                             </div>
+
                                                                             <div class="col">
                                                                                 <div class="form-group col mb-1">
-                                                                                    <small><b>Jumlah produk
-                                                                                            diterima</b></small>
-                                                                                    <input type="number" name="name[]"
+                                                                                    <small>
+                                                                                        <b>
+                                                                                            Jumlah produk diterima
+                                                                                        </b>
+                                                                                    </small>
+                                                                                    <input id="amount{{ $i . $j }}"
+                                                                                        type="number" name="amount[]"
                                                                                         class="form-control form-control-sm"
                                                                                         placeholder="Masukan jumlah"
-                                                                                        value="{{ $item->amount }}">
+                                                                                        value="{{ $item->amount }}"
+                                                                                        oninput="$('#subtotal-harga{{ $i . $j }}').html(new Intl.NumberFormat('id-ID').format( this.value * $('#harga-beli{{ $i . $j }}').val()));">
                                                                                 </div>
-
-
                                                                                 <div class="form-group col mb-1">
-                                                                                    <small><b>Harga Satuan</b></small>
+                                                                                    <small><b>Harga Beli Satuan</b></small>
                                                                                     <div class="input-group mb-1">
                                                                                         <div class="input-group-prepend">
                                                                                             <span
                                                                                                 class="input-group-text form-control-sm"><small>Rp</small></span>
                                                                                         </div>
-                                                                                        <input type="number"
-                                                                                            name="harga_beli[]"
+                                                                                        <input
+                                                                                            id="harga-beli{{ $i . $j }}"
+                                                                                            type="number"
+                                                                                            name="harga-beli[]"
                                                                                             class="form-control form-control-sm"
                                                                                             placeholder="harga"
-                                                                                            value="{{ $item->product->prices->last()->harga_beli }}">
+                                                                                            value="{{ $item->product->prices->last()->harga_beli }}"
+                                                                                            oninput="$('#subtotal-harga{{ $i . $j }}').html(new Intl.NumberFormat('id-ID').format( this.value * $('#amount{{ $i . $j }}').val())); $('#harga-jual').val($('#profit').val()  )">
                                                                                     </div>
                                                                                 </div>
-
-
+                                                                                <div class="form-group col mb-1">
+                                                                                    <small>
+                                                                                        <b>Tetapkan Harga Jual Satuan</b>
+                                                                                    </small>
+                                                                                    <div class="row">
+                                                                                        <div class="col-6">
+                                                                                            <div class="input-group mb-1">
+                                                                                                <div
+                                                                                                    class="input-group-prepend">
+                                                                                                    <span
+                                                                                                        class="input-group-text form-control-sm"><small>%</small></span>
+                                                                                                </div>
+                                                                                                <input
+                                                                                                    id="profit{{ $i . $j }}"
+                                                                                                    type="number"
+                                                                                                    name="profit[]"
+                                                                                                    class="form-control form-control-sm"
+                                                                                                    placeholder="harga"
+                                                                                                    value="{{ $item->product->prices->last()->profit * 100 }}"
+                                                                                                    oninput="$('#harga-jual{{ $i . $j }}').val( parseInt($('#harga-beli{{ $i . $j }}').val()) + ($('#harga-beli{{ $i . $j }}').val() * this.value / 100));">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-6">
+                                                                                            <div class="input-group mb-1">
+                                                                                                <div
+                                                                                                    class="input-group-prepend">
+                                                                                                    <span
+                                                                                                        class="input-group-text form-control-sm"><small>Rp</small></span>
+                                                                                                </div>
+                                                                                                <input
+                                                                                                    id="harga-jual{{ $i . $j }}"
+                                                                                                    type="number"
+                                                                                                    name="harga-jual[]"
+                                                                                                    class="form-control form-control-sm harga-beli"
+                                                                                                    placeholder="harga"
+                                                                                                    value="{{ $item->product->prices->last()->harga_jual }}"
+                                                                                                    oninput="$('#profit{{ $i . $j }}').val((( this.value / $('#harga-beli{{ $i . $j }}').val() * 100 ) - 100).toFixed(2));">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
                                                                                 <div class="form-check col ml-2 my-2">
-                                                                                    <input name="checkbox[]"
-                                                                                        class="form-check-input"
-                                                                                        type="checkbox">
+                                                                                    <input name="" class="form-check-input"
+                                                                                        type="checkbox" required>
                                                                                     <label
                                                                                         class="form-check-label"><b>Confirmed</b></label>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     @endforeach
+
+                                                                    <div class="row px-4 pt-3">
+                                                                        <b>
+                                                                            <div>Total Harga :</div>
+                                                                            <h1 class="text-success">Rp.
+                                                                                <span>
+                                                                                    <script>
+                                                                                        function setTotalHarga() {
+
+                                                                                        }
+
+                                                                                    </script>
+                                                                                    {{ number_format($total_harga, 0, ',', '.') }}
+                                                                                </span>
+                                                                            </h1>
+                                                                        </b>
+                                                                    </div>
 
                                                                 </div>
                                                                 <div class="modal-footer">

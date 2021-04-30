@@ -238,11 +238,11 @@ function order() {
             'total_price': total_price,
             '_token': $('input[name=_token]').val(),
         },
-        success: function (data) {}
+        success: function (data) {
+            window.location.href = "preorder";
+            setTimeout(function () {}, 1000);
+        }
     });
-    $('body').html('<div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>' + $('body').html());
-    setTimeout(function () {
-        window.location.href = "preorder";
-    }, 3000);
+
 
 }

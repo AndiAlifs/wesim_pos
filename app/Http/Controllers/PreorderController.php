@@ -9,6 +9,9 @@ use App\Product;
 use App\ProductCategory;
 use App\Supplier;
 use App\Inventory;
+use App\Price;
+use Carbon\Carbon;
+use Mockery\Generator\StringManipulation\Pass\InstanceMockPass;
 use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 
 class PreorderController extends Controller
@@ -145,6 +148,61 @@ class PreorderController extends Controller
             $item->delete();
         }
         PurchaseTransaction::find($id)->delete();
+        return redirect('/preorder');
+    }
+
+    public function confirm_ship(Request $request)
+    {
+        // return 0;
+        $purchase_id = $request['purchase-id'];
+        $product_id = $request['product-id'];
+        $amount = $request['amount'];
+        $profit = $request['profit'];
+        $harga_jual = $request['harga-jual'];
+        $harga_beli = $request['harga-beli'];
+
+        $total_price = 0;
+        $jumlah_produk = 0;
+        foreach ($purchase_id as  $index => $id) {
+            // echo $amount[$index] . '<br>';
+            // echo $harga_beli[$index] . '<br>';
+
+            $total_price += $amount[$index] * $harga_beli[$index];
+            $jumlah_produk += $amount[$index];
+
+            if ($amount[$index] > 0) {
+                $purchase = Purchase::find($id);
+                $purchase->amount = $amount[$index];
+                $purchase->save();
+            } else
+                $purchase = Purchase::find($id)->delete();
+
+            // if(check)
+            $prof = $profit[$index] / 100;
+            Price::create(
+                [
+                    'product_id' => $product_id[$index],
+                    'harga_beli' => $harga_beli[$index],
+                    'harga_jual' => $harga_jual[$index],
+                    'profit' => $prof,
+                    'last_update' => Carbon::now()
+                ]
+            );
+
+            $inventory =  Inventory::where('product_id', $product_id[$index])->first();
+            $inventory->in_stock = $inventory->in_stock + $amount[$index];
+            $inventory->save();
+        }
+        // return 0;
+        $index = PurchaseTransaction::where('status_id', '1')->count() + 1;
+
+        $purchase_transaction = PurchaseTransaction::find($request['purchase_transaction_id']);
+        $purchase_transaction->transaction_number = 'TRXP' . time() . '000' . $index;
+        $purchase_transaction->total_price = $total_price;
+        $purchase_transaction->total_price = $total_price;
+        $purchase_transaction->status_id = '1';
+        $purchase_transaction->save();
+
         return redirect('/preorder');
     }
 }

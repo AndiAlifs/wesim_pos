@@ -12,7 +12,14 @@
                         <div class="col p-2 pl-4"><b>#Nomor Transaksi</b></div>
                         <div class="col p-2 pl-4"><b>#Total Belanja</b></div>
                     </div> --}}
-                    <?php $trx_total_price = 0; ?>
+                    <?php
+                    $trx_total_price = 0;
+                    if (!count($sellingTransaction)) {
+                    echo '<b class="text-muted">
+                        <center>Tidak Ada Transaksi Hari Ini!!!</center>
+                    </b>';
+                    }
+                    ?>
                     @foreach ($sellingTransaction as $row)
                         <?php $trx_total_price += $row->total_price; ?>
                         <div class="cart-item list-hover border-bottom pl-4 p-2 text-dark list-item" id="list-item"

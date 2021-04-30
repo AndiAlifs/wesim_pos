@@ -167,7 +167,7 @@ function payTransaction() {
                 '_token': $('input[name=_token]').val(),
             },
             success: function (data) {
-                // location.reload();
+                location.reload();
             }
         });
     }

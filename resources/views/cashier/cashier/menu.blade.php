@@ -15,7 +15,6 @@
                                     class="fas fa-search"></i></button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -29,7 +28,7 @@
                 </div>
                 <div>
                     <div class="row">
-                        <div class="col-2 text-center btn">
+                        <div class="col text-center btn" style="width: 145px; max-width: 145px;">
                             <a href="{{ route('cashier') }}">
                                 <div class="card justify-content-center px-1 py-1 category-item">
                                     <img src="{{ asset('image/category/Dan-Dan-Noodles-11.jpg') }}" alt=""
@@ -39,7 +38,7 @@
                             </a>
                         </div>
                         @foreach ($category as $row)
-                            <div class="col-2 text-center btn">
+                            <div class="col text-center btn" style="min-width: 145px; max-width: 145px;">
                                 <a href="{{ route('filter_category', $row->id) }}">
                                     <div class="card justify-content-center px-1 py-1 category-item">
                                         <img src="{{ asset('image/category/Dan-Dan-Noodles-11.jpg') }}" alt=""
@@ -65,15 +64,14 @@
                     </h3>
                 </div>
                 <div>
-                    <div class="row" id="product-list">
+                    <div class="row d-flex justify-content-center" id="product-list">
                         @foreach ($product as $row)
-                            <div class="col-sm-2">
+                            <div class="col-sm" style="min-width: 125px; max-width: 125px;">
                                 <a href="#">
                                     <div type="button" onclick="callModal('','{{ $row->id }}')"
                                         class="btn card justify-content-center px-1 py-1 product-item"
                                         data-toggle="modal" data-target="#modal-default" id="product-item">
-                                        <img src="{{ asset($row->product->image) }}" alt="" width="100%"
-                                            height="100px">
+                                        <img src="{{ asset($row->product->image) }}" alt="">
                                         <div>
                                             <b class="text-dark">{{ $row->product->name }}</b><br>
                                             <small class="text-dark">
