@@ -1,14 +1,15 @@
 {{-- product --}}
 <div class="row" id="hide-product-list" style="display: none">
     {{-- @foreach ($product as $row) --}}
-    <div class="col-sm-2">
+    <div class="col-sm-2" style="min-width: 125px; max-width: 125px;">
         <a href="#">
             <div type="button" class="btn card justify-content-center px-1 py-1 product-item" id="product-item"
                 data-toggle="modal" data-target="#modal-default" onclick="callModal('','{{ '$row->id' }}')">
-                <img src="" alt="" width="100%" height="100px" id="product-image">
+                <img src="" alt="" id="product-image">
                 <div>
                     <b class="text-dark" id="product-name">{{ '$row->product->name' }}</b><br>
-                    <small class="text-dark" id="product-price"> Rp.{{ '$row->product->prices->last()->harga_jual' }}</small>
+                    <small class="text-dark" id="product-price">
+                        Rp.{{ '$row->product->prices->last()->harga_jual' }}</small>
                 </div>
             </div>
         </a>

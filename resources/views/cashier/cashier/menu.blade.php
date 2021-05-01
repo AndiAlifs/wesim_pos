@@ -64,7 +64,7 @@
                     </h3>
                 </div>
                 <div>
-                    <div class="row d-flex justify-content-center" id="product-list">
+                    <div class="row d-flex" id="product-list">
                         @foreach ($product as $row)
                             <div class="col-sm" style="min-width: 125px; max-width: 125px;">
                                 <a href="#">
