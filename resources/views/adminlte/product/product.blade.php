@@ -26,25 +26,25 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <table id="datatable_pagination"
-                                        class="table table-bordered table-striped dataTable dtr-inline table-responsive"
-                                        role="grid" aria-describedby="example1_info">
+                                        class="table table-bordered table-striped dataTable dtr-inline" role="grid"
+                                        aria-describedby="example1_info">
                                         <thead>
                                             <tr role="row">
                                                 {{-- <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th> --}}
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1" aria-label="Browser: activate to sort column ascending">ID
+                                                <th class="sorting" tabindex="0" aria-controls="example1"
+                                                    aria-label="Browser: activate to sort column ascending">ID
                                                     Produk</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1" aria-label="Browser: activate to sort column ascending">
+                                                <th class="sorting" tabindex="0" aria-controls="example1"
+                                                    aria-label="Browser: activate to sort column ascending">
                                                     Barcode</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1" aria-label="CSS grade: activate to sort column ascending">
+                                                <th class="sorting" tabindex="0" aria-controls="example1"
+                                                    aria-label="CSS grade: activate to sort column ascending">
                                                     Nama Produk</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1" aria-label="CSS grade: activate to sort column ascending">
+                                                <th class="sorting" tabindex="0" aria-controls="example1"
+                                                    aria-label="CSS grade: activate to sort column ascending">
                                                     Kategori Produk</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                                <th class="sorting" tabindex="0" aria-controls="example1"
+                                                    aria-label="Platform(s): activate to sort column ascending">
                                                     Produser Produk</th>
                                                 {{-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
@@ -95,9 +95,9 @@
                                                         {{ $row->price - $row->purchase_price }}</td> --}}
                                                     {{-- <td>{{ $row->description }}</td> --}}
                                                     <td>
-                                                        <!-- <button type="button" class="btn-sm btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
-                                                                                    <i class="nav-icon fas fa-edit"></i>
-                                                                                </button> -->
+                                                        {{-- <button type="button" class="btn-sm btn-warning" data-toggle="modal" data-target="#modal-default{{ $row->id }}">
+                                                                                        <i class="nav-icon fas fa-edit"></i>
+                                                                                    </button> --}}
                                                         <!-- <a class="btn-sm btn-warning> <i class="nav-icon fas fa-edit"></i></a> -->
                                                         <a onclick="return confirm('Are you sure?')"
                                                             href="/product/destroy/{{ $row->id }}"

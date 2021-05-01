@@ -23,6 +23,6 @@
 @section('script')
 
     <script script src="{{ asset('/assets/preorder/js/helper-po.js') }}"></script>
-    <script script src="{{ asset('/assets/preorder/js/myjs-po.js') }}"></script>
+    <script script src="{{ asset('/assets/preorder/js/po_master.js') }}"></script>
 
 @endsection

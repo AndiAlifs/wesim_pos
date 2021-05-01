@@ -159,7 +159,7 @@
                                                                                         class="form-control form-control-sm"
                                                                                         placeholder="Masukan jumlah"
                                                                                         value="{{ $item->amount }}"
-                                                                                        oninput="$('#subtotal-harga{{ $i . $j }}').html(new Intl.NumberFormat('id-ID').format( this.value * $('#harga-beli{{ $i . $j }}').val()));">
+                                                                                        oninput="setTotalPO(this.value, {{ $i }},{{ $j }});">
                                                                                 </div>
                                                                                 <div class="form-group col mb-1">
                                                                                     <small><b>Harga Beli Satuan</b></small>
@@ -175,7 +175,7 @@
                                                                                             class="form-control form-control-sm"
                                                                                             placeholder="harga"
                                                                                             value="{{ $item->product->prices->last()->harga_beli }}"
-                                                                                            oninput="$('#subtotal-harga{{ $i . $j }}').html(new Intl.NumberFormat('id-ID').format( this.value * $('#amount{{ $i . $j }}').val())); $('#harga-jual').val($('#profit').val()  )">
+                                                                                            oninput="setTotalPO2(this.value, {{ $i }},{{ $j }});">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group col mb-1">
@@ -233,13 +233,7 @@
                                                                         <b>
                                                                             <div>Total Harga :</div>
                                                                             <h1 class="text-success">Rp.
-                                                                                <span>
-                                                                                    <script>
-                                                                                        function setTotalHarga() {
-
-                                                                                        }
-
-                                                                                    </script>
+                                                                                <span id="total-po{{ $i }}">
                                                                                     {{ number_format($total_harga, 0, ',', '.') }}
                                                                                 </span>
                                                                             </h1>
@@ -292,4 +286,9 @@
         </div>
     </div>
 
+@endsection
+
+@section('script')
+    <script script src="{{ asset('/assets/preorder/js/helper-po.js') }}"></script>
+    <script script src="{{ asset('/assets/preorder/js/preorder.js') }}"></script>
 @endsection

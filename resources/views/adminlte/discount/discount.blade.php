@@ -26,8 +26,8 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <table id="datatable_pagination"
-                                        class="table table-bordered table-striped dataTable dtr-inline table-responsive"
-                                        role="grid" aria-describedby="example1_info">
+                                        class="table table-bordered table-striped dataTable dtr-inline" role="grid"
+                                        aria-describedby="example1_info">
                                         <thead>
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"

@@ -23,10 +23,10 @@
                         @endif
                         <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row">
-                                <div class="col-sm-12 table-responsive">
+                                <div class="col-sm-12">
                                     <table id="datatable_pagination"
-                                        class="table table-bordered table-striped dataTable dtr-inline table-responsive"
-                                        role="grid" aria-describedby="example1_info">
+                                        class="table table-bordered table-striped dataTable dtr-inline" role="grid"
+                                        aria-describedby="example1_info">
                                         <thead>
                                             <tr role="row">
                                                 {{-- <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th> --}}
@@ -44,9 +44,9 @@
                                                 <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                     aria-label="Platform(s): activate to sort column ascending">In Stock
                                                 </th>
-                                                <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                                {{-- <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">Incoming
-                                                    Stock</th>
+                                                    Stock</th> --}}
                                                 <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending">Stock
                                                     Status</th>
@@ -77,7 +77,7 @@
                                                             {{ $row->in_stock }}
                                                         </td>
                                                     @endif
-                                                    <td>{{ $row->incoming }}</td>
+                                                    {{-- <td>{{ $row->incoming }}</td> --}}
                                                     <td>
                                                         @if ($row->in_stock < 20)
                                                             <div class="progress my-1">
@@ -99,21 +99,21 @@
                                                                 </div>
                                                             </div>
                                                         @endif
-                                                        @if ($row->incoming > 0)
+                                                        {{-- @if ($row->incoming > 0)
                                                             <button type="button"
                                                                 class="btn btn-sm btn-outline-info my-1">On
                                                                 Delivery</button>
-                                                        @endif
+                                                        @endif --}}
 
                                                     </td>
                                                     <td>
-                                                        @if ($row->incoming > 0)
+                                                        {{-- @if ($row->incoming > 0)
                                                             <a onclick="return confirm('Konfirmasi PO telah diterima?')"
                                                                 href="/inventory/confirm_ship/{{ $row->id }}"
                                                                 class="btn btn-sm my-1 btn-success">
                                                                 <i class="nav-icon fas fa-truck"></i> Confirm Ship
                                                             </a>
-                                                        @endif
+                                                        @endif --}}
                                                         <button type="button" class="btn btn-sm my-1 btn-warning"
                                                             data-toggle="modal"
                                                             data-target="#modal-tambah-{{ $row->id }}">
@@ -164,7 +164,7 @@
                                                                             </div>
                                                                         @endif
                                                                     </div>
-                                                                    <div class="form-group">
+                                                                    {{-- <div class="form-group">
                                                                         <label>Incoming Stock</label>
                                                                         <input type="text" name="incoming_stock"
                                                                             class="form-control"
@@ -175,7 +175,7 @@
                                                                                 {{ $errors->first('incoming_stock') }}
                                                                             </div>
                                                                         @endif
-                                                                    </div>
+                                                                    </div> --}}
 
                                                                 </div>
                                                                 <div class="modal-footer justify-content-between">
@@ -195,15 +195,15 @@
                                             @endforeach
                                         </tbody>
                                         <!-- <tfoot>
-                                                    <tr>
-                                                        <th rowspan="1" colspan="1">No</th>
-                                                        <th rowspan="1" colspan="1">Name</th>
-                                                        <th rowspan="1" colspan="1">Username</th>
-                                                        <th rowspan="1" colspan="1">Em  ail</th>
-                                                        <th rowspan="1" colspan="1">Role</th>
-                                                        <th rowspan="1" colspan="1">Aksi</th>
-                                                    </tr>
-                                                </tfoot> -->
+                                                                                                                                                        <tr>
+                                                                                                                                                            <th rowspan="1" colspan="1">No</th>
+                                                                                                                                                            <th rowspan="1" colspan="1">Name</th>
+                                                                                                                                                            <th rowspan="1" colspan="1">Username</th>
+                                                                                                                                                            <th rowspan="1" colspan="1">Em  ail</th>
+                                                                                                                                                            <th rowspan="1" colspan="1">Role</th>
+                                                                                                                                                            <th rowspan="1" colspan="1">Aksi</th>
+                                                                                                                                                        </tr>
+                                                                                                                                                    </tfoot> -->
                                     </table>
                                     <div class="float-right pt-3">
                                         <a class="btn btn-primary" href="" data-toggle="modal" data-target="#modal-store"><i
