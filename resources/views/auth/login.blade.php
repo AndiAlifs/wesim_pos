@@ -5,23 +5,25 @@
         /* #2793c2 */
         #bg {
             height: 92vh;
-            /* background-image: url(http://localhost:8000/image/bg/photo1.png); */
-            /* background-position: left; */
+            min-width: 30vw;
+            background-image: url(http://localhost:8000/image/bg/photo1.png);
+            background-position: center;
             /* background-repeat: no-repeat; */
-            /* background-size: cover; */
+            background-size: cover;
         }
 
     </style>
     <div class="container p-0">
         <div class="row justify-content-center">
-            <img class=" col-8" src="http://localhost:8000/image/bg/photo1.png" alt="" id="bg">
-            <div class="login-box col-4 p-0 pt-5">
-                <div class="login-logo text-center py-3">
+            <div class="col" id="bg"></div>
+            {{-- <img class=" col-8" src="http://localhost:8000/image/bg/photo1.png" alt="" id="bg"> --}}
+            <div class="col-4 login-box p-0 pt-5" style="min-width: 400px;">
+                <div class="login-logo text-center pt-4">
                     <h3><a href="" class=""><b>Login </b>| WESIM</a></h3>
                 </div>
                 <!-- /.login-logo -->
                 <div class="p-5">
-                    <div class="">
+                    <div class="login-card-body">
                         <p class="login-box-msg">Sign in to start your session</p>
 
                         <form action="{{ route('login') }}" method="post">
@@ -32,7 +34,7 @@
                                     autocomplete="username" autofocus>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
-                                        <span class="fas fa-envelope"></span>
+                                        <span class="fas fa-user"></span>
                                     </div>
                                 </div>
                                 @error('username')
@@ -94,5 +96,5 @@
                 </div>
             </div>
         </div>
-        </img>
-    @endsection
+    </div>
+@endsection
