@@ -76,7 +76,7 @@
                                                     <td>{{ $row->supplier->name }}</td>
                                                     <td>{{ $row->product_count }}</td>
                                                     <td>{{ $row->total_price }}</td>
-                                                    <td>{{ $row->created_at }}</td>
+                                                    <td>{{ $row->updated_at }}</td>
                                                     <td width="10%">
                                                         <button type="button" class="btn btn-warning" data-toggle="modal"
                                                             data-target="#modal-default">

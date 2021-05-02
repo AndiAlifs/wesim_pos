@@ -27,7 +27,7 @@
                     <td>{{ $row->supplier->name }}</td>
                     <td>{{ $row->product_count }}</td>
                     <td>{{ $row->total_price }}</td>
-                    <td>{{ $row->created_at }}</td>
+                    <td>{{ $row->updated_at }}</td>
                 </tr>
             @endforeach
         </tbody>
