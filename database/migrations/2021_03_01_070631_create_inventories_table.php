@@ -20,7 +20,6 @@ class CreateInventoriesTable extends Migration
             $table->unsignedBigInteger('in_stock');
             $table->unsignedBigInteger('min_stock');
             $table->unsignedBigInteger('full_stock');
-            $table->unsignedBigInteger('incoming');
         });
     }
 

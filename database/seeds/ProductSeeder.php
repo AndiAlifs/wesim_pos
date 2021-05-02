@@ -35,16 +35,6 @@ class ProductSeeder extends Seeder
             $in_stock = rand(0,$new_inventory->full_stock);
             $new_inventory->in_stock =  $in_stock;
 
-            if ($in_stock  <= 20){
-                if(rand(0,1) == 1){
-                    $new_inventory->incoming = rand(10,$new_inventory->full_stock - $new_inventory->in_stock);
-                } else {
-                    $new_inventory->incoming = 0;
-                }
-            } else {
-                $new_inventory->incoming = 0;
-            }
-
             $new_inventory->save();
         }
     }
