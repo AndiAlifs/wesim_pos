@@ -17,7 +17,7 @@ class SellingController extends Controller
     {
         $sellingTransaction =
             sellingTransaction::with("transactionStatus", "user", "member")
-            ->where("status_id", 1)->get();
+            ->where("status_id", 1)->orderByDesc('created_at')->get();
 
         foreach ($sellingTransaction as $index => $row) {
             $sellingTransaction[$index]->product_count = Selling::where('selling_transaction_id', $row->id)->count();
