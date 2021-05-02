@@ -35,5 +35,17 @@ class SellingSeeder extends Seeder
                 "price" => 0,
             ]);
         }
+
+        $allSellingTransaction = SellingTransaction::get();
+        foreach ($allSellingTransaction as $pt) {
+            $total_harga = $pt->purchases->sum('price');
+            if ($total_harga == 0){
+                $pt->delete();
+                $pt->save();
+            } else {
+                $pt->total_price =$total_harga;
+                $pt->save();
+            }
+        }
     }
 }

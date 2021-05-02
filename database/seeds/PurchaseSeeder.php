@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\Purchase;
+use App\Product;
+use App\PurchaseTransaction;
 
 class PurchaseSeeder extends Seeder
 {
@@ -14,23 +16,39 @@ class PurchaseSeeder extends Seeder
     {
         $transaction_number_done = [1, 2, 3, 4, 5];
         for ($i = 0; $i <= rand(5, 20); $i++) {
+            $random = rand(1, 50);
+            $randomAmount = rand(1, 10);
             Purchase::create([
                 "purchase_transaction_id" =>  $transaction_number_done[rand(0, 4)],
-                "product_id" => rand(1, 50),
+                "product_id" => $random,
                 "date" => Carbon\Carbon::now()->toDateString(),
-                "amount" => rand(1, 10),
-                "price" => 0,
+                "amount" => $randomAmount,
+                "price" => Product::find($random)->prices->last()->harga_jual * $randomAmount,
             ]);
         }
         $transaction_number_PO = [6, 7, 8];
         for ($i = 0; $i <= rand(5, 20); $i++) {
+            $random = rand(1, 50);
+            $randomAmount = rand(1, 10);
             Purchase::create([
                 "purchase_transaction_id" => $transaction_number_PO[rand(0, 2)],
-                "product_id" => rand(1, 50),
+                "product_id" => $random,
                 "date" => Carbon\Carbon::now()->yesterday()->yesterday()->toDateString(),
-                "amount" => rand(1, 10),
-                "price" => 0,
+                "amount" =>  $randomAmount = rand(1, 10),
+                "price" => Product::find($random)->prices->last()->harga_jual * $randomAmount,
             ]);
+        }
+
+        $allPurchasesTransaction = PurchaseTransaction::get();
+        foreach ($allPurchasesTransaction as $pt) {
+            $total_harga = $pt->purchases->sum('price');
+            if ($total_harga == 0){
+                $pt->delete();
+                $pt->save();
+            } else {
+                $pt->total_price =$total_harga;
+                $pt->save();
+            }
         }
     }
 }
