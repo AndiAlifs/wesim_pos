@@ -48,6 +48,7 @@ class ReportController extends Controller
 
         // transcation sales
         $sellingToday =  SellingTransaction::where('transaction_date', Carbon::now()->toDateString())->count();
+        $sellingMonth =  SellingTransaction::get()->sum('total_price');
 
         // produk shipping
         $onShipping = PurchaseTransaction::where('status_id',3)->get()->count();
@@ -64,7 +65,7 @@ class ReportController extends Controller
             $jumlahSellingThisWeek[6-$i] = SellingTransaction::where('transaction_date',$hariCari->toDateString())->get()->count();
         }
 
-        return view('adminlte/report/report', compact('jumlahMember', 'topProduk', 'sellingToday','onShipping','jumlahSellingLastWeek','jumlahSellingThisWeek','sellingThisWeek'));
+        return view('adminlte/report/report', compact('jumlahMember', 'topProduk', 'sellingToday','onShipping','jumlahSellingLastWeek','jumlahSellingThisWeek','sellingThisWeek','sellingMonth'));
     }
 
     public function indexVisitor()

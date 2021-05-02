@@ -187,7 +187,7 @@
                     <div class="card-body">
                         <div class="d-flex">
                             <p class="d-flex flex-column">
-                                <span class="text-bold text-lg">Rp. 3.000.000</span>
+                                <span class="text-bold text-lg">Rp. {{ number_format($sellingMonth,0,',','.')}}</span>
                                 <span>Sales This Month</span>
                             </p>
                             <p class="ml-auto d-flex flex-column text-right">
