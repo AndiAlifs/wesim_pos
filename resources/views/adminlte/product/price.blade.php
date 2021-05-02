@@ -61,7 +61,7 @@
                                                         {{ $row->product->product_code }}
                                                     </td>
                                                     <td>
-                                                        <img src="{{ asset('image/product/gambarIndomie' . rand(1, 3) . '.JPG') }}"
+                                                        <img src="{{ $row->product->image }}"
                                                             alt="" height="60em">
                                                         <br>
                                                         {{ $row->product->name }}
@@ -128,7 +128,8 @@
                                                                                     <input type="number" name="harga_beli"
                                                                                         class="form-control"
                                                                                         placeholder="Masukan harga persatuan"
-                                                                                        value="{{ $row->harga_beli }}">
+                                                                                        value="{{ $row->harga_beli }}"
+                                                                                        readonly>
 
                                                                                 </div>
 
