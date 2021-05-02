@@ -22,4 +22,8 @@ class SellingTransaction extends Model
     {
         return $this->belongsTo('App\User');
     }
+    public function sellings()
+    {
+        return $this->hasMany(Selling::class,'selling_transaction_id');
+    }
 }
