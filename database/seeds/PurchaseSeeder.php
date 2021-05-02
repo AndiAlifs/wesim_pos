@@ -23,7 +23,7 @@ class PurchaseSeeder extends Seeder
                 "product_id" => $random,
                 "date" => Carbon\Carbon::now()->toDateString(),
                 "amount" => $randomAmount,
-                "price" => Product::find($random)->prices->last()->harga_jual * $randomAmount,
+                "price" => Product::find($random)->prices->last()->harga_beli * $randomAmount,
             ]);
         }
         $transaction_number_PO = [6, 7, 8];
@@ -35,7 +35,7 @@ class PurchaseSeeder extends Seeder
                 "product_id" => $random,
                 "date" => Carbon\Carbon::now()->yesterday()->yesterday()->toDateString(),
                 "amount" =>  $randomAmount = rand(1, 10),
-                "price" => Product::find($random)->prices->last()->harga_jual * $randomAmount,
+                "price" => Product::find($random)->prices->last()->harga_beli * $randomAmount,
             ]);
         }
 
