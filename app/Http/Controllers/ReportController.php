@@ -58,11 +58,11 @@ class ReportController extends Controller
         $sellingThisWeek = SellingTransaction::whereBetween('transaction_date',[Carbon::now()->startOfWeek()->toDateString(),Carbon::now()->endOfWeek()->toDateString()])->get()->count();
         for ($i=0; $i <= 6; $i++) { 
             $hariCari = $akhirPekan->addDays(1);
-            $jumlahSellingLastWeek[$i] = SellingTransaction::where('transaction_date',$hariCari->toDateString())->get()->count();
+            $jumlahSellingLastWeek[$i] = SellingTransaction::where('transaction_date','like',$hariCari->toDateString().'%')->get()->count();
         }
         for ($i=6; $i <= 13; $i++) { 
             $hariCari = $akhirPekan->addDays(1);
-            $jumlahSellingThisWeek[6-$i] = SellingTransaction::where('transaction_date',$hariCari->toDateString())->get()->count();
+            $jumlahSellingThisWeek[6-$i] = SellingTransaction::where('transaction_date','like',$hariCari->toDateString().'%')->get()->count();
         }
 
         return view('adminlte/report/report', compact('jumlahMember', 'topProduk', 'sellingToday','onShipping','jumlahSellingLastWeek','jumlahSellingThisWeek','sellingThisWeek','sellingMonth'));
