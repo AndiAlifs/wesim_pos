@@ -13,7 +13,7 @@
                 </ol>
                 <div class="card">
                     <div class="bg-info p-2 rounded card-title">
-                        <h3 class="display-4 text-center text-uppercase">Informasi </h3>
+                        <h3 class="display-4 text-center text-uppercase">Informasi Keuangan</h3>
                         @if ($waktu['bulan_name_start'] == $waktu['bulan_name_end'] && $waktu['tahun_start'] == $waktu['tahun_end'])
                             <h4 class="text-center">{{ $waktu['bulan_name_start'] . ' ' . $waktu['tahun_start'] }}</h4>
                         @else

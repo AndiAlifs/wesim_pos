@@ -13,7 +13,7 @@ class SellingTransactionSeeder extends Seeder
     public function run()
     {   
         for ($j=14; $j >= 0; $j--) { 
-            $tanggal = Carbon\Carbon::now()->subDays($j)->toDateString();
+            $tanggal = Carbon\Carbon::now()->subDays($j)->toDateTimeString();
             for ($i = 1; $i <= rand(20,80); $i++) {
                 SellingTransaction::create([
                     "transaction_number" => ('TRXS' . time() . '000' . $i),
