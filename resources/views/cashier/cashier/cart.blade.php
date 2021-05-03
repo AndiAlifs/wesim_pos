@@ -1,4 +1,4 @@
-<div class="col-md-4">
+<div class="col-md" style="min-width: 450px; max-width: 450px;">
     <div class="card">
         <div class="card-header">
             <h5 class=""><b>Keranjang Belanja</b></h5>

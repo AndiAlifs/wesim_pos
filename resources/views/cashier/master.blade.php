@@ -28,10 +28,10 @@
 
 <body>
     {{ csrf_field() }}
-    <div class="container-fluid light-scrollbar">
+    <div class="container-fluid light-scrollbar p-0">
         <!-- include navbar -->
         @include('cashier.partials.navbar')
-        <div class="row justify-content-center px-5">
+        <div class="row justify-content-center px-5" style="max-width: 100vw">
 
             {{-- content --}}
             @yield('content')

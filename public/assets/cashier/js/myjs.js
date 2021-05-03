@@ -236,7 +236,7 @@ function callModal(selling_id, product_id) {
                 $("#modal-name").html(data.product['name']);
                 $("#modal-price").val(toNumberFormat(data.product.prices[data.product.prices.length - 1].harga_jual));
                 $(".modal-product-head").css('background-image', 'url(' + base_url + data.product['image'] + ')');
-                $("#modal-amount").val(data['amount']);
+                $("#modal-amount").val(data['amount'] + 1);
                 in_stock = data.product.inventory['in_stock'];
                 full_stock = data.product.inventory['full_stock'];
             } else {

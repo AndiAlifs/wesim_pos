@@ -16,7 +16,6 @@
     <div class="container p-0">
         <div class="row justify-content-center">
             <div class="col" id="bg"></div>
-            {{-- <img class=" col-8" src="http://localhost:8000/image/bg/photo1.png" alt="" id="bg"> --}}
             <div class="col-4 login-box p-0 pt-5" style="min-width: 400px;">
                 <div class="login-logo text-center pt-4">
                     <h3><a href="" class=""><b>Register </b>| WESIM</a></h3>
@@ -31,7 +30,8 @@
 
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                                    placeholder="Name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    placeholder="Nama Terang" value="{{ old('name') }}" required autocomplete="name"
+                                    autofocus>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-user"></span>
@@ -93,7 +93,7 @@
 
                             <div class="input-group mb-3">
                                 <input type="password" class="form-control" name="password_confirmation"
-                                    placeholder="Confirm Password" autocomplete="new-password" required>
+                                    placeholder="Konfirmasi Password" autocomplete="new-password" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-lock"></span>
@@ -113,27 +113,15 @@
                             </div>
                             <div class="row px-2">
                                 <button type="submit" class="btn btn-block btn-primary">
-                                    <i class="fab user-plus"></i> Register
+                                    <i class="fab user-plus"></i> Daftar
                                 </button>
                             </div>
                         </form>
 
-                        <div class="social-auth-links text-center mb-3">
-                            <p>- OR -</p>
-                            {{-- <a href="#" class="btn btn-block btn-primary">
-                            <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-                        </a>
-                        <a href="#" class="btn btn-block btn-danger">
-                            <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-                        </a> --}}
+                        <div class="social-auth-links text-center">
+                            <div>- atau -</div>
+                            <a href="{{ route('login') }}" class="text-secondary">Sudah Punya Akun?</a>
                         </div>
-                        <!-- /.social-auth-links -->
-
-                        <p class="mb-1 text-secondary text-center">
-                            <a href="" class="text-secondary">Already a member</a>
-                            <br>
-                            {{-- <a href="" class="text-center">Register a new membership</a> --}}
-                        </p>
                     </div>
                     <!-- /.login-card-body -->
                 </div>
@@ -141,7 +129,7 @@
         </div>
     </div>
 
-
+    {{-- register nya laravel --}}
     {{-- <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">

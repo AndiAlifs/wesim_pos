@@ -5,8 +5,11 @@
 
 /* nav */
 .my-nav {
-    height: 10vh;
+    height: 9vh;
+    background-color: #2793c2;
+    margin-bottom: 1vh;
     /* border: 1px black solid; */
+    /* #2793c2 */
 }
 
 /* hold */

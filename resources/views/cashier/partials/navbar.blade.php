@@ -1,8 +1,13 @@
-<nav class="navbar navbar-expand navbar-white navbar-light my-nav">
+<nav id="nav" class="navbar navbar-expand navbar-white navbar-light my-nav">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
-            <h2><a class="nav-link" href="#">WESIM | KASIR</a></h2>
+            <h2>
+                <a class="nav-link text-light mt-2" href="#">
+                    <img class="rounded-circle" src="{{ asset('image/logo-wesim1.png') }}" alt="" width="50px">
+                    <span class="pt-5"> WESIM | KASIR</span>
+                </a>
+            </h2>
         </li>
     </ul>
 
@@ -15,7 +20,7 @@
         @else
 
             <li class="nav-item">
-                <a href="{{ route('cashier') }}" class="nav-link {{ Route::is('cashier') ? 'text-primary' : '' }}">
+                <a href="{{ route('cashier') }}" class="nav-link text-light">
                     <i class="nav-icon fas fa-cart-plus"></i>
                 </a>
             </li>
@@ -23,8 +28,7 @@
                 <a href="#" class="nav-link" id="reputasi"><i class="nav-icon fas fa-balance-scale"></i></a>
             </li> --}}
             <li class="nav-item">
-                <a href="{{ route('transaction_today') }}"
-                    class="nav-link {{ Route::is('transaction_today') ? 'text-primary' : '' }}">
+                <a href="{{ route('transaction_today') }}" class="nav-link text-light text-light">
                     <i class="nav-icon fas fa-history"></i>
                 </a>
             </li>
@@ -33,8 +37,8 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false" v-pre>
+                <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     {{ Auth::user()->name }} <span class="caret"></span>
                 </a>
                 <input type="hidden" value="{{ Auth::user()->id }}" id="user-id">
