@@ -89,6 +89,9 @@
         @endif
 
         <div class="content">
+            <div>
+                <img src="{{asset('logoWesim.png')}}" width="250rem">
+            </div>
             <div class="title m-b-md">
                 WESIM
             </div>
