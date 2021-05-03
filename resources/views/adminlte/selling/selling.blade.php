@@ -28,7 +28,6 @@
                     <div class="card-body">
                         <form action="" method="get">
                             <div class="form-row mb-2">
-
                                 <div class="col-3">
                                     <label for="bulan_start"><i class="fas fa-calendar"></i> Dari</label>
                                     <select name="bulan_start" id="bulan_start" class="form-control">

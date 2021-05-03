@@ -41,7 +41,7 @@ class SellingController extends Controller
             sellingTransaction::with("transactionStatus", "user", "member")
                                     ->whereBetween('transaction_date',[$dateFrom, $dateTo])
                                     ->where("status_id", 1)
-                                    ->orderByDesc('created_at')
+                                    ->orderByDesc('transaction_date')
                                     ->get();
 
         foreach ($sellingTransaction as $index => $row) {

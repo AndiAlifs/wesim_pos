@@ -16,11 +16,102 @@
                 <!-- Card Daftar Pembelian -->
                 <div class="card">
                     <div class="bg-info p-2 rounded-top card-title">
-                        <h3 class="display-4 text-center text-uppercase">Daftar Pembelian
-                        </h3>
+                        <h3 class="display-4 text-center text-uppercase">Daftar Pembelian</h3>
+                        @if ($waktu['bulan_name_start'] == $waktu['bulan_name_end'] && $waktu['tahun_start'] == $waktu['tahun_end'])
+                            <h4 class="text-center">{{ $waktu['bulan_name_start'] . ' ' . $waktu['tahun_start'] }}</h4>
+                        @else
+                            <h4 class="text-center">{{ $waktu['bulan_name_start'] . ' ' . $waktu['tahun_start'] }} -
+                                {{ $waktu['bulan_name_end'] . ' ' . $waktu['tahun_end'] }}</h4>
+                        @endif
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+                        <form action="" method="get">
+                            <div class="form-row mb-2">
+                                <div class="col-3">
+                                    <label for="bulan_start"><i class="fas fa-calendar"></i> Dari</label>
+                                    <select name="bulan_start" id="bulan_start" class="form-control">
+                                        <option value="1" {{ $waktu['bulan_start'] == '01' ? 'selected' : '' }}>Januari
+                                        </option>
+                                        <option value="2" {{ $waktu['bulan_start'] == '02' ? 'selected' : '' }}>Februari
+                                        </option>
+                                        <option value="3" {{ $waktu['bulan_start'] == '03' ? 'selected' : '' }}>Maret
+                                        </option>
+                                        <option value="4" {{ $waktu['bulan_start'] == '04' ? 'selected' : '' }}>April
+                                        </option>
+                                        <option value="5" {{ $waktu['bulan_start'] == '05' ? 'selected' : '' }}>Mei
+                                        </option>
+                                        <option value="6" {{ $waktu['bulan_start'] == '06' ? 'selected' : '' }}>Juni
+                                        </option>
+                                        <option value="7" {{ $waktu['bulan_start'] == '07' ? 'selected' : '' }}>Juli
+                                        </option>
+                                        <option value="8" {{ $waktu['bulan_start'] == '08' ? 'selected' : '' }}>Agustus
+                                        </option>
+                                        <option value="9" {{ $waktu['bulan_start'] == '09' ? 'selected' : '' }}>September
+                                        </option>
+                                        <option value="10" {{ $waktu['bulan_start'] == '10' ? 'selected' : '' }}>Oktober
+                                        </option>
+                                        <option value="11" {{ $waktu['bulan_start'] == '11' ? 'selected' : '' }}>November
+                                        </option>
+                                        <option value="12" {{ $waktu['bulan_start'] == '12' ? 'selected' : '' }}>Desember
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label for="tahun_start"> .</label>
+                                    <select name="tahun_start" id="tahun_start" class="form-control">
+                                        <option value="2020" {{ $waktu['tahun_start'] == '2020' ? 'selected' : '' }}>2020
+                                        </option>
+                                        <option value="2021" {{ $waktu['tahun_start'] == '2021' ? 'selected' : '' }}>2021
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label for="bulan_end"><i class="fas fa-calendar"></i> Sampai</label>
+                                    <select name="bulan_end" id="bulan_end" class="form-control">
+                                        <option value="1" {{ $waktu['bulan_end'] == '01' ? 'selected' : '' }}>Januari
+                                        </option>
+                                        <option value="2" {{ $waktu['bulan_end'] == '02' ? 'selected' : '' }}>Februari
+                                        </option>
+                                        <option value="3" {{ $waktu['bulan_end'] == '03' ? 'selected' : '' }}>Maret
+                                        </option>
+                                        <option value="4" {{ $waktu['bulan_end'] == '04' ? 'selected' : '' }}>April
+                                        </option>
+                                        <option value="5" {{ $waktu['bulan_end'] == '05' ? 'selected' : '' }}>Mei
+                                        </option>
+                                        <option value="6" {{ $waktu['bulan_end'] == '06' ? 'selected' : '' }}>Juni
+                                        </option>
+                                        <option value="7" {{ $waktu['bulan_end'] == '07' ? 'selected' : '' }}>Juli
+                                        </option>
+                                        <option value="8" {{ $waktu['bulan_end'] == '08' ? 'selected' : '' }}>Agustus
+                                        </option>
+                                        <option value="9" {{ $waktu['bulan_end'] == '09' ? 'selected' : '' }}>September
+                                        </option>
+                                        <option value="10" {{ $waktu['bulan_end'] == '10' ? 'selected' : '' }}>Oktober
+                                        </option>
+                                        <option value="11" {{ $waktu['bulan_end'] == '11' ? 'selected' : '' }}>November
+                                        </option>
+                                        <option value="12" {{ $waktu['bulan_end'] == '12' ? 'selected' : '' }}>Desember
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label for="tahun_end">.</label>
+                                    <select name="tahun_end" id="tahun_end" class="form-control">
+                                        <option value="2020" {{ $waktu['tahun_end'] == '2020' ? 'selected' : '' }}>2020
+                                        </option>
+                                        <option value="2021" {{ $waktu['tahun_end'] == '2021' ? 'selected' : '' }}>2021
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label for="submit"> Cari </label>
+                                    <button type="submit" class="btn btn-primary btn-block form-control"> <i
+                                            class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+
                         <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row">
                                 <div class="col-sm-12 table-responsive">
