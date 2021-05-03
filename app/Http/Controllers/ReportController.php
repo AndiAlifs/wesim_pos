@@ -48,7 +48,7 @@ class ReportController extends Controller
 
         // transcation sales
         $sellingToday =  SellingTransaction::where('transaction_date','like' ,Carbon::now()->toDateString().'%')->count();
-        $sellingMonth =  SellingTransaction::get()->sum('total_price');
+        $sellingMonth =  SellingTransaction::whereBetween('transaction_date',[Carbon::now()->firstOfMonth()->toDateTimeString(),Carbon::now()->lastOfMonth()->toDateTimeString()])->get()->sum('total_price');
 
         // produk shipping
         $onShipping = PurchaseTransaction::where('status_id',3)->get()->count();
